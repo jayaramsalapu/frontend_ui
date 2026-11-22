@@ -117,6 +117,20 @@
         const canvas = document.getElementById('hero-3d-canvas');
         if (!heroSection || !canvas) return;
 
+        // Mobile Guard: strictly do not initialize or run 3D WebGL on mobile (767px and below)
+        if (window.innerWidth <= 767) {
+            canvas.style.display = 'none';
+            const pauseBtn = document.getElementById('hero3dPauseBtn');
+            if (pauseBtn) pauseBtn.style.display = 'none';
+            // Listen for window resize in case window width increases to desktop
+            window.addEventListener('resize', () => {
+                if (!scene && window.innerWidth > 767 && typeof THREE !== 'undefined') {
+                    init();
+                }
+            }, { passive: true });
+            return;
+        }
+
         // Strict THREE availability guard before constructing any THREE object
         if (typeof THREE === 'undefined') {
             console.warn("Three.js library is not available. Showing static fallback.");
@@ -132,13 +146,14 @@
         brightHeartColor = new THREE.Color(0xD42B1E);
         brightHeartEmissive = new THREE.Color(0xCC1A0A);
 
-        const width = heroSection.clientWidth || window.innerWidth;
-        const height = heroSection.clientHeight || window.innerHeight;
+        const canvasContainer = document.querySelector('.hero-canvas-frame') || document.getElementById('bg-canvas-container') || heroSection;
+        const width = canvasContainer.clientWidth || 550;
+        const height = canvasContainer.clientHeight || 420;
 
         // 1. Scene & Warm Camera Setup
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xF7F5F0);
-        scene.fog = new THREE.FogExp2(0xF7F5F0, 0.018);
+        scene.background = new THREE.Color(0xF8F9F5);
+        scene.fog = new THREE.FogExp2(0xF8F9F5, 0.018);
 
         camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 50);
         camera.position.set(0, 0.28, 8.2);
@@ -299,11 +314,32 @@
     }
 
     function updateLayout() {
-        const heroSection = document.querySelector('.hero-viewport') || document.getElementById('home');
-        if (!heroSection || !renderer || !camera) return;
+        if (window.innerWidth <= 767) {
+            pauseLoop();
+            const canvas = document.getElementById('hero-3d-canvas');
+            if (canvas) canvas.style.display = 'none';
+            const pauseBtn = document.getElementById('hero3dPauseBtn');
+            if (pauseBtn) pauseBtn.style.display = 'none';
+            return;
+        }
 
-        const width = heroSection.clientWidth || window.innerWidth;
-        const height = heroSection.clientHeight || window.innerHeight;
+        if (!scene) {
+            if (typeof THREE !== 'undefined') {
+                init();
+            }
+            return;
+        }
+
+        const canvas = document.getElementById('hero-3d-canvas');
+        if (canvas) canvas.style.display = 'block';
+        const pauseBtn = document.getElementById('hero3dPauseBtn');
+        if (pauseBtn && !isUserPaused) pauseBtn.style.display = 'inline-flex';
+
+        const canvasContainer = document.querySelector('.hero-canvas-frame') || document.getElementById('bg-canvas-container') || document.querySelector('.hero-viewport');
+        if (!canvasContainer || !renderer || !camera || !stageGroup) return;
+
+        const width = canvasContainer.clientWidth || 550;
+        const height = canvasContainer.clientHeight || 420;
 
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
@@ -311,34 +347,35 @@
 
         // Center stage horizontally, position at comfortable vertical height
         if (width >= 1024) {
-            stageGroup.position.set(0, 0.08, 0);
-            stageGroup.scale.set(0.68, 0.68, 0.68);
-        } else if (width >= 640) {
-            stageGroup.position.set(0, -0.05, -0.4);
-            stageGroup.scale.set(0.55, 0.55, 0.55);
+            stageGroup.position.set(0, 0.04, 0);
+            stageGroup.scale.set(0.66, 0.66, 0.66);
         } else {
-            stageGroup.position.set(0, -0.20, -0.9);
-            stageGroup.scale.set(0.45, 0.45, 0.45);
+            stageGroup.position.set(0, -0.04, -0.2);
+            stageGroup.scale.set(0.58, 0.58, 0.58);
         }
 
-        // Dynamically compute positions so character is placed at left end of screen
-        // and heart is placed at right end of screen
+        // Dynamically compute positions so character is placed at left end of stage
+        // and heart is placed at right end of stage
         const aspect = width / height;
         const fovRad = (camera.fov * Math.PI) / 180;
         const halfH = Math.tan(fovRad / 2) * camera.position.z;
         const halfW = halfH * aspect;
-        const sScale = stageGroup.scale.x || 0.68;
+        const sScale = stageGroup.scale.x || 0.66;
         const stageHalfW = halfW / sScale;
 
-        startX = -Math.max(3.2, Math.min(6.5, stageHalfW * 0.78));
-        heartX = Math.max(3.2, Math.min(6.5, stageHalfW * 0.78));
-        endX = heartX - 2.1;
+        startX = -Math.max(2.6, Math.min(4.8, stageHalfW * 0.72));
+        heartX = Math.max(2.6, Math.min(4.8, stageHalfW * 0.72));
+        endX = heartX - 2.0;
 
         if (bigHeartGroup) {
             bigHeartGroup.position.x = heartX;
         }
         if (heartShadowDisc) {
             heartShadowDisc.position.x = heartX;
+        }
+
+        if (!isUserPaused && isHeroVisible && !isDocHidden && !isReducedMotion) {
+            resumeLoop();
         }
     }
 
