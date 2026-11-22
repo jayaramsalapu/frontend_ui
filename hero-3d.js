@@ -16,14 +16,30 @@
  */
 
 (function () {
-    let scene, camera, renderer;
+    let scene, camera, renderer, heroSection;
     let stageGroup, mascotGroup, mascotBodyMesh, leftFootMesh, rightFootMesh, leftHandMesh, rightHandMesh;
+    let leftEyeGroup, rightEyeGroup;
     let leftEyePupil, rightEyePupil, leftHighlightMajor, leftHighlightMinor, rightHighlightMajor, rightHighlightMinor;
-    let heldDropletGroup, heldDropletMesh, heldDropletHalo;
+    let heldDropletGroup, heldDropletMesh, heldDropletHalo, heldDropletCore, heldDropletSparkle, heldDropletLight;
     let bigHeartGroup, bigHeartMesh, bigHeartInnerCore, bigHeartAura;
     let gatheringParticles = [], radiatingParticles = [], heartPulseWaves = [];
     let mascotShadowDisc, heartShadowDisc;
-    let startX = -4.6, heartX = 4.6, endX = 2.4;
+
+    // =========================================================================
+    // ⚙️ 3D POSITION CONTROLS (EDIT HERE)
+    // =========================================================================
+    // 1. STAGE POSITION: Moves BOTH character and heart together
+    //    Increase (e.g. 2.6, 2.9) to push right; Decrease (e.g. 1.8, 1.4) to pull left
+    let MASCOT_STAGE_X = 2.4;
+
+    // 2. CHARACTER ONLY (Mascot):
+    //    startX: where mascot starts walking (Starts right after content = -3.7)
+    //    endX: where mascot stops walking (Right in front of heart = 1.35)
+    let startX = -3.7;
+    let endX = 1.35;
+
+    // 3. HEART ONLY: Stays at the right end in the same place
+    let heartX = 2.4;
 
     // Director & Pacing State (Unhurried, realistic pacing)
     let storyLoopProgress = 0.05;
@@ -66,6 +82,52 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, size, size);
         return new THREE.CanvasTexture(canvas);
+    }
+
+    // Helper: 4-Point Radiant Star Sparkle Texture (Twinkling Life Saver Glint)
+    function createSparkleTexture() {
+        const size = 128;
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const cx = size / 2, cy = size / 2;
+
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, size / 2);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        grad.addColorStop(0.2, 'rgba(255, 240, 220, 0.85)');
+        grad.addColorStop(0.5, 'rgba(255, 120, 90, 0.3)');
+        grad.addColorStop(1, 'rgba(255, 60, 40, 0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, size, size);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.moveTo(cx, 6);
+        ctx.quadraticCurveTo(cx, cy, size - 6, cy);
+        ctx.quadraticCurveTo(cx, cy, cx, size - 6);
+        ctx.quadraticCurveTo(cx, cy, 6, cy);
+        ctx.quadraticCurveTo(cx, cy, cx, 6);
+        ctx.closePath();
+        ctx.fill();
+
+        return new THREE.CanvasTexture(canvas);
+    }
+
+    // Helper: Mathematically Perfect 3D Blood Drop Lathe Geometry
+    // Hemispherical bottom dome (C^1 continuous, dr/dy -> inf at pole) smoothly tapering to sleek top apex
+    function createLifeSaverDropGeometry(radius = 0.25, height = 0.64) {
+        const points = [];
+        const segments = 48;
+        for (let i = 0; i <= segments; i++) {
+            const t = i / segments; // 0 at bottom pole, 1 at top tip
+            const r = Math.max(0.001, radius * 2.598 * Math.sqrt(Math.max(0, t)) * (1.0 - t));
+            const y = (t - 0.35) * height;
+            points.push(new THREE.Vector2(r, y));
+        }
+        const geo = new THREE.LatheGeometry(points, 48);
+        geo.computeVertexNormals();
+        return geo;
     }
 
     // Helper: 3D Teardrop Lathe Geometry
@@ -113,7 +175,7 @@
     }
 
     function init() {
-        const heroSection = document.querySelector('.hero-viewport') || document.getElementById('home');
+        heroSection = document.querySelector('.hero-viewport') || document.getElementById('home');
         const canvas = document.getElementById('hero-3d-canvas');
         if (!heroSection || !canvas) return;
 
@@ -146,9 +208,8 @@
         brightHeartColor = new THREE.Color(0xD42B1E);
         brightHeartEmissive = new THREE.Color(0xCC1A0A);
 
-        const canvasContainer = document.querySelector('.hero-canvas-frame') || document.getElementById('bg-canvas-container') || heroSection;
-        const width = canvasContainer.clientWidth || 550;
-        const height = canvasContainer.clientHeight || 420;
+        const width = heroSection.clientWidth || window.innerWidth;
+        const height = heroSection.clientHeight || (window.innerHeight - 64);
 
         // 1. Scene & Warm Camera Setup
         scene = new THREE.Scene();
@@ -164,8 +225,10 @@
             renderer = new THREE.WebGLRenderer({
                 canvas: canvas,
                 antialias: true,
-                powerPreference: 'high-performance'
+                powerPreference: 'high-performance',
+                alpha: true
             });
+            renderer.setClearColor(0xF8F9F5, 1);
         } catch (err) {
             console.warn("WebGL initialization failed, showing fallback illustration.", err);
             showFallbackIllustration(heroSection);
@@ -335,38 +398,25 @@
         const pauseBtn = document.getElementById('hero3dPauseBtn');
         if (pauseBtn && !isUserPaused) pauseBtn.style.display = 'inline-flex';
 
-        const canvasContainer = document.querySelector('.hero-canvas-frame') || document.getElementById('bg-canvas-container') || document.querySelector('.hero-viewport');
-        if (!canvasContainer || !renderer || !camera || !stageGroup) return;
+        if (!heroSection) heroSection = document.querySelector('.hero-viewport') || document.getElementById('home');
+        if (!heroSection || !renderer || !camera || !stageGroup) return;
 
-        const width = canvasContainer.clientWidth || 550;
-        const height = canvasContainer.clientHeight || 420;
+        const width = heroSection.clientWidth || window.innerWidth;
+        const height = heroSection.clientHeight || (window.innerHeight - 64);
 
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
 
-        // Center stage horizontally, position at comfortable vertical height
-        if (width >= 1024) {
-            stageGroup.position.set(0, 0.04, 0);
-            stageGroup.scale.set(0.66, 0.66, 0.66);
-        } else {
-            stageGroup.position.set(0, -0.04, -0.2);
-            stageGroup.scale.set(0.58, 0.58, 0.58);
-        }
+        // Position stage purely on the RIGHT side of the hero (clear of text content)
+        const isWideDesktop = width >= 1440;
+        const isDesktop = width >= 1024;
+        const stageX = isWideDesktop ? (MASCOT_STAGE_X + 0.4) : (isDesktop ? MASCOT_STAGE_X : 1.2);
 
-        // Dynamically compute positions so character is placed at left end of stage
-        // and heart is placed at right end of stage
-        const aspect = width / height;
-        const fovRad = (camera.fov * Math.PI) / 180;
-        const halfH = Math.tan(fovRad / 2) * camera.position.z;
-        const halfW = halfH * aspect;
-        const sScale = stageGroup.scale.x || 0.66;
-        const stageHalfW = halfW / sScale;
+        stageGroup.position.set(stageX, 0.04, 0);
+        stageGroup.scale.set(0.65, 0.65, 0.65);
 
-        startX = -Math.max(2.6, Math.min(4.8, stageHalfW * 0.72));
-        heartX = Math.max(2.6, Math.min(4.8, stageHalfW * 0.72));
-        endX = heartX - 2.0;
-
+        // Maintain configured heart position
         if (bigHeartGroup) {
             bigHeartGroup.position.x = heartX;
         }
@@ -526,49 +576,58 @@
         badgeHeart.position.set(0, 0.28, 0.75);
         mascotGroup.add(badgeHeart);
 
-        // 4. Large Cute Soulful Eyes with Glossy Highlights
-        const eyeWhiteGeo = new THREE.SphereGeometry(0.16, 24, 24);
-        const eyeWhiteMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: 0.18 });
+        // 4. Large Cute Soulful Eyes with Glossy Highlights & Zero Body Clipping
+        const eyeWhiteGeo = new THREE.SphereGeometry(0.165, 24, 24);
+        const eyeWhiteMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: 0.15 });
 
-        const leftEyeWhite = new THREE.Mesh(eyeWhiteGeo, eyeWhiteMat);
-        leftEyeWhite.position.set(-0.25, -0.05, 0.71);
-        mascotGroup.add(leftEyeWhite);
+        const pupilGeo = new THREE.SphereGeometry(0.088, 20, 20);
+        const pupilMat = new THREE.MeshStandardMaterial({ color: 0x1A1E1C, roughness: 0.08 });
 
-        const rightEyeWhite = new THREE.Mesh(eyeWhiteGeo, eyeWhiteMat);
-        rightEyeWhite.position.set(0.25, -0.05, 0.71);
-        mascotGroup.add(rightEyeWhite);
-
-        const pupilGeo = new THREE.SphereGeometry(0.09, 20, 20);
-        const pupilMat = new THREE.MeshStandardMaterial({ color: 0x1A1E1C, roughness: 0.1 });
-
-        leftEyePupil = new THREE.Mesh(pupilGeo, pupilMat);
-        leftEyePupil.position.set(-0.24, -0.06, 0.78);
-        mascotGroup.add(leftEyePupil);
-
-        rightEyePupil = new THREE.Mesh(pupilGeo, pupilMat);
-        rightEyePupil.position.set(0.27, -0.06, 0.78);
-        mascotGroup.add(rightEyePupil);
-
-        // Specular Highlights for lively cartoon eyes
         const hlGeoMajor = new THREE.SphereGeometry(0.032, 12, 12);
         const hlGeoMinor = new THREE.SphereGeometry(0.016, 10, 10);
         const hlMat = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
 
+        // Left Eye Assembly (User's left side: x = -0.24, fully proud of droplet body surface)
+        leftEyeGroup = new THREE.Group();
+        leftEyeGroup.position.set(-0.24, -0.04, 0.81);
+        leftEyeGroup.rotation.y = -0.10; // Angled outward following natural droplet contour
+        mascotGroup.add(leftEyeGroup);
+
+        const leftEyeWhite = new THREE.Mesh(eyeWhiteGeo, eyeWhiteMat);
+        leftEyeGroup.add(leftEyeWhite);
+
+        leftEyePupil = new THREE.Mesh(pupilGeo, pupilMat);
+        leftEyePupil.position.set(0, 0, 0.10);
+        leftEyeGroup.add(leftEyePupil);
+
         leftHighlightMajor = new THREE.Mesh(hlGeoMajor, hlMat);
-        leftHighlightMajor.position.set(-0.22, -0.03, 0.85);
-        mascotGroup.add(leftHighlightMajor);
+        leftHighlightMajor.position.set(0.025, 0.03, 0.17);
+        leftEyeGroup.add(leftHighlightMajor);
 
         leftHighlightMinor = new THREE.Mesh(hlGeoMinor, hlMat);
-        leftHighlightMinor.position.set(-0.26, -0.08, 0.85);
-        mascotGroup.add(leftHighlightMinor);
+        leftHighlightMinor.position.set(-0.035, -0.03, 0.17);
+        leftEyeGroup.add(leftHighlightMinor);
+
+        // Right Eye Assembly (User's right side: x = +0.24, fully proud of droplet body surface)
+        rightEyeGroup = new THREE.Group();
+        rightEyeGroup.position.set(0.24, -0.04, 0.81);
+        rightEyeGroup.rotation.y = 0.10; // Symmetrically angled outward
+        mascotGroup.add(rightEyeGroup);
+
+        const rightEyeWhite = new THREE.Mesh(eyeWhiteGeo, eyeWhiteMat);
+        rightEyeGroup.add(rightEyeWhite);
+
+        rightEyePupil = new THREE.Mesh(pupilGeo, pupilMat);
+        rightEyePupil.position.set(0, 0, 0.10);
+        rightEyeGroup.add(rightEyePupil);
 
         rightHighlightMajor = new THREE.Mesh(hlGeoMajor, hlMat);
-        rightHighlightMajor.position.set(0.29, -0.03, 0.85);
-        mascotGroup.add(rightHighlightMajor);
+        rightHighlightMajor.position.set(0.025, 0.03, 0.17);
+        rightEyeGroup.add(rightHighlightMajor);
 
         rightHighlightMinor = new THREE.Mesh(hlGeoMinor, hlMat);
-        rightHighlightMinor.position.set(0.25, -0.08, 0.85);
-        mascotGroup.add(rightHighlightMinor);
+        rightHighlightMinor.position.set(-0.035, -0.03, 0.17);
+        rightEyeGroup.add(rightHighlightMinor);
 
         // 5. Rosy Cheeks & Right Cheek Band-Aid
         const cheekGeo = new THREE.SphereGeometry(0.105, 16, 16);
@@ -626,35 +685,71 @@
         rightHandMesh.position.set(0.70, -0.32, 0.30);
         mascotGroup.add(rightHandMesh);
 
-        // 8. Luminous Blood Drop Held in Hands
+        // 8. Ultra-Glossy Luminous "Life Saver" Blood Drop Held in Hands
         heldDropletGroup = new THREE.Group();
-        heldDropletGroup.position.set(0.60, -0.12, 0.45);
+        heldDropletGroup.position.set(0.58, -0.12, 0.45);
         mascotGroup.add(heldDropletGroup);
 
-        const miniDropGeo = createTeardropGeometry(0.22, 0.58);
-        const miniDropMat = new THREE.MeshPhysicalMaterial({
-            color: 0xE63926,
-            emissive: 0xFF2A15,
-            emissiveIntensity: 0.85,
-            roughness: 0.1,
+        // A. Outer Ruby Crystal Shell (Iconic clean blooddrop profile, ultra-glossy clearcoat)
+        const lifeDropGeo = createLifeSaverDropGeometry(0.25, 0.64);
+        const lifeDropMat = new THREE.MeshPhysicalMaterial({
+            color: 0xFF1424,
+            emissive: 0xDC2626,
+            emissiveIntensity: 0.88,
+            roughness: 0.04,
+            metalness: 0.02,
             clearcoat: 1.0,
+            clearcoatRoughness: 0.02,
+            reflectivity: 1.0,
             transparent: true,
-            opacity: 0.95
+            opacity: 0.94
         });
-        heldDropletMesh = new THREE.Mesh(miniDropGeo, miniDropMat);
+        heldDropletMesh = new THREE.Mesh(lifeDropGeo, lifeDropMat);
         heldDropletGroup.add(heldDropletMesh);
 
-        const dropHaloTex = createGlowTexture('#FF482A');
+        // B. Inner Golden-Warm Life Spark Core
+        const coreGeo = createLifeSaverDropGeometry(0.12, 0.32);
+        const coreMat = new THREE.MeshBasicMaterial({
+            color: 0xFFF2A6,
+            transparent: true,
+            opacity: 0.92,
+            blending: THREE.AdditiveBlending
+        });
+        heldDropletCore = new THREE.Mesh(coreGeo, coreMat);
+        heldDropletCore.position.y = -0.02;
+        heldDropletGroup.add(heldDropletCore);
+
+        // C. Radiant Ambient Aura Halo
+        const dropHaloTex = createGlowTexture('#FF3820');
         heldDropletHalo = new THREE.Sprite(
             new THREE.SpriteMaterial({
                 map: dropHaloTex,
                 transparent: true,
-                opacity: 0.45,
+                opacity: 0.55,
                 blending: THREE.AdditiveBlending
             })
         );
-        heldDropletHalo.scale.set(0.95, 0.95, 1);
+        heldDropletHalo.scale.set(1.15, 1.15, 1);
         heldDropletGroup.add(heldDropletHalo);
+
+        // D. 4-Pointed Star Sparkle (Identifies as a gleaming, precious life saver)
+        const sparkleTex = createSparkleTexture();
+        heldDropletSparkle = new THREE.Sprite(
+            new THREE.SpriteMaterial({
+                map: sparkleTex,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending
+            })
+        );
+        heldDropletSparkle.position.set(0.10, 0.08, 0.16);
+        heldDropletSparkle.scale.set(0.48, 0.48, 1);
+        heldDropletGroup.add(heldDropletSparkle);
+
+        // E. Subtle Point Light illuminating hands and surroundings
+        heldDropletLight = new THREE.PointLight(0xFF3322, 1.2, 2.0, 2);
+        heldDropletLight.position.set(0, 0, 0.1);
+        heldDropletGroup.add(heldDropletLight);
     }
 
     // -------------------------------------------------------------------------
@@ -833,9 +928,10 @@
         let targetAwaken = 0.0;
 
         if (storyLoopProgress < 0.30) {
-            // Act 0: Character starts at left end of screen, gathering particles into a glowing drop; heart is DULL
+            // Act 0: Character catches blood particles, forming into a radiant life-saver droplet; heart is DULL
             const t = storyLoopProgress / 0.30;
-            targetDropScale = 0.28 + t * 0.77;
+            const smoothT = t * t * (3 - 2 * t);
+            targetDropScale = 0.20 + smoothT * 0.85;
             targetWalk = 0.0;
             targetAwaken = 0.0; // Completely dull
         } else if (storyLoopProgress < 0.72) {
@@ -892,44 +988,94 @@
             0.15 + rightStep
         );
 
-        // Natural lateral body sway as weight transfers between feet
-        mascotGroup.rotation.y = 0.32 - storyVars.mascotWalkProgress * 0.10;
-        mascotGroup.rotation.z = Math.cos(stepPhase) * 0.045 * stepBlend + Math.sin(elapsed * 1.6) * 0.015;
+        // Natural lateral body sway as weight transfers between feet (faces forward-comfortably toward user)
+        mascotGroup.rotation.y = 0.08 - storyVars.mascotWalkProgress * 0.04 + Math.sin(elapsed * 0.8) * 0.015;
+        mascotGroup.rotation.z = Math.cos(stepPhase) * 0.04 * stepBlend + Math.sin(elapsed * 1.6) * 0.015;
         mascotGroup.rotation.x = 0.04 * stepBlend;
 
-        // Natural eye blinking & gaze tracking
-        const blinkCycle = (elapsed * 0.22) % 1.0;
-        const isBlinking = blinkCycle > 0.94;
-        leftEyePupil.scale.y = isBlinking ? 0.1 : 1.0;
-        rightEyePupil.scale.y = isBlinking ? 0.1 : 1.0;
+        // Natural synchronous eye blinking (both eyes blink cleanly together every ~3.5s)
+        const blinkCycle = (elapsed * 0.25) % 1.0;
+        const isBlinking = blinkCycle > 0.94 && blinkCycle < 0.98;
+        const blinkScaleY = isBlinking ? 0.08 : 1.0;
+        if (leftEyeGroup && rightEyeGroup) {
+            leftEyeGroup.scale.y = blinkScaleY;
+            rightEyeGroup.scale.y = blinkScaleY;
+        }
 
-        const lookX = 0.02 + storyVars.mascotWalkProgress * 0.03 + mouseX * 0.015;
-        const lookY = -0.06 + (storyVars.heartAwaken > 0.4 ? 0.02 : -0.01) + mouseY * 0.015;
-        leftEyePupil.position.set(-0.24 + lookX, lookY, 0.78);
-        rightEyePupil.position.set(0.27 + lookX, lookY, 0.78);
-
-        leftHighlightMajor.position.set(-0.22 + lookX * 0.8, -0.03 + lookY * 0.5, 0.85);
-        leftHighlightMinor.position.set(-0.26 + lookX * 0.8, -0.08 + lookY * 0.5, 0.85);
-        rightHighlightMajor.position.set(0.29 + lookX * 0.8, -0.03 + lookY * 0.5, 0.85);
-        rightHighlightMinor.position.set(0.25 + lookX * 0.8, -0.08 + lookY * 0.5, 0.85);
+        // Smooth cursor gaze tracking (symmetrical across both eyes inside eye group local space)
+        const lookX = mouseX * 0.03 + Math.sin(elapsed * 0.6) * 0.01;
+        const lookY = mouseY * 0.02 + (storyVars.heartAwaken > 0.4 ? 0.015 : -0.008);
+        if (leftEyePupil && rightEyePupil) {
+            leftEyePupil.position.set(lookX, lookY, 0.10);
+            rightEyePupil.position.set(lookX, lookY, 0.10);
+        }
+        if (leftHighlightMajor && rightHighlightMajor) {
+            leftHighlightMajor.position.set(0.025 + lookX * 0.35, 0.03 + lookY * 0.35, 0.17);
+            rightHighlightMajor.position.set(0.025 + lookX * 0.35, 0.03 + lookY * 0.35, 0.17);
+        }
+        if (leftHighlightMinor && rightHighlightMinor) {
+            leftHighlightMinor.position.set(-0.035 + lookX * 0.35, -0.03 + lookY * 0.35, 0.17);
+            rightHighlightMinor.position.set(-0.035 + lookX * 0.35, -0.03 + lookY * 0.35, 0.17);
+        }
 
         // Cradling hands extend gently to offer the droplet as mascot approaches
         const reach = storyVars.mascotWalkProgress * 0.14;
         leftHandMesh.position.set(0.42 + reach, -0.32 + idleBreath * 0.3, 0.58);
         rightHandMesh.position.set(0.70 + reach, -0.32 + idleBreath * 0.3, 0.30);
 
-        // Held Glowing Droplet
-        heldDropletGroup.position.set(0.60 + reach, -0.12 + Math.sin(elapsed * 2.8) * 0.02, 0.45);
-        heldDropletGroup.scale.setScalar(storyVars.dropletCharge);
-        heldDropletMesh.rotation.y = elapsed * 1.1;
-        heldDropletMesh.material.emissiveIntensity = 0.65 + storyVars.dropletCharge * 0.4 + Math.sin(elapsed * 3.5) * 0.1;
-        heldDropletHalo.material.opacity = 0.3 + storyVars.dropletCharge * 0.35;
+        // Held Glowing "Life Saver" Blooddrop
+        const charge = storyVars.dropletCharge;
+        const dropY = -0.12 + Math.sin(elapsed * 2.5) * 0.015;
+        heldDropletGroup.position.set(0.58 + reach, dropY, 0.45);
+        heldDropletGroup.scale.setScalar(Math.max(0.01, charge));
+
+        // Smooth rotation
+        heldDropletMesh.rotation.y = elapsed * 0.85;
+
+        // Shiny, bright, living light pulsations (Life Saver effect)
+        const shimmer = Math.sin(elapsed * 4.2) * 0.15;
+        const pulseGlow = 0.88 + charge * 0.45 + shimmer;
+        heldDropletMesh.material.emissiveIntensity = pulseGlow;
+
+        // Inner glowing warm life core
+        if (heldDropletCore) {
+            heldDropletCore.rotation.y = -elapsed * 1.2;
+            const coreScale = 0.92 + Math.sin(elapsed * 4.8) * 0.12;
+            heldDropletCore.scale.set(coreScale, coreScale, coreScale);
+            heldDropletCore.material.opacity = (0.55 + charge * 0.42) * (0.85 + shimmer * 0.4);
+        }
+
+        // Ambient radiant halo
+        if (heldDropletHalo) {
+            heldDropletHalo.material.opacity = 0.35 + charge * 0.4 + shimmer * 0.25;
+            const haloS = 1.05 + Math.sin(elapsed * 2.8) * 0.10;
+            heldDropletHalo.scale.set(haloS, haloS, 1);
+        }
+
+        // 4-point star sparkle (Life Saver specular twinkle)
+        if (heldDropletSparkle) {
+            const twinkle = Math.pow(Math.max(0, Math.sin(elapsed * 3.4)), 3.0);
+            heldDropletSparkle.material.opacity = Math.max(0, (charge - 0.35) / 0.65) * (0.35 + twinkle * 0.65);
+            heldDropletSparkle.material.rotation = elapsed * 0.5;
+            const starS = 0.44 + twinkle * 0.22;
+            heldDropletSparkle.scale.set(starS, starS, 1);
+        }
+
+        // Point light intensity following droplet charge
+        if (heldDropletLight) {
+            heldDropletLight.intensity = (0.5 + charge * 1.2) * (0.9 + shimmer * 0.3);
+        }
 
         // ---------------------------------------------------------------------
         // GATHERING PARTICLES ANIMATION (Flowing smoothly into mascot's hands)
         // ---------------------------------------------------------------------
         if (scratchVecTarget) {
-            scratchVecTarget.set(mascotX + 0.58, -0.40 + walkStepBob + idleBreath, mascotZ + 0.42);
+            // Target the EXACT center of the held droplet in world space
+            scratchVecTarget.set(
+                mascotX + 0.58 + reach,
+                -0.32 + walkStepBob + idleBreath + dropY,
+                mascotZ + 0.45
+            );
         }
         const gatherIntensity = currentAct === 0 ? 0.95 : (currentAct === 1 ? 0.3 : 0.12);
 
@@ -945,7 +1091,7 @@
                 p.mesh.position.copy(scratchVecPos);
             }
             const fade = Math.sin(easeU * Math.PI);
-            p.mesh.material.opacity = fade * 0.75 * gatherIntensity;
+            p.mesh.material.opacity = fade * 0.85 * gatherIntensity;
             p.mesh.scale.setScalar(p.baseScale * (1.1 - easeU * 0.4));
         });
 
@@ -1023,4 +1169,33 @@
     } else {
         init();
     }
+
+    // -------------------------------------------------------------------------
+    // 🛠️ LIVE DEV TOOLS (Test positions in browser console)
+    // -------------------------------------------------------------------------
+    window.setHeroStageX = function (val) {
+        MASCOT_STAGE_X = val;
+        if (stageGroup) stageGroup.position.x = val;
+        console.log(`[Hero 3D] Stage position set to: ${val}`);
+    };
+
+    window.setHeroCharacterX = function (start, end) {
+        const oldStart = startX;
+        if (start !== undefined) startX = start;
+        if (end !== undefined) endX = end;
+        const diff = startX - oldStart;
+        if (gatheringParticles && diff !== 0) {
+            gatheringParticles.forEach(p => {
+                if (p.startPos) p.startPos.x += diff;
+            });
+        }
+        console.log(`[Hero 3D] Character bounds set to: startX = ${startX}, endX = ${endX}`);
+    };
+
+    window.setHeroHeartX = function (val) {
+        heartX = val;
+        if (bigHeartGroup) bigHeartGroup.position.x = val;
+        if (heartShadowDisc) heartShadowDisc.position.x = val;
+        console.log(`[Hero 3D] Heart position set to: ${val}`);
+    };
 })();

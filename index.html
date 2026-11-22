@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#F8F9F5">
     <title>EasyConnect — Voluntary Blood Donation Coordination</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,8 +70,20 @@
 
     <main id="main-content" tabindex="-1">
 
-        <!-- HERO SECTION (Desktop 2-Column Balanced Layout / Mobile Text-Focused) -->
+        <!-- HERO SECTION (Interactive 3D Animation as Full Background / Desktop & Mobile Optimized) -->
         <section class="hero-viewport" id="home">
+
+            <!-- 3D Animation Canvas as FULL HERO SECTION BACKGROUND -->
+            <div id="bg-canvas-container" class="hero-3d-bg-container" aria-hidden="true">
+                <canvas id="hero-3d-canvas" class="hero-3d-full-canvas"
+                    aria-label="Interactive 3D animation of EasyConnect blood-drop mascot reviving a beating heart"></canvas>
+            </div>
+
+            <!-- Accessible 3D Animation Pause / Resume Control -->
+            <button type="button" class="hero-3d-pause-btn" id="hero3dPauseBtn" aria-label="Pause 3D hero animation"
+                title="Pause / Resume Animation">
+                <i class="fa-solid fa-pause" aria-hidden="true"></i>
+            </button>
 
             <div class="container hero-container">
 
@@ -90,13 +103,15 @@
                                 someone smiles<br class="hero-break-desktop">
                                 <span class="hero-headline-again-wrap">
                                     again.
-                                    <svg class="hero-headline-curve" viewBox="0 0 130 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M4 10C42 14.5 92 12.5 126 3.5" stroke="url(#heroCurveGrad)" stroke-width="2.5" stroke-linecap="round"/>
+                                    <svg class="hero-headline-curve" viewBox="0 0 130 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M4 10C42 14.5 92 12.5 126 3.5" stroke="url(#heroCurveGrad)"
+                                            stroke-width="2.5" stroke-linecap="round" />
                                         <defs>
                                             <linearGradient id="heroCurveGrad" x1="0" y1="0" x2="1" y2="0">
-                                                <stop offset="0%" stop-color="#A64F46"/>
-                                                <stop offset="50%" stop-color="#C84938"/>
-                                                <stop offset="100%" stop-color="#EA6D58"/>
+                                                <stop offset="0%" stop-color="#A64F46" />
+                                                <stop offset="50%" stop-color="#C84938" />
+                                                <stop offset="100%" stop-color="#EA6D58" />
                                             </linearGradient>
                                         </defs>
                                     </svg>
@@ -123,78 +138,43 @@
                         </div>
 
                         <div class="hero-privacy-reassurance">
-                            <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
-                            <span>Private community coordination · No public contact details displayed</span>
+                            <div class="hero-privacy-header">
+                                <svg class="hero-privacy-shield-icon" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                                <span class="hero-privacy-title">
+                                    Kindness shared. <span class="privacy-title-gradient">Privacy kept.</span>
+                                </span>
+                            </div>
+                            <p class="hero-privacy-desc">
+                                Your phone number and exact location stay off public profiles.<br
+                                    class="hero-privacy-break">
+                                You decide when to share.
+                            </p>
                         </div>
                     </div>
 
-                    <!-- RIGHT COLUMN: 3D Animation Stage (~45% on desktop, completely hidden <= 767px) -->
-                    <div class="hero-visual-col" id="heroVisualCol">
-                        <div class="hero-canvas-frame">
-                            <!-- Accessible 3D Animation Pause / Resume Control -->
-                            <div id="bg-canvas-container" class="bg-canvas-container">
-                                <canvas id="hero-3d-canvas" class="hero-3d-full-canvas"
-                                    aria-label="Interactive 3D animation of EasyConnect blood-drop mascot reviving a beating heart"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- RIGHT COLUMN: Visual spacer allowing 3D background animation to breathe -->
+                    <div class="hero-visual-spacer" aria-hidden="true"></div>
 
                 </div>
 
-                <!-- HERO BOTTOM TRUST BAR (Desktop & Tablet only; hidden on mobile <= 767px) -->
-                <div class="hero-bottom-trust">
-                    <!-- 3 INFORMATIONAL TRUST CARDS -->
-                    <div class="three-feature-cards" role="region" aria-label="Key Community Principles">
-                        <div class="feature-card">
-                            <div class="fc-icon icon-terracotta">
-                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                            </div>
-                            <div class="fc-content">
-                                <span class="fc-title">Privacy First</span>
-                                <span class="fc-desc">Zero public contact sharing</span>
-                            </div>
-                        </div>
+                <!-- COMMUNITY PILLARS CARD -->
+                <div class="community-pillars-card">
 
-                        <div class="feature-card">
-                            <div class="fc-icon icon-sage">
-                                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            </div>
-                            <div class="fc-content">
-                                <span class="fc-title">Nearby Donors</span>
-                                <span class="fc-desc">Wave-based radius matching</span>
-                            </div>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="fc-icon icon-sage">
-                                <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
-                            </div>
-                            <div class="fc-content">
-                                <span class="fc-title">Safe Check-in</span>
-                                <span class="fc-desc">In-person hospital check-in</span>
-                            </div>
-                        </div>
+                    <div class="pillar-divider" aria-hidden="true"></div>
+                    <div class="pillar-item">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <span>Nearby Location Matching</span>
                     </div>
-
-                    <!-- COMMUNITY PILLARS CARD -->
-                    <div class="community-pillars-card">
-                        <div class="pillar-item">
-                            <i class="fa-solid fa-users" aria-hidden="true"></i>
-                            <span>Community Volunteers</span>
-                        </div>
-                        <div class="pillar-divider" aria-hidden="true"></div>
-                        <div class="pillar-item">
-                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            <span>Location Wave Matching</span>
-                        </div>
-                        <div class="pillar-divider" aria-hidden="true"></div>
-                        <div class="pillar-item">
-                            <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
-                            <span>Hospital Blood Banks</span>
-                        </div>
+                    <div class="pillar-divider" aria-hidden="true"></div>
+                    <div class="pillar-item">
+                        <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
+                        <span>Emergency Notification & Alerts</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
