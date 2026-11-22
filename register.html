@@ -31,9 +31,9 @@
 
         <!-- PAGE HERO -->
         <div class="page-hero">
-            <div class="eyebrow">— YOUR JOURNEY STARTS HERE</div>
-            <h1>Become part of <span class="serif">someone's story.</span></h1>
-            <p>A few small steps to make yourself available for someone who may need help.</p>
+            <div class="eyebrow">— VOLUNTEER DONOR PROFILE</div>
+            <h1>Set up your <span class="serif">donor profile.</span></h1>
+            <p>Your account connects you to local emergency blood alerts. Complete your location and availability below. Joining never commits you to donate.</p>
         </div>
 
         <!-- 2-COLUMN REGISTRATION LAYOUT -->
@@ -199,17 +199,18 @@
                                 <label for="blood-group">Blood group *</label>
                                 <select id="blood-group" name="blood_group" required>
                                     <option value="">Select blood group</option>
-                                    <option value="O+">O+ (Universal RBC Donor)</option>
-                                    <option value="O−">O− (True Universal Donor)</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O−">O−</option>
                                     <option value="A+">A+</option>
                                     <option value="A−">A−</option>
                                     <option value="B+">B+</option>
                                     <option value="B−">B−</option>
-                                    <option value="AB+">AB+ (Universal Plasma Donor)</option>
+                                    <option value="AB+">AB+</option>
                                     <option value="AB−">AB−</option>
                                     <option value="unknown">I don't know yet</option>
                                 </select>
                                 <span class="field-error-feedback" id="blood-group-error"><i class="fa-solid fa-circle-exclamation"></i> Please select your blood group.</span>
+                                <div class="fineprint" style="margin-top: 6px;"><i class="fa-solid fa-circle-info"></i> Clinical screening and compatibility testing will always be performed by licensed donation centres.</div>
                             </div>
 
                             <div class="field full">
@@ -294,24 +295,31 @@
                         <p class="hint">Control when and how you are contacted. Joining never commits you to donate.</p>
 
                         <div class="fields">
-                            <div class="field full">
-                                <label>Are you open to emergency donation invitations?</label>
-                                <div class="choice-row">
-                                    <label class="choice"><input type="radio" name="available" value="yes" checked> Yes, invite me</label>
-                                    <label class="choice"><input type="radio" name="available" value="later"> Pause / Maybe later</label>
+                            <div class="field full" id="field-available">
+                                <label id="availableLabel">Are you open to emergency donation invitations? *</label>
+                                <div class="choice-col" role="radiogroup" aria-labelledby="availableLabel">
+                                    <label class="choice choice-full">
+                                        <input type="radio" name="available" value="yes">
+                                        <span class="choice-text"><strong>Yes, invite me</strong> — Alert me when someone in my radius needs a match.</span>
+                                    </label>
+                                    <label class="choice choice-full">
+                                        <input type="radio" name="available" value="later">
+                                        <span class="choice-text"><strong>Pause / Maybe later</strong> — Keep profile active but pause alerts for now.</span>
+                                    </label>
                                 </div>
+                                <span class="field-error-feedback" id="available-error"><i class="fa-solid fa-circle-exclamation"></i> Please choose an emergency invitation preference.</span>
                             </div>
 
                             <div class="field full" id="field-consent">
-                                <label class="choice consent-box" style="align-items:flex-start">
-                                    <input type="checkbox" id="consent" required style="margin-top:4px">
-                                    <span>I agree to voluntary community coordination and understand that medical eligibility and compatibility testing are strictly performed by authorized hospitals or blood centres. *</span>
+                                <label class="consent-row">
+                                    <input type="checkbox" id="consent" required>
+                                    <span class="consent-text">I agree to voluntary community coordination and understand that medical eligibility and compatibility testing are strictly performed by authorized hospitals or blood centres. *</span>
                                 </label>
                                 <span class="field-error-feedback" id="consent-error"><i class="fa-solid fa-circle-exclamation"></i> Please accept the voluntary coordination agreement to finish.</span>
                             </div>
 
                             <div class="field full">
-                                <div class="notice">EasyConnect is a coordination platform that connects willing volunteers. Clinical evaluation is always handled by clinicians.</div>
+                                <div class="notice">EasyConnect is a coordination platform that connects willing volunteers. Clinical evaluation is always handled by clinicians. Joining never commits you to donate.</div>
                             </div>
                         </div>
                     </div>
@@ -325,7 +333,7 @@
                             <h2>Your Lifesaver Battery is 100% Charged!</h2>
                             <p class="hint" style="max-width:480px; margin: 12px auto 24px;">Your profile, GPS location, and schedule are set! You are now part of a compassionate network of community volunteers ready to step forward when seconds count.</p>
                             <a href="dashboard.html" class="btn btn-primary" style="background:var(--terracotta); color:#fff; display:inline-flex;">
-                                Go to My Space ↗
+                                Go to My Space <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -337,7 +345,7 @@
                             Back
                         </button>
                         <button class="btn btn-signup" type="button" id="next-btn" style="background:var(--sage); color:#fff;">
-                            Continue ↗
+                            Continue <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
 

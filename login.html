@@ -221,23 +221,79 @@
                 </div>
 
                 <!-- ==============================================
+                     PANEL 3: PASSWORD RECOVERY FLOW
+                     ============================================== -->
+                <div class="auth-panel" id="panelForgot" role="tabpanel" aria-labelledby="forgotPasswordLink">
+                    
+                    <div class="auth-heading-wrap">
+                        <h2>Reset Password</h2>
+                        <p class="auth-subtext">Enter your registered email address to receive password reset instructions.</p>
+                    </div>
+
+                    <!-- FORGOT PASSWORD FORM -->
+                    <form id="formForgot" novalidate>
+
+                        <div class="auth-field" id="fieldForgotEmail">
+                            <label for="forgotEmail">Email Address *</label>
+                            <div class="auth-input-wrap">
+                                <i class="fa-regular fa-envelope input-icon"></i>
+                                <input type="email" id="forgotEmail" name="forgot_email" autocomplete="email" placeholder="name@example.com" required>
+                            </div>
+                            <span class="auth-field-error" id="forgotEmailError"></span>
+                        </div>
+
+                        <button type="submit" class="btn-auth-primary" id="btnForgotSubmit">
+                            Send Reset Instructions <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <div class="auth-back-login-wrap" style="text-align: center; margin-top: 18px;">
+                            <button type="button" class="btn-link-back" id="backToLoginFromForgot" style="background: none; border: none; color: var(--sage); font-weight: 700; font-size: 13.5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Return to Log In</span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <!-- PROTOTYPE LIMITATION NOTICE & CONFIRMATION (Disclosed honestly) -->
+                    <div class="forgot-notice-panel" id="forgotFeedbackPanel" style="display: none; padding-top: 8px;">
+                        <div class="prototype-limit-banner" style="background: #FFF8EE; border: 1px solid #F0DCBE; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; text-align: left;">
+                            <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fa-solid fa-circle-info" style="color: #C87A2D; font-size: 16px; margin-top: 2px;"></i>
+                                <div>
+                                    <strong style="display: block; font-size: 13.5px; color: #8A4E12; margin-bottom: 4px;">Prototype Simulation Notice</strong>
+                                    <p style="font-size: 12.5px; line-height: 1.5; color: #6D4316; margin: 0;">
+                                        In this prototype demo, password reset emails cannot be dispatched without an active SMTP backend service. Your reset request for <span id="forgotTargetEmail" style="font-weight: 700;"></span> has been logged locally.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-auth-primary" id="returnToLoginBtn" style="background: var(--sage); width: 100%;">
+                            <i class="fa-solid fa-arrow-left"></i> Return to Log In
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ==============================================
                      PANEL 2: SIGN UP FORM (HORIZONTAL STEP WIZARD)
                      ============================================== -->
                 <div class="auth-panel" id="panelSignup" role="tabpanel" aria-labelledby="tabSignup">
                     
                     <div class="auth-heading-wrap">
-                        <h2 id="signupStepHeader">Join EasyConnect</h2>
-                        <p class="auth-subtext" id="signupStepSubtext">Register as a donor or find nearby blood support</p>
+                        <h2 id="signupStepHeader">Create your account</h2>
+                        <p class="auth-subtext" id="signupStepSubtext">An account lets you request blood or manage alerts. You can set up a donor profile after signing up.</p>
                     </div>
 
                     <!-- HORIZONTAL PROGRESS TRACK (Like registration page) -->
                     <div class="signup-progress-wrap">
                         <div class="signup-step-label">
                             <span id="signupStepText">Step 1 of 3 · Your Details</span>
-                            <strong id="signupStepPercent">33%</strong>
+                            <strong id="signupStepPercent">0%</strong>
                         </div>
                         <div class="progress-track">
-                            <div class="progress-fill" id="signupProgressFill" style="width: 33%;"></div>
+                            <div class="progress-fill" id="signupProgressFill" style="width: 0%;"></div>
                         </div>
                     </div>
 
@@ -324,7 +380,7 @@
                                 <span>Back</span>
                             </button>
                             <button type="button" class="btn-auth-primary" id="signupNextBtn">
-                                <span>Continue ↗</span>
+                                <span>Continue <i class="fa-solid fa-arrow-right"></i></span>
                             </button>
                         </div>
 

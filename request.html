@@ -43,11 +43,11 @@
             <!-- HORIZONTAL PROGRESS BAR (Like registration page) -->
             <div class="progress-label" id="progressLabelRow">
                 <span id="reqStepText">Step 1 of 3 · Your Contact</span>
-                <strong id="reqPercent">33%</strong>
+                <strong id="reqPercent">0%</strong>
             </div>
 
             <div class="progress-track" id="progressTrackRow">
-                <div class="progress-fill" id="reqProgressFill" style="width: 33%;"></div>
+                <div class="progress-fill" id="reqProgressFill" style="width: 0%;"></div>
             </div>
 
             <!-- MULTI-STEP REQUEST FORM -->
@@ -99,80 +99,76 @@
                 <div class="request-step" data-step="1">
                     <div class="request-step-heading">
                         <h2>Blood group required.</h2>
-                        <p>Choose the matching blood group, units, and required date.</p>
+                        <p>Select the needed blood group, units, and required date.</p>
                     </div>
 
-                    <!-- Blood Group Required -->
+                    <!-- Blood Group Required (Deliberate Choice, No Confusing Universal Tags) -->
                     <div class="auth-field" id="fieldReqBloodGroup">
-                        <label>Blood Group Required *</label>
-                        <div class="blood-pills-grid">
+                        <label id="bloodGroupLabel">Blood Group Required *</label>
+                        <div class="blood-pills-grid" role="radiogroup" aria-labelledby="bloodGroupLabel">
                             <label class="blood-pill-label">
-                                <input type="radio" name="blood_group" value="A+" checked>
+                                <input type="radio" name="blood_group" value="A+">
                                 <span class="blood-pill-box">
-                                    <span>A+</span>
-                                    <small>Compatible</small>
+                                    <span class="bg-title">A+</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="A-">
                                 <span class="blood-pill-box">
-                                    <span>A-</span>
-                                    <small>Compatible</small>
+                                    <span class="bg-title">A-</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="B+">
                                 <span class="blood-pill-box">
-                                    <span>B+</span>
-                                    <small>Compatible</small>
+                                    <span class="bg-title">B+</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="B-">
                                 <span class="blood-pill-box">
-                                    <span>B-</span>
-                                    <small>Compatible</small>
+                                    <span class="bg-title">B-</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="O+">
                                 <span class="blood-pill-box">
-                                    <span>O+</span>
-                                    <small>Universal +</small>
+                                    <span class="bg-title">O+</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="O-">
                                 <span class="blood-pill-box">
-                                    <span>O-</span>
-                                    <small>Universal -</small>
+                                    <span class="bg-title">O-</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="AB+">
                                 <span class="blood-pill-box">
-                                    <span>AB+</span>
-                                    <small>Universal Rec.</small>
+                                    <span class="bg-title">AB+</span>
                                 </span>
                             </label>
                             <label class="blood-pill-label">
                                 <input type="radio" name="blood_group" value="AB-">
                                 <span class="blood-pill-box">
-                                    <span>AB-</span>
-                                    <small>Rare Rec.</small>
+                                    <span class="bg-title">AB-</span>
                                 </span>
                             </label>
                         </div>
                         <span class="auth-field-error" id="reqBloodGroupError"></span>
+                        <div class="blood-group-helper-text">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Clinical compatibility and cross-matching will be formally confirmed by the hospital blood bank.</span>
+                        </div>
                     </div>
 
-                    <!-- Units & Required Date in 2 columns -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+                    <!-- Units & Required Date in responsive 2 columns -->
+                    <div class="req-two-col" style="margin-top: 14px;">
                         <div class="auth-field" id="fieldReqUnits">
                             <label for="reqUnits">Units Required *</label>
                             <div class="auth-input-wrap">
                                 <i class="fa-solid fa-droplet input-icon"></i>
-                                <input type="number" id="reqUnits" name="req_units" min="1" max="10" value="2" placeholder="e.g. 2" required>
+                                <input type="number" id="reqUnits" name="req_units" min="1" max="10" placeholder="e.g. 2" required>
                             </div>
                             <span class="auth-field-error" id="reqUnitsError"></span>
                         </div>
@@ -189,7 +185,7 @@
                 </div>
 
                 <!-- ==============================================
-                     STEP 3: HOSPITAL & LOCATION
+                     STEP 3: HOSPITAL & LOCATION + REVIEW SUMMARY
                      ============================================== -->
                 <div class="request-step" data-step="2">
                     <div class="request-step-heading">
@@ -207,8 +203,8 @@
                         <span class="auth-field-error" id="reqHospitalError"></span>
                     </div>
 
-                    <!-- Address & City in 2 columns -->
-                    <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px;">
+                    <!-- Address & City in responsive 2 columns -->
+                    <div class="req-two-col">
                         <div class="auth-field" id="fieldReqAddress">
                             <label for="reqAddress">Hospital Address / Landmark *</label>
                             <div class="auth-input-wrap">
@@ -231,7 +227,60 @@
                     <!-- Additional Context / Notes -->
                     <div class="auth-field" id="fieldReqNotes" style="margin-top: 10px;">
                         <label for="reqNotes">Additional Context / Instructions (Optional)</label>
-                        <textarea id="reqNotes" name="req_notes" rows="3" maxlength="300" placeholder="Any special coordination notes, contact timing, or patient ward details..." style="width: 100%; border: 1px solid #DCD6CD; border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.2s; resize: vertical;"></textarea>
+                        <textarea id="reqNotes" name="req_notes" rows="2" maxlength="300" placeholder="Any special coordination notes, contact timing, or patient ward details..." style="width: 100%; border: 1px solid #DCD6CD; border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.2s; resize: vertical;"></textarea>
+                    </div>
+
+                    <!-- COMPACT REVIEW SUMMARY CARD BEFORE BROADCAST -->
+                    <div class="req-review-summary-card" id="reqReviewSummaryCard">
+                        <div class="review-summary-head">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <div>
+                                <h3>Review Request Details</h3>
+                                <p>Check your information before broadcasting to local community donors.</p>
+                            </div>
+                        </div>
+
+                        <div class="review-grid">
+                            <div class="review-item">
+                                <div class="review-item-content">
+                                    <span class="review-lbl">Requester Contact</span>
+                                    <strong class="review-val" id="revContactVal">—</strong>
+                                </div>
+                                <button type="button" class="btn-review-edit" data-edit-step="0" aria-label="Edit contact details">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-item-content">
+                                    <span class="review-lbl">Blood Group & Units</span>
+                                    <strong class="review-val" id="revRequirementVal">—</strong>
+                                </div>
+                                <button type="button" class="btn-review-edit" data-edit-step="1" aria-label="Edit blood group and units">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-item-content">
+                                    <span class="review-lbl">Required Date</span>
+                                    <strong class="review-val" id="revDateVal">—</strong>
+                                </div>
+                                <button type="button" class="btn-review-edit" data-edit-step="1" aria-label="Edit required date">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                            </div>
+
+                            <div class="review-item">
+                                <div class="review-item-content">
+                                    <span class="review-lbl">Hospital & Facility</span>
+                                    <strong class="review-val" id="revHospitalVal">—</strong>
+                                </div>
+                                <button type="button" class="btn-review-edit" data-edit-step="2" aria-label="Edit hospital and city">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -332,22 +381,42 @@
             const reqCity = document.getElementById("reqCity");
             const reqNotes = document.getElementById("reqNotes");
 
-            // Prevent selecting past dates
+            // Prevent selecting past dates without pre-populating value
             if (reqDate) {
                 const today = new Date();
                 const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
                     .toISOString().slice(0, 10);
                 reqDate.min = localToday;
-                reqDate.value = localToday;
+                reqDate.value = ""; // Deliberate choice required
             }
 
             let currentStep = 0;
 
             const stepInfo = [
-                { title: "Step 1 of 3 · Your Contact", percent: "33%", btn: "Continue ↗" },
-                { title: "Step 2 of 3 · Blood Requirement", percent: "66%", btn: "Continue ↗" },
-                { title: "Step 3 of 3 · Hospital Location", percent: "100%", btn: "Submit Blood Request ↗" }
+                { title: "Step 1 of 3 · Your Contact", percent: "0%", btn: 'Continue <i class="fa-solid fa-arrow-right"></i>' },
+                { title: "Step 2 of 3 · Blood Requirement", percent: "33%", btn: 'Continue <i class="fa-solid fa-arrow-right"></i>' },
+                { title: "Step 3 of 3 · Hospital & Review", percent: "66%", btn: 'Broadcast Blood Request <i class="fa-solid fa-arrow-right"></i>' }
             ];
+
+            const populateReviewCard = () => {
+                const bg = document.querySelector('input[name="blood_group"]:checked')?.value || "Not selected";
+                const units = reqUnits?.value || "1";
+                const date = reqDate?.value || "Required date";
+                const name = (reqName?.value || "").trim() || "Requester";
+                const phone = (reqPhone?.value || "").trim() || "Phone";
+                const hosp = (reqHospital?.value || "").trim() || "Hospital";
+                const city = (reqCity?.value || "").trim() || "City";
+
+                const revContact = document.getElementById("revContactVal");
+                const revReq = document.getElementById("revRequirementVal");
+                const revDate = document.getElementById("revDateVal");
+                const revHosp = document.getElementById("revHospitalVal");
+
+                if (revContact) revContact.textContent = `${name} · ${phone}`;
+                if (revReq) revReq.textContent = `${bg} (${units} Unit${parseInt(units, 10) > 1 ? 's' : ''})`;
+                if (revDate) revDate.textContent = date;
+                if (revHosp) revHosp.textContent = `${hosp}, ${city}`;
+            };
 
             const updateUI = () => {
                 steps.forEach((step, idx) => {
@@ -370,6 +439,10 @@
                     if (reqBackBtn) {
                         reqBackBtn.style.display = currentStep > 0 ? "inline-flex" : "none";
                     }
+
+                    if (currentStep === 2) {
+                        populateReviewCard();
+                    }
                 } else {
                     // Success View
                     if (progressLabelRow) progressLabelRow.style.display = "none";
@@ -379,8 +452,20 @@
                 }
             };
 
+            // Review edit buttons to navigate directly back to any step
+            document.querySelectorAll(".btn-review-edit").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const target = parseInt(btn.getAttribute("data-edit-step"), 10);
+                    if (!isNaN(target) && target >= 0 && target < 3) {
+                        currentStep = target;
+                        updateUI();
+                    }
+                });
+            });
+
             const validateCurrentStep = () => {
                 let valid = true;
+                let firstInvalid = null;
 
                 if (currentStep === 0) {
                     const nameVal = (reqName?.value || "").trim();
@@ -399,6 +484,7 @@
                         fieldName?.classList.add("has-error");
                         if (errName) errName.textContent = "Please enter your full name.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqName;
                     } else {
                         fieldName?.classList.remove("has-error");
                     }
@@ -407,6 +493,7 @@
                         fieldEmail?.classList.add("has-error");
                         if (errEmail) errEmail.textContent = "Please enter a valid email address.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqEmail;
                     } else {
                         fieldEmail?.classList.remove("has-error");
                     }
@@ -416,10 +503,25 @@
                         fieldPhone?.classList.add("has-error");
                         if (errPhone) errPhone.textContent = "Please enter a valid 10-digit phone number.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqPhone;
                     } else {
                         fieldPhone?.classList.remove("has-error");
                     }
                 } else if (currentStep === 1) {
+                    const selectedBg = document.querySelector('input[name="blood_group"]:checked');
+                    const fieldBg = document.getElementById("fieldReqBloodGroup");
+                    const errBg = document.getElementById("reqBloodGroupError");
+
+                    if (!selectedBg) {
+                        fieldBg?.classList.add("has-error");
+                        if (errBg) errBg.textContent = "Please select the required blood group.";
+                        valid = false;
+                        if (!firstInvalid) firstInvalid = document.querySelector('input[name="blood_group"]');
+                    } else {
+                        fieldBg?.classList.remove("has-error");
+                        if (errBg) errBg.textContent = "";
+                    }
+
                     const unitsVal = parseInt(reqUnits?.value, 10);
                     const dateVal = reqDate?.value;
                     const fieldUnits = document.getElementById("fieldReqUnits");
@@ -427,10 +529,11 @@
                     const errUnits = document.getElementById("reqUnitsError");
                     const errDate = document.getElementById("reqDateError");
 
-                    if (isNaN(unitsVal) || unitsVal < 1) {
+                    if (isNaN(unitsVal) || unitsVal < 1 || unitsVal > 10) {
                         fieldUnits?.classList.add("has-error");
-                        if (errUnits) errUnits.textContent = "Please specify at least 1 unit.";
+                        if (errUnits) errUnits.textContent = "Please enter valid units between 1 and 10.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqUnits;
                     } else {
                         fieldUnits?.classList.remove("has-error");
                     }
@@ -439,6 +542,7 @@
                         fieldDate?.classList.add("has-error");
                         if (errDate) errDate.textContent = "Please select the date blood is required.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqDate;
                     } else {
                         fieldDate?.classList.remove("has-error");
                     }
@@ -459,6 +563,7 @@
                         fieldHosp?.classList.add("has-error");
                         if (errHosp) errHosp.textContent = "Please provide the hospital or facility name.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqHospital;
                     } else {
                         fieldHosp?.classList.remove("has-error");
                     }
@@ -467,6 +572,7 @@
                         fieldAddr?.classList.add("has-error");
                         if (errAddr) errAddr.textContent = "Please enter hospital address / landmark.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqAddress;
                     } else {
                         fieldAddr?.classList.remove("has-error");
                     }
@@ -475,9 +581,14 @@
                         fieldCity?.classList.add("has-error");
                         if (errCity) errCity.textContent = "Please enter the city.";
                         valid = false;
+                        if (!firstInvalid) firstInvalid = reqCity;
                     } else {
                         fieldCity?.classList.remove("has-error");
                     }
+                }
+
+                if (!valid && firstInvalid) {
+                    firstInvalid.focus();
                 }
 
                 return valid;
@@ -497,7 +608,7 @@
                         reqNextBtn.disabled = true;
 
                         setTimeout(() => {
-                            // Populate summary
+                            // Populate final success summary
                             const selectedBg = document.querySelector('input[name="blood_group"]:checked')?.value || "O+";
                             const unitsVal = reqUnits?.value || "2";
                             const dateVal = reqDate?.value || "Urgent";

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabTabBar = document.querySelector(".auth-tab-bar");
     const panelLogin = document.getElementById("panelLogin");
     const panelSignup = document.getElementById("panelSignup");
+    const panelForgot = document.getElementById("panelForgot");
 
     const headerToggleBtn = document.getElementById("headerToggleBtn");
     const headerToggleHint = document.getElementById("headerToggleHint");
@@ -22,6 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginEmail = document.getElementById("loginEmail");
     const loginPassword = document.getElementById("loginPassword");
     const toggleLoginPassword = document.getElementById("toggleLoginPassword");
+    const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+
+    // Inputs — Forgot Password
+    const formForgot = document.getElementById("formForgot");
+    const forgotEmail = document.getElementById("forgotEmail");
+    const forgotEmailError = document.getElementById("forgotEmailError");
+    const forgotFeedbackPanel = document.getElementById("forgotFeedbackPanel");
+    const forgotTargetEmail = document.getElementById("forgotTargetEmail");
+    const backToLoginFromForgot = document.getElementById("backToLoginFromForgot");
+    const returnToLoginBtn = document.getElementById("returnToLoginBtn");
 
     // Inputs — Sign Up (Only Name, Email, Password, Confirm Password, OTP)
     const signupName = document.getElementById("signupName");
@@ -41,10 +52,33 @@ document.addEventListener("DOMContentLoaded", () => {
     let otpCountdownInterval = null;
 
     /* =========================================================
-       1. SEGMENTED TAB SWITCHER (LOG IN / SIGN UP)
+       1. SEGMENTED TAB SWITCHER (LOG IN / SIGN UP / FORGOT)
        ========================================================= */
     const switchTab = (mode) => {
-        if (mode === "signup") {
+        if (mode === "forgot") {
+            tabTabBar?.classList.remove("signup-active");
+            tabLogin?.classList.remove("active");
+            tabSignup?.classList.remove("active");
+            tabLogin?.setAttribute("aria-selected", "false");
+            tabSignup?.setAttribute("aria-selected", "false");
+
+            panelLogin?.classList.remove("active");
+            panelSignup?.classList.remove("active");
+            panelForgot?.classList.add("active");
+
+            // Reset forgot form state
+            if (formForgot) formForgot.style.display = "block";
+            if (forgotFeedbackPanel) forgotFeedbackPanel.style.display = "none";
+            if (forgotEmail) {
+                forgotEmail.value = "";
+                document.getElementById("fieldForgotEmail")?.classList.remove("has-error");
+                if (forgotEmailError) forgotEmailError.textContent = "";
+                setTimeout(() => forgotEmail.focus(), 80);
+            }
+
+            if (headerToggleHint) headerToggleHint.textContent = "Remembered password?";
+            if (headerToggleBtn) headerToggleBtn.textContent = "Log In";
+        } else if (mode === "signup") {
             tabTabBar?.classList.add("signup-active");
             tabLogin?.classList.remove("active");
             tabSignup?.classList.add("active");
@@ -52,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tabSignup?.setAttribute("aria-selected", "true");
 
             panelLogin?.classList.remove("active");
+            panelForgot?.classList.remove("active");
             panelSignup?.classList.add("active");
 
             if (headerToggleHint) headerToggleHint.textContent = "Already have an account?";
@@ -67,8 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
             tabLogin?.setAttribute("aria-selected", "true");
             tabSignup?.setAttribute("aria-selected", "false");
 
-            panelLogin?.classList.add("active");
+            panelForgot?.classList.remove("active");
             panelSignup?.classList.remove("active");
+            panelLogin?.classList.add("active");
 
             if (headerToggleHint) headerToggleHint.textContent = "Don't have an account?";
             if (headerToggleBtn) headerToggleBtn.textContent = "Sign Up";
@@ -82,6 +118,27 @@ document.addEventListener("DOMContentLoaded", () => {
     tabLogin?.addEventListener("click", () => switchTab("login"));
     tabSignup?.addEventListener("click", () => switchTab("signup"));
 
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchTab("forgot");
+        });
+    }
+
+    if (backToLoginFromForgot) {
+        backToLoginFromForgot.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchTab("login");
+        });
+    }
+
+    if (returnToLoginBtn) {
+        returnToLoginBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchTab("login");
+        });
+    }
+
     if (headerToggleBtn) {
         headerToggleBtn.addEventListener("click", () => {
             const isLoginActive = tabLogin?.classList.contains("active");
@@ -89,13 +146,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Direct URL parameter & hash routing (e.g. login.html?tab=signup or #signup)
+    // Direct URL parameter & hash routing (e.g. login.html?tab=signup or #signup or #forgot)
     const initAuthTabFromURL = () => {
         try {
             const params = new URLSearchParams(window.location.search);
             const tabParam = (params.get("tab") || window.location.hash.replace("#", "")).toLowerCase();
             if (tabParam === "signup" || tabParam === "register") {
                 switchTab("signup");
+            } else if (tabParam === "forgot" || tabParam === "reset") {
+                switchTab("forgot");
             } else if (tabParam === "login" || tabParam === "signin") {
                 switchTab("login");
             }
@@ -232,24 +291,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const stepData = [
         {
             title: "Step 1 of 3 · Your Details",
-            percent: "33%",
-            header: "Join EasyConnect",
-            subtext: "Register as a donor or find nearby blood support",
-            btnText: "Continue ↗"
+            percent: "0%",
+            header: "Create your account",
+            subtext: "An account lets you request blood or manage alerts. You can set up a donor profile after signing up.",
+            btnText: 'Continue <i class="fa-solid fa-arrow-right"></i>'
         },
         {
             title: "Step 2 of 3 · Security",
-            percent: "66%",
+            percent: "50%",
             header: "Set Your Password",
             subtext: "Create a secure password to protect your account",
-            btnText: "Continue ↗"
+            btnText: 'Continue <i class="fa-solid fa-arrow-right"></i>'
         },
         {
             title: "Step 3 of 3 · Verification",
-            percent: "100%",
+            percent: "75%",
             header: "Verify Your Email",
             subtext: "Confirm your account with the 6-digit OTP code",
-            btnText: "Verify & Create Account ↗"
+            btnText: 'Verify & Create Account <i class="fa-solid fa-arrow-right"></i>'
         }
     ];
 
@@ -286,6 +345,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const validateSignupStep = (stepIdx) => {
         let isValid = true;
+        let firstInvalidField = null;
+
         if (stepIdx === 0) {
             const nameVal = (signupName?.value || "").trim();
             const emailVal = (signupEmail?.value || "").trim();
@@ -298,6 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldName?.classList.add("has-error");
                 if (errName) errName.textContent = "Please enter your full name.";
                 isValid = false;
+                if (!firstInvalidField) firstInvalidField = signupName;
             } else {
                 fieldName?.classList.remove("has-error");
             }
@@ -306,6 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldEmail?.classList.add("has-error");
                 if (errEmail) errEmail.textContent = "Please enter a valid email address.";
                 isValid = false;
+                if (!firstInvalidField) firstInvalidField = signupEmail;
             } else {
                 fieldEmail?.classList.remove("has-error");
             }
@@ -321,6 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldPass?.classList.add("has-error");
                 if (errPass) errPass.textContent = "Password must be at least 8 characters.";
                 isValid = false;
+                if (!firstInvalidField) firstInvalidField = signupPassword;
             } else {
                 fieldPass?.classList.remove("has-error");
             }
@@ -329,10 +393,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldConfirm?.classList.add("has-error");
                 if (errConfirm) errConfirm.textContent = "Please confirm your password.";
                 isValid = false;
+                if (!firstInvalidField) firstInvalidField = signupConfirmPassword;
             } else if (confirmVal !== passVal) {
                 fieldConfirm?.classList.add("has-error");
                 if (errConfirm) errConfirm.textContent = "Passwords do not match.";
                 isValid = false;
+                if (!firstInvalidField) firstInvalidField = signupConfirmPassword;
             } else {
                 fieldConfirm?.classList.remove("has-error");
             }
@@ -345,10 +411,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldOtp?.classList.add("has-error");
                 if (errOtp) errOtp.textContent = "Please enter the 6-digit OTP code (Click 'Send OTP').";
                 isValid = false;
+                if (!firstInvalidField) firstInvalidField = signupOtp;
             } else {
                 fieldOtp?.classList.remove("has-error");
             }
         }
+
+        if (!isValid && firstInvalidField) {
+            firstInvalidField.focus();
+        }
+
         return isValid;
     };
 
@@ -368,6 +440,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Final submission
                 signupNextBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Verifying & Creating Account...`;
                 signupNextBtn.disabled = true;
+
+                // Save user info for profile prefill
+                try {
+                    const finalName = (signupName?.value || "").trim() || "Aditi Sharma";
+                    const finalEmail = (signupEmail?.value || "").trim() || "aditi@example.com";
+                    localStorage.setItem("easyconnect_user", JSON.stringify({ name: finalName, email: finalEmail }));
+                } catch (e) {
+                    console.warn("Storage not available", e);
+                }
 
                 setTimeout(() => {
                     window.location.href = "dashboard.html";
@@ -448,6 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formLogin.addEventListener("submit", (e) => {
             e.preventDefault();
             let hasError = false;
+            let firstInvalid = null;
 
             const emailVal = (loginEmail?.value || "").trim();
             const passVal = (loginPassword?.value || "").trim();
@@ -461,6 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldEmail?.classList.add("has-error");
                 if (errEmail) errEmail.textContent = "Please enter a valid email address.";
                 hasError = true;
+                if (!firstInvalid) firstInvalid = loginEmail;
             } else {
                 fieldEmail?.classList.remove("has-error");
             }
@@ -469,8 +552,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 fieldPass?.classList.add("has-error");
                 if (errPass) errPass.textContent = "Please enter your password (minimum 6 characters).";
                 hasError = true;
+                if (!firstInvalid) firstInvalid = loginPassword;
             } else {
                 fieldPass?.classList.remove("has-error");
+            }
+
+            if (hasError && firstInvalid) {
+                firstInvalid.focus();
+                return;
             }
 
             if (!hasError) {
@@ -478,10 +567,52 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Logging in...`;
                 btn.disabled = true;
 
+                // Save session in localStorage
+                try {
+                    localStorage.setItem("easyconnect_user", JSON.stringify({ name: "Logged In User", email: emailVal }));
+                } catch (e) {
+                    console.warn("Storage not available", e);
+                }
+
                 setTimeout(() => {
                     window.location.href = "dashboard.html";
                 }, 900);
             }
+        });
+    }
+
+    /* FORGOT PASSWORD FORM SUBMISSION */
+    if (formForgot) {
+        formForgot.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const emailVal = (forgotEmail?.value || "").trim();
+            const fieldForgot = document.getElementById("fieldForgotEmail");
+
+            if (!emailVal || !emailVal.includes("@") || !emailVal.includes(".")) {
+                fieldForgot?.classList.add("has-error");
+                if (forgotEmailError) forgotEmailError.textContent = "Please enter a valid registered email address.";
+                forgotEmail?.focus();
+                return;
+            }
+
+            fieldForgot?.classList.remove("has-error");
+            if (forgotEmailError) forgotEmailError.textContent = "";
+
+            const btn = document.getElementById("btnForgotSubmit");
+            if (btn) {
+                btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Checking account...`;
+                btn.disabled = true;
+            }
+
+            setTimeout(() => {
+                if (formForgot) formForgot.style.display = "none";
+                if (forgotFeedbackPanel) forgotFeedbackPanel.style.display = "block";
+                if (forgotTargetEmail) forgotTargetEmail.textContent = emailVal;
+                if (btn) {
+                    btn.innerHTML = `Send Reset Instructions <i class="fa-solid fa-arrow-right"></i>`;
+                    btn.disabled = false;
+                }
+            }, 600);
         });
     }
 

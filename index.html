@@ -44,11 +44,14 @@
 
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="active">Home</a>
-                <a href="donors.html">Find Donors</a>
                 <a href="#about">About</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#faq">FAQ</a>
-                <a href="request.html">Request Blood</a>
+                <!-- Mobile only account navigation -->
+                <div class="mobile-only-nav-actions">
+                    <a href="login.html?tab=login" class="btn-mobile-nav btn-mobile-login">Log In</a>
+                    <a href="login.html?tab=signup" class="btn-mobile-nav btn-mobile-signup">Sign Up</a>
+                </div>
             </nav>
 
             <div class="nav-actions">
@@ -97,25 +100,36 @@
                     <p class="hero-description hero-subtitle">
                         One small act of kindness from you can give a family back their tomorrow.
                     </p>
-                </div>
 
-                <!-- HERO MIDDLE 3D STAGE (Open space for character walking across screen) -->
-                <div class="hero-middle-stage"></div>
-
-                <!-- LOWER AREA (CTA Buttons & Community Pillars Card) -->
-                <div class="hero-lower-area">
+                    <!-- HERO ACTION BUTTONS (DIRECTLY BELOW HEADLINE WITH CLEAR 3-TIER HIERARCHY) -->
                     <div class="hero-buttons">
                         <a href="donors.html" class="btn btn-primary btn-hero-sage">
                             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                            Find Donors
+                            <span>Find Donors</span>
                         </a>
 
                         <a href="register.html" class="btn btn-secondary btn-hero-white">
                             <i class="fa-solid fa-droplet droplet-terracotta" aria-hidden="true"></i>
-                            Become a Donor
+                            <span>Become a Donor</span>
+                        </a>
+
+                        <a href="request.html" class="btn btn-tertiary btn-hero-terracotta">
+                            <i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i>
+                            <span>Request Blood</span>
                         </a>
                     </div>
 
+                    <div class="hero-privacy-reassurance">
+                        <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                        <span>Private community coordination · No public contact details displayed</span>
+                    </div>
+                </div>
+
+                <!-- HERO MIDDLE 3D STAGE (Controlled defined area for mascot animation) -->
+                <div class="hero-middle-stage"></div>
+
+                <!-- LOWER AREA (Community Pillars Card) -->
+                <div class="hero-lower-area">
                     <!-- COMMUNITY PILLARS CARD (3 pillars separated by vertical dividers) -->
                     <div class="community-pillars-card">
                         <div class="pillar-item">
@@ -129,8 +143,8 @@
                         </div>
                         <div class="pillar-divider" aria-hidden="true"></div>
                         <div class="pillar-item">
-                            <i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i>
-                            <span>Simple Blood Requests</span>
+                            <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
+                            <span>Hospital Coordination</span>
                         </div>
                     </div>
                 </div>
@@ -224,55 +238,110 @@
             </div>
         </section>
 
-        <!-- HOW IT WORKS: 4 SIMPLE STEPS -->
+        <!-- HOW IT WORKS: SEPARATED REQUESTER & DONOR PATHWAYS -->
         <section class="how-section" id="how-it-works">
             <div class="container">
 
                 <div class="section-heading">
                     <span class="section-label">HOW IT WORKS</span>
-                    <h2>Four Simple Steps to Connect</h2>
-                    <p>Easy for everyone: from signing up to confirming a successful connection.</p>
+                    <h2>Two Simple, Transparent Pathways</h2>
+                    <p>Whether you urgently need blood or wish to volunteer, here is exactly how EasyConnect coordinates support.</p>
                 </div>
 
-                <div class="card-grid-4">
-
-                    <div class="step-card">
-                        <span class="step-num">01</span>
-                        <div class="step-icon">
-                            <i class="fa-regular fa-user"></i>
-                        </div>
-                        <h3>Create a Profile</h3>
-                        <p>Sign up easily with your email to access the community platform.</p>
+                <!-- HOW IT WORKS TAB SWITCHER -->
+                <div class="how-tabs-container">
+                    <div class="how-tab-bar" role="tablist" aria-label="Coordination pathways">
+                        <button type="button" class="how-tab active" id="tabHowRequester" role="tab" aria-selected="true" aria-controls="panelHowRequester">
+                            <i class="fa-solid fa-hand-holding-medical"></i>
+                            <span>I need blood</span>
+                        </button>
+                        <button type="button" class="how-tab" id="tabHowDonor" role="tab" aria-selected="false" aria-controls="panelHowDonor">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                            <span>I want to donate</span>
+                        </button>
                     </div>
+                </div>
 
-                    <div class="step-card">
-                        <span class="step-num">02</span>
-                        <div class="step-icon">
-                            <i class="fa-solid fa-id-card-clip"></i>
+                <!-- TAB PANEL 1: I NEED BLOOD -->
+                <div class="how-tab-panel active" id="panelHowRequester" role="tabpanel" aria-labelledby="tabHowRequester">
+                    <div class="card-grid-4">
+                        <div class="step-card">
+                            <span class="step-num">01</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-file-waveform"></i>
+                            </div>
+                            <h3>Post Requirement</h3>
+                            <p>Enter patient blood group, required units, hospital facility, and contact details.</p>
                         </div>
-                        <h3>Register as a Donor</h3>
-                        <p>Choose to register as a donor, set your availability, and travel preferences.</p>
-                    </div>
 
-                    <div class="step-card">
-                        <span class="step-num">03</span>
-                        <div class="step-icon">
-                            <i class="fa-solid fa-location-crosshairs"></i>
+                        <div class="step-card">
+                            <span class="step-num">02</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-location-crosshairs"></i>
+                            </div>
+                            <h3>Radius Wave Alert</h3>
+                            <p>Private alerts dispatch outward in controlled waves (5km, 10km, 20km) to available volunteers.</p>
                         </div>
-                        <h3>Search in Nearby Radius</h3>
-                        <p>If you seek blood, find and request available volunteers within your nearby radius.
-                        </p>
-                    </div>
 
-                    <div class="step-card">
-                        <span class="step-num">04</span>
-                        <div class="step-icon">
-                            <i class="fa-solid fa-qrcode"></i>
+                        <div class="step-card">
+                            <span class="step-num">03</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h3>Coordinate Arrival</h3>
+                            <p>Volunteers who accept connect directly with you to coordinate travel and arrival timing.</p>
                         </div>
-                        <h3>Confirm With QR Code</h3>
-                        <p>After a donation takes place, both sides scan a one-time QR code to confirm.</p>
-                    </div>
 
+                        <div class="step-card">
+                            <span class="step-num">04</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-hospital-user"></i>
+                            </div>
+                            <h3>Hospital Testing</h3>
+                            <p>Licensed blood bank performs clinical screening, cross-matching, and safe donation procedures.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB PANEL 2: I WANT TO DONATE -->
+                <div class="how-tab-panel" id="panelHowDonor" role="tabpanel" aria-labelledby="tabHowDonor" style="display: none;">
+                    <div class="card-grid-4">
+                        <div class="step-card">
+                            <span class="step-num">01</span>
+                            <div class="step-icon">
+                                <i class="fa-regular fa-id-badge"></i>
+                            </div>
+                            <h3>Set Up Profile</h3>
+                            <p>Enter your self-reported blood group, general location, and daily travel schedule.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <span class="step-num">02</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                            <h3>Proximity Alerts</h3>
+                            <p>Receive emergency alerts only when a verified hospital near your route requires your group.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <span class="step-num">03</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <h3>Voluntary Decision</h3>
+                            <p>Accept or decline based on your availability. Participation is always 100% voluntary.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <span class="step-num">04</span>
+                            <div class="step-icon">
+                                <i class="fa-solid fa-qrcode"></i>
+                            </div>
+                            <h3>Bedside QR Check-in</h3>
+                            <p>Scan a one-time QR code at the hospital blood bank to confirm completion and earn trust badges.</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>

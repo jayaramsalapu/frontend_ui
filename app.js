@@ -265,6 +265,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let current = 0;
 
+    // PREFILL AUTHENTICATED USER DATA IF LOGGED IN
+    try {
+      const storedUser = localStorage.getItem("easyconnect_user");
+      if (storedUser) {
+        const parsed = JSON.parse(storedUser);
+        const nameField = form.querySelector("#fullname");
+        const emailField = form.querySelector("#email");
+        if (nameField && !nameField.value && parsed.name && parsed.name !== "Logged In User") {
+          nameField.value = parsed.name;
+          setTimeout(() => validateFieldInput(nameField), 50);
+        }
+        if (emailField && !emailField.value && parsed.email) {
+          emailField.value = parsed.email;
+          setTimeout(() => validateFieldInput(emailField), 50);
+        }
+      }
+    } catch (e) {
+      console.warn("Could not read stored user", e);
+    }
+
     /* COMPUTE ACCURATE BATTERY CHARGE DYNAMICALLY */
     const computeBatteryCharge = () => {
       let charge = 0;
@@ -656,7 +676,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (charge < 40) {
           bubbleText.textContent = "Personal details saved! Your location helps match urgent requests.";
         } else if (charge < 60) {
-          bubbleText.textContent = "Location verified! Blood group details enable rapid matching.";
+          bubbleText.textContent = "Location saved! Blood group details enable rapid matching.";
         } else if (charge < 80) {
           bubbleText.textContent = "Blood group set! Availability routes requests where you are.";
         } else if (charge < 100) {
@@ -728,7 +748,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         if (stepName) stepName.textContent = `Step ${current + 1} of 5 · ${labels[current]}`;
         if (next) {
-          next.textContent = current === 4 ? "Complete Registration ♡" : "Continue ↗";
+          next.innerHTML = current === 4 ? "Complete Registration ♡" : 'Continue <i class="fa-solid fa-arrow-right"></i>';
         }
       }
 
@@ -860,12 +880,23 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!firstInvalidInput) firstInvalidInput = evening;
         }
       } else if (current === 4) {
-        // Step 5: Consent
+        // Step 5: Emergency invitations & Consent
+        const avail = form.querySelector('input[name="available"]:checked');
+        if (!avail) {
+          setFieldError("field-available", true);
+          isValid = false;
+          if (!firstInvalidInput) firstInvalidInput = form.querySelector('input[name="available"]');
+        } else {
+          setFieldError("field-available", false);
+        }
+
         const consent = form.querySelector("#consent");
         if (!consent || !consent.checked) {
           setFieldError("field-consent", true);
           isValid = false;
           if (!firstInvalidInput) firstInvalidInput = consent;
+        } else {
+          setFieldError("field-consent", false);
         }
       }
 
@@ -925,11 +956,11 @@ document.addEventListener("DOMContentLoaded", () => {
         navigator.geolocation.getCurrentPosition(
           position => {
             detectGpsBtn.classList.remove("detecting");
-            detectGpsBtn.innerHTML = '<i class="fa-solid fa-check"></i> <span>GPS Verified</span>';
+            detectGpsBtn.innerHTML = '<i class="fa-solid fa-check"></i> <span>GPS Acquired</span>';
             const lat = position.coords.latitude.toFixed(4);
             const lng = position.coords.longitude.toFixed(4);
 
-            gpsInput.value = `Visakhapatnam (${lat}° N, ${lng}° E) · Live GPS Verified`;
+            gpsInput.value = `Visakhapatnam (${lat}° N, ${lng}° E) · Live GPS`;
             gpsInput.classList.add("gps-verified");
             validateFieldInput(gpsInput);
 
@@ -944,7 +975,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (gpsStatusMsg) {
               gpsStatusMsg.className = "gps-status-msg";
-              gpsStatusMsg.innerHTML = `<i class="fa-solid fa-circle-check"></i> Accuracy radius: within ${Math.round(position.coords.accuracy)}m. Location verified!`;
+              gpsStatusMsg.innerHTML = `<i class="fa-solid fa-circle-check"></i> Accuracy radius: within ${Math.round(position.coords.accuracy)}m. Live coordinates recorded.`;
             }
 
             const currentCharge = computeBatteryCharge();
@@ -1441,6 +1472,36 @@ document.addEventListener("DOMContentLoaded", () => {
         top: 0,
         behavior: reducedMotion ? "auto" : "smooth"
       });
+    });
+  }
+
+  /* ========================================
+     HOW IT WORKS TABS (REQUESTER VS DONOR)
+  ======================================== */
+  const tabHowRequester = document.getElementById("tabHowRequester");
+  const tabHowDonor = document.getElementById("tabHowDonor");
+  const panelHowRequester = document.getElementById("panelHowRequester");
+  const panelHowDonor = document.getElementById("panelHowDonor");
+
+  if (tabHowRequester && tabHowDonor) {
+    tabHowRequester.addEventListener("click", () => {
+      tabHowRequester.classList.add("active");
+      tabHowRequester.setAttribute("aria-selected", "true");
+      tabHowDonor.classList.remove("active");
+      tabHowDonor.setAttribute("aria-selected", "false");
+
+      if (panelHowRequester) panelHowRequester.style.display = "block";
+      if (panelHowDonor) panelHowDonor.style.display = "none";
+    });
+
+    tabHowDonor.addEventListener("click", () => {
+      tabHowDonor.classList.add("active");
+      tabHowDonor.setAttribute("aria-selected", "true");
+      tabHowRequester.classList.remove("active");
+      tabHowRequester.setAttribute("aria-selected", "false");
+
+      if (panelHowDonor) panelHowDonor.style.display = "block";
+      if (panelHowRequester) panelHowRequester.style.display = "none";
     });
   }
 
