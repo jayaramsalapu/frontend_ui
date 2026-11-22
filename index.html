@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F2">
+    <title>EasyConnect | Connect Lives Through Blood Donation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Three.js r128 for 3D Hero Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body data-page="home">
+
+    <!-- Keyboard-accessible Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- NAVBAR -->
+    <header class="site-header">
+        <!-- Subtle Reading Progress Line (Transform-based, decorative, hidden from AT) -->
+        <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
+
+        <div class="navbar">
+
+            <a href="index.html" class="brand">
+                <span class="brand-icon">
+                    <i class="fa-solid fa-droplet"></i>
+                    <i class="fa-solid fa-heart heart-icon"></i>
+                </span>
+                <span class="brand-name">
+                    EasyConnect
+                </span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Home</a>
+                <a href="donors.html">Find Donors</a>
+                <a href="#about">About</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="request.html">Request Blood</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html?tab=login" class="btn btn-secondary btn-login">Log In</a>
+                <a href="login.html?tab=signup" class="btn btn-primary btn-signup">Sign Up</a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="navLinks">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+
+        <!-- FULL-VIEWPORT HERO SECTION (Matches Reference Design) -->
+        <section class="hero-viewport" id="home">
+
+            <!-- Accessible 3D Animation Pause / Resume Control -->
+            <button type="button" class="hero-3d-pause-btn" id="hero3dPauseBtn" aria-label="Pause 3D animation"
+                aria-pressed="false" title="Pause 3D animation">
+                <i class="fa-solid fa-pause" aria-hidden="true"></i>
+                <span class="sr-only">Pause 3D animation</span>
+            </button>
+
+            <!-- FULL HERO 3D CANVAS BACKGROUND CONTAINER -->
+            <div id="bg-canvas-container" class="bg-canvas-container">
+                <canvas id="hero-3d-canvas" class="hero-3d-full-canvas" aria-label="Interactive 3D animation of EasyConnect blood-drop mascot reviving a beating heart"></canvas>
+            </div>
+
+            <div class="container hero-container">
+
+                <!-- TOP CENTERED HEADER -->
+                <div class="hero-top-header">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Blood Donation Community</span>
+                    </div>
+
+                    <h1 class="hero-headline">
+                        Be the reason <span class="accent-sage">someone smiles again.</span>
+                    </h1>
+
+                    <p class="hero-description hero-subtitle">
+                        One small act of kindness from you can give a family back their tomorrow.
+                    </p>
+                </div>
+
+                <!-- HERO MIDDLE 3D STAGE (Open space for character walking across screen) -->
+                <div class="hero-middle-stage"></div>
+
+                <!-- LOWER AREA (CTA Buttons & Community Pillars Card) -->
+                <div class="hero-lower-area">
+                    <div class="hero-buttons">
+                        <a href="donors.html" class="btn btn-primary btn-hero-sage">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            Find Donors
+                        </a>
+
+                        <a href="register.html" class="btn btn-secondary btn-hero-white">
+                            <i class="fa-solid fa-droplet droplet-terracotta" aria-hidden="true"></i>
+                            Become a Donor
+                        </a>
+                    </div>
+
+                    <!-- COMMUNITY PILLARS CARD (3 pillars separated by vertical dividers) -->
+                    <div class="community-pillars-card">
+                        <div class="pillar-item">
+                            <i class="fa-solid fa-users" aria-hidden="true"></i>
+                            <span>Community Volunteers</span>
+                        </div>
+                        <div class="pillar-divider" aria-hidden="true"></div>
+                        <div class="pillar-item">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <span>Location-Based Matching</span>
+                        </div>
+                        <div class="pillar-divider" aria-hidden="true"></div>
+                        <div class="pillar-item">
+                            <i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i>
+                            <span>Simple Blood Requests</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 INFORMATIONAL TRUST CARDS (Clear non-button informational cards) -->
+                <div class="three-feature-cards" role="region" aria-label="Key Community Guarantees">
+                    <div class="feature-card">
+                        <div class="fc-icon icon-terracotta">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                        </div>
+                        <div class="fc-content">
+                            <span class="fc-title">Privacy First</span>
+                            <span class="fc-desc">Zero public contact sharing</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="fc-icon icon-sage">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        </div>
+                        <div class="fc-content">
+                            <span class="fc-title">Nearby Donors</span>
+                            <span class="fc-desc">Matched within your city</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="fc-icon icon-sage">
+                            <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
+                        </div>
+                        <div class="fc-content">
+                            <span class="fc-title">QR Verified</span>
+                            <span class="fc-desc">Bedside authentication</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WHY EASYCONNECT (4 CORE ADVANTAGES) -->
+        <section class="minimal-section" id="about">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">WHY EASYCONNECT</span>
+                    <h2>Thoughtful Community Coordination</h2>
+                    <p>Designed to help you connect with willing blood donors quickly, privately, and reliably.
+                    </p>
+                </div>
+
+                <div class="card-grid-4">
+
+                    <div class="min-card">
+                        <div class="min-icon">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h3>Focused Requests</h3>
+                        <p>No lost messages in cluttered groups. Requests go directly to relevant, available
+                            donors.</p>
+                    </div>
+
+                    <div class="min-card">
+                        <div class="min-icon">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <h3>Real Availability</h3>
+                        <p>Connect with volunteers based on their active schedule and current availability.</p>
+                    </div>
+
+                    <div class="min-card">
+                        <div class="min-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>Privacy Protected</h3>
+                        <p>No public donor map. Exact locations and phone numbers remain private on the server.
+                        </p>
+                    </div>
+
+                    <div class="min-card">
+                        <div class="min-icon">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3>Clear Trust Labels</h3>
+                        <p>Honest badges for email, phone, and self-reported blood group keep expectations
+                            clear.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS: 4 SIMPLE STEPS -->
+        <section class="how-section" id="how-it-works">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">HOW IT WORKS</span>
+                    <h2>Four Simple Steps to Connect</h2>
+                    <p>Easy for everyone: from signing up to confirming a successful connection.</p>
+                </div>
+
+                <div class="card-grid-4">
+
+                    <div class="step-card">
+                        <span class="step-num">01</span>
+                        <div class="step-icon">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <h3>Create a Profile</h3>
+                        <p>Sign up easily with your email to access the community platform.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">02</span>
+                        <div class="step-icon">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                        </div>
+                        <h3>Register as a Donor</h3>
+                        <p>Choose to register as a donor, set your availability, and travel preferences.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">03</span>
+                        <div class="step-icon">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </div>
+                        <h3>Search in Nearby Radius</h3>
+                        <p>If you seek blood, find and request available volunteers within your nearby radius.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">04</span>
+                        <div class="step-icon">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                        <h3>Confirm With QR Code</h3>
+                        <p>After a donation takes place, both sides scan a one-time QR code to confirm.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MATCHING & PRIVACY HIGHLIGHTS -->
+        <section class="features-split-section">
+            <div class="container">
+
+                <div class="two-col-grid">
+
+                    <!-- Shortlist in waves (Controlled Dispatch) -->
+                    <div class="info-box">
+                        <span class="box-tag">CONTROLLED DISPATCH</span>
+                        <h3>Shortlist Sent in Waves</h3>
+                        <p class="info-box-desc">Invitations expand in controlled radius stages to reach volunteers fairly:</p>
+
+                        <div class="split-feature-list">
+                            <div class="split-feature-item wave-item">
+                                <div class="wave-badge-num">1</div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Immediate Radius</h4>
+                                        <span class="km-pill">Within 5 km</span>
+                                    </div>
+                                    <p class="item-desc">Initial alert sent privately to opted-in volunteers closest to the facility.</p>
+                                </div>
+                            </div>
+
+                            <div class="split-feature-item wave-item">
+                                <div class="wave-badge-num">2</div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Expanding Radius</h4>
+                                        <span class="km-pill">Within 10 km</span>
+                                    </div>
+                                    <p class="item-desc">Gradually expands outward if additional responses are needed.</p>
+                                </div>
+                            </div>
+
+                            <div class="split-feature-item wave-item">
+                                <div class="wave-badge-num">3</div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">District Radius</h4>
+                                        <span class="km-pill">Within 20 km</span>
+                                    </div>
+                                    <p class="item-desc">Encompasses broader city transit zones and neighboring volunteer hubs.</p>
+                                </div>
+                            </div>
+
+                            <div class="split-feature-item wave-item">
+                                <div class="wave-badge-num">4</div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Regional Reach</h4>
+                                        <span class="km-pill">Within 30 km</span>
+                                    </div>
+                                    <p class="item-desc">Extended outreach for critical requirements or rare blood groups.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YOUR PRIVACY & SECURITY MATTER (4 Safeguards) -->
+                    <div class="info-box">
+                        <span class="box-tag">PRIVACY FIRST</span>
+                        <h3>Your Privacy & Security Matter</h3>
+                        <p class="info-box-desc">Essential safeguards built directly into our coordination platform:</p>
+
+                        <div class="split-feature-list">
+                            <div class="split-feature-item privacy-item">
+                                <div class="feature-icon-box">
+                                    <i class="fa-solid fa-location-crosshairs"></i>
+                                </div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Location Privacy</h4>
+                                    </div>
+                                    <p class="item-desc">Your precise location is not displayed publicly. Location information is used for matching according to your preferences.</p>
+                                </div>
+                            </div>
+
+                            <div class="split-feature-item privacy-item">
+                                <div class="feature-icon-box">
+                                    <i class="fa-solid fa-phone-slash"></i>
+                                </div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Protected Contact Information</h4>
+                                    </div>
+                                    <p class="item-desc">Phone numbers and email addresses are not publicly displayed. Personal contact sharing requires consent.</p>
+                                </div>
+                            </div>
+
+                            <div class="split-feature-item privacy-item">
+                                <div class="feature-icon-box">
+                                    <i class="fa-solid fa-sliders"></i>
+                                </div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Volunteer Control</h4>
+                                    </div>
+                                    <p class="item-desc">Pause donor invitations, update your availability, and manage notification preferences.</p>
+                                </div>
+                            </div>
+
+                            <div class="split-feature-item privacy-item">
+                                <div class="feature-icon-box">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div class="item-body">
+                                    <div class="item-head">
+                                        <h4 class="item-title">Account Security</h4>
+                                    </div>
+                                    <p class="item-desc">Authentication, access controls, and secure data handling help protect your account and personal information.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CLEAR BADGES -->
+        <section class="badges-section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TRANSPARENCY</span>
+                    <h2>Clear Trust Badges</h2>
+                    <p>Transparent indicators help users understand profile status at a glance.</p>
+                </div>
+
+                <div class="badge-mini-grid">
+
+                    <div class="mini-badge-card">
+                        <span class="badge-pill olive"><i class="fa-regular fa-envelope"></i> Email
+                            Verified</span>
+                        <p>User confirmed their email address during sign-up.</p>
+                    </div>
+
+                    <div class="mini-badge-card">
+                        <span class="badge-pill olive"><i class="fa-solid fa-phone"></i> Phone Verified</span>
+                        <p>User verified their mobile number with a one-time OTP code.</p>
+                    </div>
+
+                    <div class="mini-badge-card">
+                        <span class="badge-pill clay"><i class="fa-solid fa-droplet"></i> Blood Group
+                            Stated</span>
+                        <p>Self-reported by volunteer; tested by hospital before donation.</p>
+                    </div>
+
+                    <div class="mini-badge-card">
+                        <span class="badge-pill neutral"><i class="fa-regular fa-file"></i> Document
+                            Checked</span>
+                        <p>Optional document reviewed by community moderation.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SAFETY INFORMATION SECTION (NEW COMPACT SECTION) -->
+        <section class="safety-section" id="safety">
+            <div class="container">
+
+                <div class="safety-card-box">
+                    <div class="safety-header">
+                        <span class="section-label">SAFETY & RESPONSIBILITY</span>
+                        <h2>Safe Donation Starts With the Right Information</h2>
+                        <p class="safety-desc">
+                            EasyConnect helps connect people, while hospitals and licensed blood banks remain
+                            responsible for donor screening, blood testing, compatibility assessment, and
+                            donation
+                            procedures.
+                        </p>
+                    </div>
+
+                    <div class="safety-points-grid">
+
+                        <div class="safety-point">
+                            <div class="sp-icon"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i></div>
+                            <div>
+                                <h3>Medical Screening Required</h3>
+                                <p>Every donor must meet the eligibility requirements determined by the authorized donation facility.</p>
+                            </div>
+                        </div>
+
+                        <div class="safety-point">
+                            <div class="sp-icon"><i class="fa-regular fa-heart" aria-hidden="true"></i></div>
+                            <div>
+                                <h3>Voluntary Participation</h3>
+                                <p>Donors can accept or decline invitations. No one should be pressured into donating.</p>
+                            </div>
+                        </div>
+
+                        <div class="safety-point">
+                            <div class="sp-icon"><i class="fa-solid fa-shield-cat" aria-hidden="true"></i></div>
+                            <div>
+                                <h3>Report Suspicious Activity</h3>
+                                <p>Report misleading requests, impersonation, harassment, or requests for payment.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="safety-action-row">
+                        <button type="button" class="btn btn-secondary btn-report-issue" id="openReportModal">
+                            <i class="fa-solid fa-flag" aria-hidden="true"></i> Report an Issue
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">COMMON QUESTIONS</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Everything you need to know about voluntary donation, privacy, and community safety.</p>
+                </div>
+
+                <div class="faq-accordion">
+
+                    <details class="faq-item" open>
+                        <summary class="faq-question">
+                            <span>Who is eligible to donate blood through EasyConnect?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Any healthy adult between 18 and 65 years old weighing at least 45–50 kg can register. Authorized hospital doctors and blood bank personnel perform the final screening, hemoglobin checks, and clinical evaluation before every donation.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Is my exact location or phone number visible publicly?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Never. EasyConnect protects volunteer privacy with zero public map tracking. Your phone number, address, and live GPS coordinates stay encrypted on our servers. Contact sharing requires your direct, two-way consent.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How does radius-based matching work in emergencies?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>When an emergency blood request is posted, notifications go out in controlled waves starting within a 5 km radius. If additional matching volunteers are needed, the radius expands smoothly (10 km, 20 km, 30 km) without spamming the entire community.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Is there any fee or charge to use EasyConnect?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>No. EasyConnect is 100% free and voluntary. Buying or selling blood is illegal and strictly against our principles. Any requests for money or gifts should be immediately reported using our "Report an Issue" tool.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How does the QR verification after donation work?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Once a donation is completed at the medical facility, both the donor and the recipient or blood bank scan a secure one-time QR code. This logs the verified life-saving donation, updates the donor's profile, and automatically initiates their recommended rest period.</p>
+                        </div>
+                    </details>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- COMMUNITY CTA -->
+        <section class="community-section">
+            <div class="container">
+                <div class="community-card">
+                    <div>
+                        <span class="community-label">BE PART OF SOMETHING MEANINGFUL</span>
+                        <h2>A Small Act Can Make<br>A Big Difference.</h2>
+                        <p>Your willingness to help could mean everything to someone in need.</p>
+                    </div>
+
+                    <div class="community-actions">
+                        <a href="register.html" class="btn btn-primary-on-dark btn-community">
+                            Join Our Community
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a href="donors.html" class="btn btn-secondary-on-dark btn-outline-light">
+                            Find Donors
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- REPORT AN ISSUE MODAL -->
+    <div class="report-modal" id="reportModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+        <div class="report-modal-dialog">
+            <div class="report-modal-header">
+                <h3 id="reportModalTitle"><i class="fa-solid fa-flag" style="color:var(--blood); margin-right:8px;"></i>
+                    Report an Issue</h3>
+                <button type="button" class="close-report-btn" id="closeReportBtn"
+                    aria-label="Close dialog">&times;</button>
+            </div>
+            <form id="reportForm" class="report-modal-body">
+                <p class="report-intro">
+                    Your safety and trust are our top priority. Please report any suspicious activity, payment requests,
+                    or misleading behavior.
+                </p>
+                <div class="report-field">
+                    <label for="reportType">Issue Category *</label>
+                    <select id="reportType" required>
+                        <option value="">Select a reason</option>
+                        <option value="payment">Request asking for money/payment</option>
+                        <option value="fake">Fake or misleading request</option>
+                        <option value="impersonation">Impersonation or false details</option>
+                        <option value="harassment">Harassment or spam</option>
+                        <option value="other">Other concern</option>
+                    </select>
+                </div>
+                <div class="report-field">
+                    <label for="reportDetails">Details / Description *</label>
+                    <textarea id="reportDetails" rows="4"
+                        placeholder="Please provide relevant details, username or request info..." required></textarea>
+                </div>
+                <div class="report-field">
+                    <label for="reportEmail">Your Email (optional, for follow-up)</label>
+                    <input type="email" id="reportEmail" placeholder="your.email@example.com">
+                </div>
+                <div class="report-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelReportBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="background:var(--blood)">Submit Report</button>
+                </div>
+                <p class="report-success-msg" id="reportSuccessMsg"
+                    style="display:none; color:var(--olive); font-weight:700; margin-top:12px;">
+                    <i class="fa-solid fa-circle-check"></i> Thank you. Your report has been submitted to the moderation
+                    team.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-top-row">
+                <div class="footer-brand-wrap">
+                    <a href="index.html" class="brand">
+                        <span class="brand-icon">
+                            <i class="fa-solid fa-droplet"></i>
+                            <i class="fa-solid fa-heart heart-icon"></i>
+                        </span>
+                        <span class="brand-name">
+                            Easy<span>Connect</span>
+                        </span>
+                    </a>
+                    <p class="footer-tagline">Thoughtful community blood coordination, designed for privacy and care.
+                    </p>
+                </div>
+
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="donors.html">Find Donors</a>
+                    <a href="request.html">Request Blood</a>
+                    <a href="register.html">Become a Donor</a>
+                    <a href="#safety">Safety</a>
+                    <button type="button" class="footer-report-link open-report-trigger">Report an Issue</button>
+                </nav>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-copy">© 2026 EasyConnect · Voluntary Community Coordination</p>
+                <div class="footer-meta">
+                    <span class="footer-pill"><i class="fa-solid fa-shield-halved"></i> Privacy First</span>
+                    <span class="footer-pill"><i class="fa-solid fa-heart"></i> Voluntary</span>
+                    <button type="button" class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top"
+                        title="Back to top">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="hero-3d.js"></script>
+</body>
+
+</html>

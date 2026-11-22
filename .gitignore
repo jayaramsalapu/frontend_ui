@@ -1,0 +1,11 @@
+# Local backups
+backup_pre_audit/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & logs
+.vscode/
+*.log

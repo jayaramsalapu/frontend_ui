@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Authentication — EasyConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-page="auth" class="auth-page">
+
+    <!-- MINIMAL TOP BAR (NO WEBSITE NAVBAR) -->
+    <div class="auth-top-bar">
+        <a href="index.html" class="reg-back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Home</span>
+        </a>
+    </div>
+
+    <!-- CENTERED AUTHENTICATION VIEWPORT -->
+    <main class="auth-viewport">
+
+        <!-- MASCOT & AUTH CARD WRAPPER -->
+        <div class="auth-card-container">
+
+            <!-- INTERACTIVE BLOOD DROP MASCOT PEELING OVER TOP BORDER -->
+            <div class="mascot-stage" id="mascotStage" aria-hidden="true">
+                <div class="mascot-body-wrapper" id="mascotWrapper">
+                    
+                    <svg class="mascot-svg" viewBox="0 0 160 160" width="140" height="140">
+                        <defs>
+                            <!-- Body Gradient -->
+                            <linearGradient id="mascotRedGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+                                <stop offset="0%" stop-color="#E85A48" />
+                                <stop offset="60%" stop-color="#C04030" />
+                                <stop offset="100%" stop-color="#9C2A1E" />
+                            </linearGradient>
+
+                            <!-- Headband Shadow -->
+                            <filter id="headbandShadow" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#550E06" flood-opacity="0.3" />
+                            </filter>
+
+                            <!-- Soft Glow for Heart -->
+                            <filter id="heartGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#C04030" flood-opacity="0.4" />
+                            </filter>
+                        </defs>
+
+                        <!-- Mascot Droplet Body -->
+                        <path class="mascot-base-body" d="M 80,18 C 96,48 126,80 126,110 C 126,136 105,152 80,152 C 55,152 34,136 34,110 C 34,80 64,48 80,18 Z" fill="url(#mascotRedGrad)" />
+
+                        <!-- Body Specular Highlight Curve -->
+                        <path d="M 44,98 C 44,82 58,58 72,36 C 62,56 48,78 48,102 C 48,114 52,126 58,136 C 49,127 44,113 44,98 Z" fill="#FFA599" opacity="0.45" />
+
+                        <!-- White Medical Headband -->
+                        <path d="M 38,72 Q 80,84 122,72 L 124,84 Q 80,98 36,84 Z" fill="#FFFFFF" stroke="#E8E2D9" stroke-width="1" filter="url(#headbandShadow)" />
+
+                        <!-- Central Circular Emblem with Heart -->
+                        <circle cx="80" cy="80" r="11.5" fill="#FFFFFF" stroke="#E8E2D9" stroke-width="1" />
+                        <path d="M 80,86 C 75,81 72,78 72,75 C 72,72.5 74,71 76.5,71 C 78,71 79.5,72 80,73 C 80.5,72 82,71 83.5,71 C 86,71 88,72.5 88,75 C 88,78 85,81 80,86 Z" fill="#C04030" filter="url(#heartGlow)" />
+
+                        <!-- Eyes Group -->
+                        <g class="mascot-eyes-group" id="mascotEyes">
+                            <!-- OPEN EYES (Default state) -->
+                            <g class="eye-open-group" id="leftEyeOpen">
+                                <ellipse cx="61" cy="103" rx="10.5" ry="12.5" fill="#FFFFFF" />
+                                <g class="pupil-box" id="leftPupil" transform="translate(0, 0)">
+                                    <circle cx="61" cy="104" r="6.2" fill="#1F2421" />
+                                    <circle cx="63.2" cy="101.5" r="2.2" fill="#FFFFFF" />
+                                    <circle cx="59.5" cy="105.8" r="1.1" fill="#FFFFFF" />
+                                </g>
+                            </g>
+
+                            <g class="eye-open-group" id="rightEyeOpen">
+                                <ellipse cx="99" cy="103" rx="10.5" ry="12.5" fill="#FFFFFF" />
+                                <g class="pupil-box" id="rightPupil" transform="translate(0, 0)">
+                                    <circle cx="99" cy="104" r="6.2" fill="#1F2421" />
+                                    <circle cx="101.2" cy="101.5" r="2.2" fill="#FFFFFF" />
+                                    <circle cx="97.5" cy="105.8" r="1.1" fill="#FFFFFF" />
+                                </g>
+                            </g>
+
+                            <!-- CLOSED EYES (Sweet curved closed eyelid arcs when covering eyes) -->
+                            <g class="eye-closed-group" id="leftEyeClosed">
+                                <path d="M 50,104 Q 61,111 72,104" fill="none" stroke="#68150D" stroke-width="2.6" stroke-linecap="round" />
+                                <path d="M 52,102 Q 61,108 70,102" fill="none" stroke="#FFA599" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+                            </g>
+
+                            <g class="eye-closed-group" id="rightEyeClosed">
+                                <path d="M 88,104 Q 99,111 110,104" fill="none" stroke="#68150D" stroke-width="2.6" stroke-linecap="round" />
+                                <path d="M 90,102 Q 99,108 108,102" fill="none" stroke="#FFA599" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+                            </g>
+                        </g>
+
+                        <!-- Rosy Cheeks -->
+                        <ellipse cx="48" cy="115" rx="6.5" ry="3.8" fill="#FF8D7F" opacity="0.6" />
+                        <ellipse cx="112" cy="115" rx="6.5" ry="3.8" fill="#FF8D7F" opacity="0.6" />
+
+                        <!-- Cute Bandaid on Right Cheek (per user uploaded image) -->
+                        <g transform="translate(104, 114) rotate(25)">
+                            <rect x="-8" y="-4" width="17" height="8.5" rx="3" fill="#E8BFA4" stroke="#D2A384" stroke-width="0.8" />
+                            <circle cx="-3" cy="0.2" r="0.7" fill="#B07C5B" />
+                            <circle cx="0.5" cy="0.2" r="0.7" fill="#B07C5B" />
+                            <circle cx="4" cy="0.2" r="0.7" fill="#B07C5B" />
+                        </g>
+
+                        <!-- Sweet Smile Mouth -->
+                        <path class="mascot-mouth" d="M 75,116 Q 80,122 85,116" fill="none" stroke="#68150D" stroke-width="2.2" stroke-linecap="round" />
+
+                        <!-- Left Hand (Resting or Covering) -->
+                        <g class="mascot-hand mascot-hand-left" id="handLeft">
+                            <ellipse cx="37" cy="148" rx="11.5" ry="9" fill="#C04030" stroke="#8E2015" stroke-width="1.2" />
+                            <!-- Fingers detail -->
+                            <path d="M 32,143 Q 37,146 42,143" fill="none" stroke="#FFA599" stroke-width="1.2" stroke-linecap="round" />
+                        </g>
+
+                        <!-- Right Hand (Resting or Covering) -->
+                        <g class="mascot-hand mascot-hand-right" id="handRight">
+                            <ellipse cx="123" cy="148" rx="11.5" ry="9" fill="#C04030" stroke="#8E2015" stroke-width="1.2" />
+                            <!-- Fingers detail -->
+                            <path d="M 118,143 Q 123,146 128,143" fill="none" stroke="#FFA599" stroke-width="1.2" stroke-linecap="round" />
+                        </g>
+
+                    </svg>
+
+                </div>
+            </div>
+
+            <!-- CRISP WHITE AUTH CARD -->
+            <div class="auth-card">
+
+                <!-- SEGMENTED TAB SWITCHER (LOG IN / SIGN UP) -->
+                <div class="auth-tab-bar" role="tablist" aria-label="Authentication Type">
+                    <button type="button" class="auth-tab active" id="tabLogin" role="tab" aria-selected="true" aria-controls="formLogin">
+                        Log In
+                    </button>
+                    <button type="button" class="auth-tab" id="tabSignup" role="tab" aria-selected="false" aria-controls="formSignup">
+                        Sign Up
+                    </button>
+                    <div class="auth-tab-pill" id="tabPill"></div>
+                </div>
+
+                <!-- ==============================================
+                     PANEL 1: LOG IN FORM
+                     ============================================== -->
+                <div class="auth-panel active" id="panelLogin" role="tabpanel" aria-labelledby="tabLogin">
+                    
+                    <div class="auth-heading-wrap">
+                        <h2>Welcome Back</h2>
+                        <p class="auth-subtext">Log in to your EasyConnect account</p>
+                    </div>
+
+                    <form id="formLogin" novalidate>
+
+                        <!-- Email Input -->
+                        <div class="auth-field" id="fieldLoginEmail">
+                            <label for="loginEmail">Email Address *</label>
+                            <div class="auth-input-wrap">
+                                <i class="fa-regular fa-envelope input-icon"></i>
+                                <input type="email" id="loginEmail" name="email" autocomplete="email" placeholder="name@example.com" required>
+                            </div>
+                            <span class="auth-field-error" id="loginEmailError"></span>
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="auth-field" id="fieldLoginPassword">
+                            <div class="field-label-row">
+                                <label for="loginPassword">Password *</label>
+                                <a href="#forgot" class="forgot-link" id="forgotPasswordLink">Forgot password?</a>
+                            </div>
+                            <div class="auth-input-wrap">
+                                <i class="fa-solid fa-lock input-icon"></i>
+                                <input type="password" id="loginPassword" name="password" autocomplete="current-password" placeholder="••••••••••••" required>
+                                <button type="button" class="btn-toggle-eye" id="toggleLoginPassword" aria-label="Toggle password visibility">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="auth-field-error" id="loginPasswordError"></span>
+                        </div>
+
+                        <!-- Keep Me Logged In -->
+                        <div class="auth-options-row">
+                            <label class="auth-checkbox-label">
+                                <input type="checkbox" id="keepLoggedIn" name="remember" checked>
+                                <span>Keep me logged in</span>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-auth-primary" id="loginSubmitBtn">
+                            Log In
+                        </button>
+
+                        <!-- Social Divider -->
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Social Buttons -->
+                        <div class="auth-social-row">
+                            <button type="button" class="btn-social">
+                                <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                                </svg>
+                                <span>Google</span>
+                            </button>
+                            <button type="button" class="btn-social">
+                                <i class="fa-brands fa-apple social-icon" style="font-size: 18px; color: #1F2421;"></i>
+                                <span>Apple</span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- ==============================================
+                     PANEL 2: SIGN UP FORM (HORIZONTAL STEP WIZARD)
+                     ============================================== -->
+                <div class="auth-panel" id="panelSignup" role="tabpanel" aria-labelledby="tabSignup">
+                    
+                    <div class="auth-heading-wrap">
+                        <h2 id="signupStepHeader">Join EasyConnect</h2>
+                        <p class="auth-subtext" id="signupStepSubtext">Register as a donor or find nearby blood support</p>
+                    </div>
+
+                    <!-- HORIZONTAL PROGRESS TRACK (Like registration page) -->
+                    <div class="signup-progress-wrap">
+                        <div class="signup-step-label">
+                            <span id="signupStepText">Step 1 of 3 · Your Details</span>
+                            <strong id="signupStepPercent">33%</strong>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="signupProgressFill" style="width: 33%;"></div>
+                        </div>
+                    </div>
+
+                    <form id="formSignup" novalidate>
+
+                        <!-- STEP 1: NAME & EMAIL -->
+                        <div class="signup-step active" data-step="0">
+                            <!-- Full Name -->
+                            <div class="auth-field" id="fieldSignupName">
+                                <label for="signupName">Full Name *</label>
+                                <div class="auth-input-wrap">
+                                    <i class="fa-regular fa-user input-icon"></i>
+                                    <input type="text" id="signupName" name="fullname" autocomplete="name" placeholder="e.g. Aditi Sharma" required>
+                                </div>
+                                <span class="auth-field-error" id="signupNameError"></span>
+                            </div>
+
+                            <!-- Email Address -->
+                            <div class="auth-field" id="fieldSignupEmail">
+                                <label for="signupEmail">Email Address *</label>
+                                <div class="auth-input-wrap">
+                                    <i class="fa-regular fa-envelope input-icon"></i>
+                                    <input type="email" id="signupEmail" name="email" autocomplete="email" placeholder="name@example.com" required>
+                                </div>
+                                <span class="auth-field-error" id="signupEmailError"></span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: PASSWORD & CONFIRM PASSWORD -->
+                        <div class="signup-step" data-step="1">
+                            <!-- Password Input -->
+                            <div class="auth-field" id="fieldSignupPassword">
+                                <label for="signupPassword">Password *</label>
+                                <div class="auth-input-wrap">
+                                    <i class="fa-solid fa-lock input-icon"></i>
+                                    <input type="password" id="signupPassword" name="password" autocomplete="new-password" placeholder="At least 8 characters" required>
+                                    <button type="button" class="btn-toggle-eye" id="toggleSignupPassword" aria-label="Toggle password visibility">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                </div>
+                                <span class="auth-field-error" id="signupPasswordError"></span>
+                            </div>
+
+                            <!-- Confirm Password Input -->
+                            <div class="auth-field" id="fieldSignupConfirmPassword">
+                                <label for="signupConfirmPassword">Confirm Password *</label>
+                                <div class="auth-input-wrap">
+                                    <i class="fa-solid fa-shield-halved input-icon"></i>
+                                    <input type="password" id="signupConfirmPassword" name="confirm_password" autocomplete="new-password" placeholder="Re-enter your password" required>
+                                    <button type="button" class="btn-toggle-eye" id="toggleSignupConfirmPassword" aria-label="Toggle confirm password visibility">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                </div>
+                                <span class="auth-field-error" id="signupConfirmPasswordError"></span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: EMAIL OTP VERIFICATION -->
+                        <div class="signup-step" data-step="2">
+                            <div class="auth-field" id="fieldSignupOtp">
+                                <div class="field-label-row">
+                                    <label for="signupOtp">Email Verification (OTP) *</label>
+                                    <span class="otp-hint-msg" id="otpHintMsg">Click 'Send OTP'</span>
+                                </div>
+                                <div class="auth-input-wrap otp-input-wrap">
+                                    <i class="fa-solid fa-key input-icon"></i>
+                                    <input type="text" id="signupOtp" name="otp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP code" required>
+                                    <button type="button" class="btn-send-otp" id="btnSendOtp">
+                                        <span>Send OTP</span>
+                                    </button>
+                                </div>
+                                <span class="auth-field-error" id="signupOtpError"></span>
+                            </div>
+                            <div class="auth-otp-subnote">
+                                <i class="fa-solid fa-shield-heart"></i>
+                                <span>We will send a 6-digit confirmation code to verify your email.</span>
+                            </div>
+                        </div>
+
+                        <!-- STEP ACTION BUTTONS -->
+                        <div class="signup-step-actions">
+                            <button type="button" class="btn-step-back" id="signupBackBtn" style="display: none;">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                            <button type="button" class="btn-auth-primary" id="signupNextBtn">
+                                <span>Continue ↗</span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- BOTTOM FOOTER NOTE -->
+            <div class="auth-footer-note">
+                <i class="fa-solid fa-shield-heart" style="color: var(--sage); margin-right: 6px;"></i>
+                <span>Your private contact information is protected and never shared without consent.</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+
+</html>

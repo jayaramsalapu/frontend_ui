@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Become a Donor — EasyConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-page="register">
+
+    <main class="container">
+        <!-- TOP BRAND & BACK BAR (STANDALONE MINIMAL) -->
+        <div class="reg-top-bar">
+            <a href="index.html" class="brand">
+                <span class="brand-icon">
+                    <i class="fa-solid fa-droplet"></i>
+                    <i class="fa-solid fa-heart heart-icon"></i>
+                </span>
+                <span class="brand-name">
+                    Easy<span>Connect</span>
+                </span>
+            </a>
+            <a href="index.html" class="reg-back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+
+        <!-- PAGE HERO -->
+        <div class="page-hero">
+            <div class="eyebrow">— YOUR JOURNEY STARTS HERE</div>
+            <h1>Become part of <span class="serif">someone's story.</span></h1>
+            <p>A few small steps to make yourself available for someone who may need help.</p>
+        </div>
+
+        <!-- 2-COLUMN REGISTRATION LAYOUT -->
+        <div class="register-layout">
+
+            <!-- LEFT: FORM CARD WIZARD -->
+            <section class="form-card">
+                <div class="progress-label">
+                    <span id="step-name">Step 1 of 5 · About you</span>
+                    <strong id="percent">0%</strong>
+                </div>
+
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                </div>
+
+                <form id="register-form" novalidate>
+
+                    <!-- STEP 1: IDENTITY & DOB -->
+                    <div class="form-step active" data-step="0">
+                        <h2>Let's get acquainted.</h2>
+                        <p class="hint">Basic identity details. Your phone number is kept private and never shared without consent.</p>
+
+                        <div class="fields">
+                            <div class="field full" id="field-fullname">
+                                <label for="fullname">Your full name *</label>
+                                <div class="input-icon-wrap" id="wrap-fullname">
+                                    <i class="fa-regular fa-user input-icon"></i>
+                                    <input id="fullname" name="fullname" autocomplete="name" placeholder="e.g. Aditi Sharma" required>
+                                    <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                        <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="field-error-feedback" id="fullname-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter your full name.</span>
+                            </div>
+
+                            <div class="field" id="field-email">
+                                <label for="email">Email address *</label>
+                                <div class="input-icon-wrap" id="wrap-email">
+                                    <i class="fa-regular fa-envelope input-icon"></i>
+                                    <input id="email" type="email" name="email" autocomplete="email" placeholder="aditi.sharma@example.com" required>
+                                    <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                        <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="field-error-feedback" id="email-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid email address.</span>
+                            </div>
+
+                            <div class="field" id="field-phone">
+                                <label for="phone">Phone number *</label>
+                                <div class="input-icon-wrap" id="wrap-phone">
+                                    <i class="fa-solid fa-phone input-icon"></i>
+                                    <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="10-digit mobile number" required>
+                                    <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                        <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="field-error-feedback" id="phone-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid 10-digit phone number.</span>
+                            </div>
+
+                            <div class="field" id="field-dob">
+                                <label for="dob">Date of Birth (DOB) *</label>
+                                <div class="input-icon-wrap" id="wrap-dob">
+                                    <i class="fa-regular fa-calendar input-icon"></i>
+                                    <input id="dob" name="dob" type="date" required>
+                                    <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                        <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="field-error-feedback" id="dob-error"><i class="fa-solid fa-circle-exclamation"></i> Please select your date of birth.</span>
+                            </div>
+
+                            <div class="field">
+                                <label for="gender">Gender (optional)</label>
+                                <select id="gender" name="gender">
+                                    <option value="">Select gender</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="other">Other / Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: ACCURATE GPS LOCATION -->
+                    <div class="form-step" data-step="1">
+                        <h2>Accurate location matching.</h2>
+                        <p class="hint">We use your approximate radius for wave matching. Exact coordinates are never displayed on a public map.</p>
+
+                        <div class="fields">
+                            <div class="field full" id="field-gps">
+                                <label for="gps-input">Primary GPS Location</label>
+                                <div class="gps-field-group">
+                                    <div class="input-icon-wrap" id="wrap-gps">
+                                        <i class="fa-solid fa-location-crosshairs input-icon" style="color:var(--sage)"></i>
+                                        <input id="gps-input" name="gps_location" placeholder="Click 'Detect Live GPS' or enter city/area">
+                                        <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                            <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                            <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <button type="button" class="btn btn-detect-gps" id="detectGpsBtn">
+                                        <i class="fa-solid fa-crosshairs"></i>
+                                        <span>Detect Live GPS</span>
+                                    </button>
+                                </div>
+                                <span class="gps-status-msg" id="gpsStatusMsg"></span>
+                            </div>
+
+                            <div class="field" id="field-city">
+                                <label for="city">City or Town *</label>
+                                <div class="input-icon-wrap no-left-icon" id="wrap-city">
+                                    <input id="city" name="city" placeholder="e.g. Visakhapatnam" required>
+                                    <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                        <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="field-error-feedback" id="city-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter your city or town.</span>
+                            </div>
+
+                            <div class="field" id="field-state">
+                                <label for="state">State *</label>
+                                <select id="state" name="state" required>
+                                    <option value="">Select state</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span class="field-error-feedback" id="state-error"><i class="fa-solid fa-circle-exclamation"></i> Please select your state.</span>
+                            </div>
+
+                            <div class="field full" id="field-pincode">
+                                <label for="pincode">PIN code *</label>
+                                <div class="input-icon-wrap no-left-icon" id="wrap-pincode">
+                                    <input id="pincode" name="pincode" inputmode="numeric" placeholder="6-digit postal PIN" required>
+                                    <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                        <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="field-error-feedback" id="pincode-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter your 6-digit postal PIN code.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: BLOOD GROUP & ELIGIBILITY -->
+                    <div class="form-step" data-step="2">
+                        <h2>Tell us your blood group.</h2>
+                        <p class="hint">Don't have a test report? That's completely fine. Self-reported groups are transparently labeled.</p>
+
+                        <div class="fields">
+                            <div class="field full" id="field-blood-group">
+                                <label for="blood-group">Blood group *</label>
+                                <select id="blood-group" name="blood_group" required>
+                                    <option value="">Select blood group</option>
+                                    <option value="O+">O+ (Universal RBC Donor)</option>
+                                    <option value="O−">O− (True Universal Donor)</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A−">A−</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B−">B−</option>
+                                    <option value="AB+">AB+ (Universal Plasma Donor)</option>
+                                    <option value="AB−">AB−</option>
+                                    <option value="unknown">I don't know yet</option>
+                                </select>
+                                <span class="field-error-feedback" id="blood-group-error"><i class="fa-solid fa-circle-exclamation"></i> Please select your blood group.</span>
+                            </div>
+
+                            <div class="field full">
+                                <label for="last-donation">Last Donation Date (if any)</label>
+                                <input id="last-donation" type="date" name="last_donation">
+                            </div>
+
+                            <div class="field full">
+                                <label for="proof">Proof / Donor Card (optional)</label>
+                                <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf">
+                                <div class="fineprint">Uploaded documents are held on private, restricted storage for optional moderation.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: DAILY SCHEDULE & REACHABILITY -->
+                    <div class="form-step" data-step="3">
+                        <h2>Your Daily Schedule.</h2>
+                        <p class="hint">Volunteers travel between college, school, office, and home. Setting your schedule ensures requests reach you where you actually are.</p>
+
+                        <div class="fields">
+                            <div class="field full schedule-card-block" id="field-daytime">
+                                <div class="schedule-head">
+                                    <i class="fa-solid fa-sun" style="color:#E69C24"></i>
+                                    <strong>Daytime Hours (~9 AM – 5 PM · Weekdays)</strong>
+                                </div>
+                                <div class="schedule-inputs">
+                                    <select id="daytime-type" name="daytime_type">
+                                        <option value="college">College / University</option>
+                                        <option value="office">Office / Workplace</option>
+                                        <option value="school">School</option>
+                                        <option value="home">Home / Remote</option>
+                                    </select>
+                                    <div class="input-icon-wrap no-left-icon" id="wrap-daytime">
+                                        <input id="daytime-location" name="daytime_location" placeholder="e.g. St. Mary's Engineering College, Campus Block B">
+                                        <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                            <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                            <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span class="field-error-feedback" id="daytime-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter your college, school, or workplace address.</span>
+                            </div>
+
+                            <div class="field full schedule-card-block" id="field-evening">
+                                <div class="schedule-head">
+                                    <i class="fa-solid fa-moon" style="color:#5D6D7E"></i>
+                                    <strong>Evening & Weekends (Off-Hours)</strong>
+                                </div>
+                                <div class="schedule-inputs">
+                                    <select id="evening-type" name="evening_type">
+                                        <option value="home">Home / Residence</option>
+                                        <option value="hostel">Hostel / PG</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="input-icon-wrap no-left-icon" id="wrap-evening">
+                                        <input id="evening-location" name="evening_location" placeholder="e.g. Residential Address, MVP Colony">
+                                        <svg class="input-check-svg" viewBox="0 0 20 20" aria-hidden="true">
+                                            <circle class="check-circle" cx="10" cy="10" r="8.5" fill="#EEF4F0" stroke="#4B6559" stroke-width="1.2" />
+                                            <path class="check-path" d="M6 10.3L8.6 13L14 7.5" fill="none" stroke="#4B6559" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span class="field-error-feedback" id="evening-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter your home or evening area.</span>
+                            </div>
+
+                            <div class="field full">
+                                <label>Maximum Travel Feasibility</label>
+                                <div class="choice-row">
+                                    <label class="choice"><input type="radio" name="travel_range" value="5km" checked> Within 5 km</label>
+                                    <label class="choice"><input type="radio" name="travel_range" value="10km"> Within 10 km</label>
+                                    <label class="choice"><input type="radio" name="travel_range" value="20km"> Within 20 km</label>
+                                    <label class="choice"><input type="radio" name="travel_range" value="city"> Across City</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: PREFERENCES & CONSENT -->
+                    <div class="form-step" data-step="4">
+                        <h2>Make it meaningful.</h2>
+                        <p class="hint">Control when and how you are contacted. Joining never commits you to donate.</p>
+
+                        <div class="fields">
+                            <div class="field full">
+                                <label>Are you open to emergency donation invitations?</label>
+                                <div class="choice-row">
+                                    <label class="choice"><input type="radio" name="available" value="yes" checked> Yes, invite me</label>
+                                    <label class="choice"><input type="radio" name="available" value="later"> Pause / Maybe later</label>
+                                </div>
+                            </div>
+
+                            <div class="field full" id="field-consent">
+                                <label class="choice consent-box" style="align-items:flex-start">
+                                    <input type="checkbox" id="consent" required style="margin-top:4px">
+                                    <span>I agree to voluntary community coordination and understand that medical eligibility and compatibility testing are strictly performed by authorized hospitals or blood centres. *</span>
+                                </label>
+                                <span class="field-error-feedback" id="consent-error"><i class="fa-solid fa-circle-exclamation"></i> Please accept the voluntary coordination agreement to finish.</span>
+                            </div>
+
+                            <div class="field full">
+                                <div class="notice">EasyConnect is a coordination platform that connects willing volunteers. Clinical evaluation is always handled by clinicians.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 6: COMPLETION SUCCESS -->
+                    <div class="form-step" data-step="5">
+                        <div class="success-box" style="text-align:center; padding: 20px 10px;">
+                            <div class="success-battery-icon">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+                            <h2>Your Lifesaver Battery is 100% Charged!</h2>
+                            <p class="hint" style="max-width:480px; margin: 12px auto 24px;">Your profile, GPS location, and schedule are set! You are now part of a compassionate network of community volunteers ready to step forward when seconds count.</p>
+                            <a href="dashboard.html" class="btn btn-primary" style="background:var(--terracotta); color:#fff; display:inline-flex;">
+                                Go to My Space ↗
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ACTIONS NAV BUTTONS -->
+                    <div class="form-actions" id="form-actions">
+                        <button class="btn btn-login" type="button" id="back-btn" style="visibility:hidden">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Back
+                        </button>
+                        <button class="btn btn-signup" type="button" id="next-btn" style="background:var(--sage); color:#fff;">
+                            Continue ↗
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- RIGHT: ANIMATED LIFESAVER BATTERY SHOWCASE -->
+            <aside class="storypanel battery-panel">
+
+                <div class="battery-header">
+                    <span class="eyebrow">— YOUR LIFESAVER JOURNEY</span>
+                    <h2>Every step brings you <span>closer.</span></h2>
+                    <p>Every step you complete powers this lifesaver battery.</p>
+                </div>
+
+                <!-- Floating Speech Bubble -->
+                <div class="battery-bubble-wrap">
+                    <div class="battery-bubble">
+                        <div class="bubble-heart-icon">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <span class="bubble-text" id="bubble-speech-text">
+                            At 100%, Your Battery Powers a Heartbeat to Save Lives! ♥
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 3D Battery Showcase Stage -->
+                <div class="battery-stage">
+
+                    <!-- Left Orbiting Milestone Tags -->
+                    <div class="battery-tags-col tags-left">
+                        <div class="battery-tag" id="tag-identity">
+                            <span class="tag-status-icon"><i class="fa-regular fa-user"></i></span>
+                            <span>Personal Details</span>
+                        </div>
+                        <div class="battery-tag" id="tag-blood">
+                            <span class="tag-status-icon"><i class="fa-solid fa-droplet"></i></span>
+                            <span>Blood Group details</span>
+                        </div>
+                        <div class="battery-tag" id="tag-eligibility">
+                            <span class="tag-status-icon"><i class="fa-solid fa-shield-heart"></i></span>
+                            <span>Donor Preferences</span>
+                        </div>
+                    </div>
+
+                    <!-- 3D Cylindrical Battery -->
+                    <div class="battery-cylinder" id="batteryCylinder">
+                        <!-- Top Brass Terminal Cap -->
+                        <div class="battery-cap"></div>
+
+                        <!-- Glass Glare Highlight -->
+                        <div class="battery-glass-glare"></div>
+
+                        <!-- Warm Light Ring for 100% Celebration -->
+                        <div class="battery-light-ring" id="batteryLightRing"></div>
+
+                        <!-- Fluid Liquid Level -->
+                        <div class="battery-liquid" id="batteryLiquid" style="height: 0%;">
+                            <!-- Surface Rotating Wave -->
+                            <div class="battery-wave"></div>
+
+                            <!-- Dynamic Swirling Energy Light Rings (from reference video) -->
+                            <div class="battery-energy-swirl swirl-1"></div>
+                            <div class="battery-energy-swirl swirl-2"></div>
+
+                            <!-- Animated Rising Bubbles -->
+                            <div class="battery-bubbles">
+                                <div class="battery-bubble-dot bubble-1"></div>
+                                <div class="battery-bubble-dot bubble-2"></div>
+                                <div class="battery-bubble-dot bubble-3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Battery Core Numbers Display -->
+                        <div class="battery-core-display">
+                            <div class="battery-core-percent" id="batteryPercent">0%</div>
+                            <div class="battery-core-label" id="batteryStatus">COMPLETE</div>
+                        </div>
+
+                        <!-- ECG Heartbeat Wave beside the battery -->
+                        <div class="battery-ecg-line">
+                            <svg viewBox="0 0 100 40">
+                                <path class="ecg-pulse-path" d="M 0 20 L 25 20 L 32 4 L 42 36 L 50 10 L 58 26 L 66 20 L 100 20" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Right Orbiting Milestone Tags -->
+                    <div class="battery-tags-col tags-right">
+                        <div class="battery-tag" id="tag-location">
+                            <span class="tag-status-icon"><i class="fa-solid fa-location-dot"></i></span>
+                            <span>Your Location</span>
+                        </div>
+                        <div class="battery-tag" id="tag-schedule">
+                            <span class="tag-status-icon"><i class="fa-regular fa-clock"></i></span>
+                            <span>Availability</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Dynamic Story Card Footer -->
+                <div class="battery-story-foot">
+                    <strong id="story-title">A kind intention begins.</strong>
+                    <span id="story-copy">Every detail you provide powers this lifesaver battery to connect with those in need.</span>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- MINIMAL REGISTRATION FOOTER NOTE -->
+    <div class="reg-page-footer">
+        <span>EasyConnect · Voluntary Community Blood Coordination</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

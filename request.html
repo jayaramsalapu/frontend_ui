@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Request Blood — EasyConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-page="request" class="request-page">
+
+    <!-- TOP BRAND & BACK BAR (STANDALONE MINIMAL, NO WEBSITE NAVBAR) -->
+    <div class="reg-top-bar">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">
+                <i class="fa-solid fa-droplet"></i>
+                <i class="fa-solid fa-heart heart-icon"></i>
+            </span>
+            <span class="brand-name">
+                Easy<span>Connect</span>
+            </span>
+        </a>
+        <a href="index.html" class="reg-back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Home</span>
+        </a>
+    </div>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero request-hero">
+        <div class="eyebrow">— DIRECT COMMUNITY AID</div>
+        <h1>Request blood, <span class="serif">simply.</span></h1>
+        <p>Share your emergency requirement step by step to connect directly with nearby verified volunteer donors.</p>
+    </div>
+
+    <!-- CENTERED HORIZONTAL STEPPED WIZARD (NO RIGHT SIDEBAR) -->
+    <main class="request-wizard-container">
+
+        <div class="request-card">
+
+            <!-- HORIZONTAL PROGRESS BAR (Like registration page) -->
+            <div class="progress-label" id="progressLabelRow">
+                <span id="reqStepText">Step 1 of 3 · Your Contact</span>
+                <strong id="reqPercent">33%</strong>
+            </div>
+
+            <div class="progress-track" id="progressTrackRow">
+                <div class="progress-fill" id="reqProgressFill" style="width: 33%;"></div>
+            </div>
+
+            <!-- MULTI-STEP REQUEST FORM -->
+            <form id="bloodRequestForm" novalidate>
+
+                <!-- ==============================================
+                     STEP 1: CONTACT DETAILS
+                     ============================================== -->
+                <div class="request-step active" data-step="0">
+                    <div class="request-step-heading">
+                        <h2>Who is requesting?</h2>
+                        <p>We only use this contact info to coordinate with willing donors.</p>
+                    </div>
+
+                    <!-- Requester Full Name -->
+                    <div class="auth-field" id="fieldReqName">
+                        <label for="reqName">Requester Name *</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input type="text" id="reqName" name="req_name" autocomplete="name" placeholder="e.g. Rahul Verma" required>
+                        </div>
+                        <span class="auth-field-error" id="reqNameError"></span>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="auth-field" id="fieldReqEmail">
+                        <label for="reqEmail">Email Address *</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" id="reqEmail" name="req_email" autocomplete="email" placeholder="rahul@example.com" required>
+                        </div>
+                        <span class="auth-field-error" id="reqEmailError"></span>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="auth-field" id="fieldReqPhone">
+                        <label for="reqPhone">Phone Number *</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-solid fa-phone input-icon"></i>
+                            <input type="tel" id="reqPhone" name="req_phone" inputmode="tel" placeholder="10-digit mobile number" required>
+                        </div>
+                        <span class="auth-field-error" id="reqPhoneError"></span>
+                    </div>
+                </div>
+
+                <!-- ==============================================
+                     STEP 2: BLOOD REQUIREMENT DETAILS
+                     ============================================== -->
+                <div class="request-step" data-step="1">
+                    <div class="request-step-heading">
+                        <h2>Blood group required.</h2>
+                        <p>Choose the matching blood group, units, and required date.</p>
+                    </div>
+
+                    <!-- Blood Group Required -->
+                    <div class="auth-field" id="fieldReqBloodGroup">
+                        <label>Blood Group Required *</label>
+                        <div class="blood-pills-grid">
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="A+" checked>
+                                <span class="blood-pill-box">
+                                    <span>A+</span>
+                                    <small>Compatible</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="A-">
+                                <span class="blood-pill-box">
+                                    <span>A-</span>
+                                    <small>Compatible</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="B+">
+                                <span class="blood-pill-box">
+                                    <span>B+</span>
+                                    <small>Compatible</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="B-">
+                                <span class="blood-pill-box">
+                                    <span>B-</span>
+                                    <small>Compatible</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="O+">
+                                <span class="blood-pill-box">
+                                    <span>O+</span>
+                                    <small>Universal +</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="O-">
+                                <span class="blood-pill-box">
+                                    <span>O-</span>
+                                    <small>Universal -</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="AB+">
+                                <span class="blood-pill-box">
+                                    <span>AB+</span>
+                                    <small>Universal Rec.</small>
+                                </span>
+                            </label>
+                            <label class="blood-pill-label">
+                                <input type="radio" name="blood_group" value="AB-">
+                                <span class="blood-pill-box">
+                                    <span>AB-</span>
+                                    <small>Rare Rec.</small>
+                                </span>
+                            </label>
+                        </div>
+                        <span class="auth-field-error" id="reqBloodGroupError"></span>
+                    </div>
+
+                    <!-- Units & Required Date in 2 columns -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+                        <div class="auth-field" id="fieldReqUnits">
+                            <label for="reqUnits">Units Required *</label>
+                            <div class="auth-input-wrap">
+                                <i class="fa-solid fa-droplet input-icon"></i>
+                                <input type="number" id="reqUnits" name="req_units" min="1" max="10" value="2" placeholder="e.g. 2" required>
+                            </div>
+                            <span class="auth-field-error" id="reqUnitsError"></span>
+                        </div>
+
+                        <div class="auth-field" id="fieldReqDate">
+                            <label for="reqDate">Required By *</label>
+                            <div class="auth-input-wrap">
+                                <i class="fa-regular fa-calendar input-icon"></i>
+                                <input type="date" id="reqDate" name="req_date" required>
+                            </div>
+                            <span class="auth-field-error" id="reqDateError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==============================================
+                     STEP 3: HOSPITAL & LOCATION
+                     ============================================== -->
+                <div class="request-step" data-step="2">
+                    <div class="request-step-heading">
+                        <h2>Hospital & location.</h2>
+                        <p>Provide hospital location so nearby donors can reach quickly.</p>
+                    </div>
+
+                    <!-- Hospital Name -->
+                    <div class="auth-field" id="fieldReqHospital">
+                        <label for="reqHospital">Hospital Name / Licensed Blood Bank *</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-regular fa-hospital input-icon"></i>
+                            <input type="text" id="reqHospital" name="req_hospital" placeholder="e.g. Care Hospital / Apollo Health" required>
+                        </div>
+                        <span class="auth-field-error" id="reqHospitalError"></span>
+                    </div>
+
+                    <!-- Address & City in 2 columns -->
+                    <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px;">
+                        <div class="auth-field" id="fieldReqAddress">
+                            <label for="reqAddress">Hospital Address / Landmark *</label>
+                            <div class="auth-input-wrap">
+                                <i class="fa-solid fa-location-dot input-icon"></i>
+                                <input type="text" id="reqAddress" name="req_address" placeholder="e.g. Ward 4B, Ramnagar" required>
+                            </div>
+                            <span class="auth-field-error" id="reqAddressError"></span>
+                        </div>
+
+                        <div class="auth-field" id="fieldReqCity">
+                            <label for="reqCity">City *</label>
+                            <div class="auth-input-wrap">
+                                <i class="fa-solid fa-city input-icon"></i>
+                                <input type="text" id="reqCity" name="req_city" placeholder="e.g. Visakhapatnam" required>
+                            </div>
+                            <span class="auth-field-error" id="reqCityError"></span>
+                        </div>
+                    </div>
+
+                    <!-- Additional Context / Notes -->
+                    <div class="auth-field" id="fieldReqNotes" style="margin-top: 10px;">
+                        <label for="reqNotes">Additional Context / Instructions (Optional)</label>
+                        <textarea id="reqNotes" name="req_notes" rows="3" maxlength="300" placeholder="Any special coordination notes, contact timing, or patient ward details..." style="width: 100%; border: 1px solid #DCD6CD; border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.2s; resize: vertical;"></textarea>
+                    </div>
+                </div>
+
+                <!-- ==============================================
+                     STEP 4: SUBMISSION SUCCESS SCREEN
+                     ============================================== -->
+                <div class="request-step" data-step="3" id="reqSuccessStep">
+                    <div class="request-success-panel">
+                        <div class="req-success-icon-wrap">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h2 style="font: 800 24px Manrope, sans-serif; color: #1F2421; margin: 0 0 6px;">Request Broadcast Sent!</h2>
+                        <p style="font-size: 13.5px; color: #5C6460; margin: 0 auto; max-width: 440px;">
+                            Your urgent blood request has been formatted and broadcasted to verified community donors in your vicinity.
+                        </p>
+
+                        <!-- SUMMARY BREAKDOWN -->
+                        <div class="request-summary-card">
+                            <div class="req-summary-row">
+                                <span class="label">Request ID</span>
+                                <span class="val" id="sumRequestId">#EC-92841</span>
+                            </div>
+                            <div class="req-summary-row">
+                                <span class="label">Blood Group & Units</span>
+                                <span class="val" id="sumBloodUnits">O+ (2 Units)</span>
+                            </div>
+                            <div class="req-summary-row">
+                                <span class="label">Required By</span>
+                                <span class="val" id="sumDate">Tomorrow</span>
+                            </div>
+                            <div class="req-summary-row">
+                                <span class="label">Hospital / City</span>
+                                <span class="val" id="sumHospital">Care Hospital, Visakhapatnam</span>
+                            </div>
+                            <div class="req-summary-row">
+                                <span class="label">Contact Person</span>
+                                <span class="val" id="sumContact">Rahul Verma (+91 98765 43210)</span>
+                            </div>
+                        </div>
+
+                        <div class="req-success-actions">
+                            <a href="donors.html" class="btn olive" style="display: inline-flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Browse Matching Donors ↗</span>
+                            </a>
+                            <a href="index.html" class="btn outline" style="display: inline-flex; align-items: center; gap: 8px;">
+                                <span>Back to Home</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP NAVIGATION ACTIONS ROW -->
+                <div class="request-actions-row" id="reqActionsRow">
+                    <button type="button" class="btn-back" id="reqBackBtn" style="display: none;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <button type="button" class="btn-next" id="reqNextBtn">
+                        <span>Continue ↗</span>
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- FOOTER SAFETY DISCLAIMER -->
+            <div class="request-footer-disclaimer" id="reqDisclaimer">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>EasyConnect connects willing community volunteers. Medical compatibility, testing, and blood processing must always take place through licensed hospital blood banks.</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- INTERACTIVE STEP WIZARD LOGIC -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const steps = document.querySelectorAll(".request-step");
+            const reqStepText = document.getElementById("reqStepText");
+            const reqPercent = document.getElementById("reqPercent");
+            const reqProgressFill = document.getElementById("reqProgressFill");
+            const reqBackBtn = document.getElementById("reqBackBtn");
+            const reqNextBtn = document.getElementById("reqNextBtn");
+            const reqActionsRow = document.getElementById("reqActionsRow");
+            const progressLabelRow = document.getElementById("progressLabelRow");
+            const progressTrackRow = document.getElementById("progressTrackRow");
+            const reqDisclaimer = document.getElementById("reqDisclaimer");
+
+            // Form inputs
+            const reqName = document.getElementById("reqName");
+            const reqEmail = document.getElementById("reqEmail");
+            const reqPhone = document.getElementById("reqPhone");
+            const reqUnits = document.getElementById("reqUnits");
+            const reqDate = document.getElementById("reqDate");
+            const reqHospital = document.getElementById("reqHospital");
+            const reqAddress = document.getElementById("reqAddress");
+            const reqCity = document.getElementById("reqCity");
+            const reqNotes = document.getElementById("reqNotes");
+
+            // Prevent selecting past dates
+            if (reqDate) {
+                const today = new Date();
+                const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+                    .toISOString().slice(0, 10);
+                reqDate.min = localToday;
+                reqDate.value = localToday;
+            }
+
+            let currentStep = 0;
+
+            const stepInfo = [
+                { title: "Step 1 of 3 · Your Contact", percent: "33%", btn: "Continue ↗" },
+                { title: "Step 2 of 3 · Blood Requirement", percent: "66%", btn: "Continue ↗" },
+                { title: "Step 3 of 3 · Hospital Location", percent: "100%", btn: "Submit Blood Request ↗" }
+            ];
+
+            const updateUI = () => {
+                steps.forEach((step, idx) => {
+                    if (idx === currentStep) {
+                        step.classList.add("active");
+                    } else {
+                        step.classList.remove("active");
+                    }
+                });
+
+                if (currentStep < 3) {
+                    const info = stepInfo[currentStep];
+                    if (reqStepText) reqStepText.textContent = info.title;
+                    if (reqPercent) reqPercent.textContent = info.percent;
+                    if (reqProgressFill) reqProgressFill.style.width = info.percent;
+                    if (reqNextBtn) {
+                        reqNextBtn.innerHTML = `<span>${info.btn}</span>`;
+                        reqNextBtn.disabled = false;
+                    }
+                    if (reqBackBtn) {
+                        reqBackBtn.style.display = currentStep > 0 ? "inline-flex" : "none";
+                    }
+                } else {
+                    // Success View
+                    if (progressLabelRow) progressLabelRow.style.display = "none";
+                    if (progressTrackRow) progressTrackRow.style.display = "none";
+                    if (reqActionsRow) reqActionsRow.style.display = "none";
+                    if (reqDisclaimer) reqDisclaimer.style.display = "none";
+                }
+            };
+
+            const validateCurrentStep = () => {
+                let valid = true;
+
+                if (currentStep === 0) {
+                    const nameVal = (reqName?.value || "").trim();
+                    const emailVal = (reqEmail?.value || "").trim();
+                    const phoneVal = (reqPhone?.value || "").trim();
+
+                    const fieldName = document.getElementById("fieldReqName");
+                    const fieldEmail = document.getElementById("fieldReqEmail");
+                    const fieldPhone = document.getElementById("fieldReqPhone");
+
+                    const errName = document.getElementById("reqNameError");
+                    const errEmail = document.getElementById("reqEmailError");
+                    const errPhone = document.getElementById("reqPhoneError");
+
+                    if (nameVal.length < 2) {
+                        fieldName?.classList.add("has-error");
+                        if (errName) errName.textContent = "Please enter your full name.";
+                        valid = false;
+                    } else {
+                        fieldName?.classList.remove("has-error");
+                    }
+
+                    if (!emailVal || !emailVal.includes("@") || !emailVal.includes(".")) {
+                        fieldEmail?.classList.add("has-error");
+                        if (errEmail) errEmail.textContent = "Please enter a valid email address.";
+                        valid = false;
+                    } else {
+                        fieldEmail?.classList.remove("has-error");
+                    }
+
+                    const phoneDigits = phoneVal.replace(/[^0-9]/g, "");
+                    if (phoneDigits.length < 10) {
+                        fieldPhone?.classList.add("has-error");
+                        if (errPhone) errPhone.textContent = "Please enter a valid 10-digit phone number.";
+                        valid = false;
+                    } else {
+                        fieldPhone?.classList.remove("has-error");
+                    }
+                } else if (currentStep === 1) {
+                    const unitsVal = parseInt(reqUnits?.value, 10);
+                    const dateVal = reqDate?.value;
+                    const fieldUnits = document.getElementById("fieldReqUnits");
+                    const fieldDate = document.getElementById("fieldReqDate");
+                    const errUnits = document.getElementById("reqUnitsError");
+                    const errDate = document.getElementById("reqDateError");
+
+                    if (isNaN(unitsVal) || unitsVal < 1) {
+                        fieldUnits?.classList.add("has-error");
+                        if (errUnits) errUnits.textContent = "Please specify at least 1 unit.";
+                        valid = false;
+                    } else {
+                        fieldUnits?.classList.remove("has-error");
+                    }
+
+                    if (!dateVal) {
+                        fieldDate?.classList.add("has-error");
+                        if (errDate) errDate.textContent = "Please select the date blood is required.";
+                        valid = false;
+                    } else {
+                        fieldDate?.classList.remove("has-error");
+                    }
+                } else if (currentStep === 2) {
+                    const hospVal = (reqHospital?.value || "").trim();
+                    const addrVal = (reqAddress?.value || "").trim();
+                    const cityVal = (reqCity?.value || "").trim();
+
+                    const fieldHosp = document.getElementById("fieldReqHospital");
+                    const fieldAddr = document.getElementById("fieldReqAddress");
+                    const fieldCity = document.getElementById("fieldReqCity");
+
+                    const errHosp = document.getElementById("reqHospitalError");
+                    const errAddr = document.getElementById("reqAddressError");
+                    const errCity = document.getElementById("reqCityError");
+
+                    if (hospVal.length < 3) {
+                        fieldHosp?.classList.add("has-error");
+                        if (errHosp) errHosp.textContent = "Please provide the hospital or facility name.";
+                        valid = false;
+                    } else {
+                        fieldHosp?.classList.remove("has-error");
+                    }
+
+                    if (addrVal.length < 3) {
+                        fieldAddr?.classList.add("has-error");
+                        if (errAddr) errAddr.textContent = "Please enter hospital address / landmark.";
+                        valid = false;
+                    } else {
+                        fieldAddr?.classList.remove("has-error");
+                    }
+
+                    if (cityVal.length < 2) {
+                        fieldCity?.classList.add("has-error");
+                        if (errCity) errCity.textContent = "Please enter the city.";
+                        valid = false;
+                    } else {
+                        fieldCity?.classList.remove("has-error");
+                    }
+                }
+
+                return valid;
+            };
+
+            // Next / Submit Button
+            if (reqNextBtn) {
+                reqNextBtn.addEventListener("click", () => {
+                    if (!validateCurrentStep()) return;
+
+                    if (currentStep < 2) {
+                        currentStep++;
+                        updateUI();
+                    } else if (currentStep === 2) {
+                        // Submit
+                        reqNextBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Broadcasting Request...`;
+                        reqNextBtn.disabled = true;
+
+                        setTimeout(() => {
+                            // Populate summary
+                            const selectedBg = document.querySelector('input[name="blood_group"]:checked')?.value || "O+";
+                            const unitsVal = reqUnits?.value || "2";
+                            const dateVal = reqDate?.value || "Urgent";
+                            const hospVal = reqHospital?.value || "Local Hospital";
+                            const cityVal = reqCity?.value || "Visakhapatnam";
+                            const nameVal = reqName?.value || "Requester";
+                            const phoneVal = reqPhone?.value || "";
+
+                            const sumBloodUnits = document.getElementById("sumBloodUnits");
+                            const sumDate = document.getElementById("sumDate");
+                            const sumHospital = document.getElementById("sumHospital");
+                            const sumContact = document.getElementById("sumContact");
+                            const sumRequestId = document.getElementById("sumRequestId");
+
+                            if (sumBloodUnits) sumBloodUnits.textContent = `${selectedBg} (${unitsVal} Unit${unitsVal > 1 ? 's' : ''})`;
+                            if (sumDate) sumDate.textContent = dateVal;
+                            if (sumHospital) sumHospital.textContent = `${hospVal}, ${cityVal}`;
+                            if (sumContact) sumContact.textContent = `${nameVal} (${phoneVal})`;
+                            if (sumRequestId) sumRequestId.textContent = `#EC-${Math.floor(10000 + Math.random() * 90000)}`;
+
+                            currentStep = 3;
+                            updateUI();
+                        }, 750);
+                    }
+                });
+            }
+
+            // Back Button
+            if (reqBackBtn) {
+                reqBackBtn.addEventListener("click", () => {
+                    if (currentStep > 0 && currentStep < 3) {
+                        currentStep--;
+                        updateUI();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

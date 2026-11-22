@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Space — EasyConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-page="dashboard">
+    <div class="topbar">A private-feeling dashboard concept. All values shown here are illustrative.</div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="container nav">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">
+                <i class="fa-solid fa-droplet"></i>
+                <i class="fa-solid fa-heart heart-icon"></i>
+            </span>
+            <span class="brand-name">
+                Easy<span>Connect</span>
+            </span>
+        </a>
+
+        <nav class="navlinks">
+            <a href="index.html">Home</a>
+            <a href="donors.html">Find Donors</a>
+            <a href="request.html">Request Blood</a>
+            <a href="dashboard.html" class="active">My Space</a>
+        </nav>
+
+        <div class="navright" style="display: flex; align-items: center; gap: 10px;">
+            <a class="btn small" href="donors.html">Find Donors ↗</a>
+            <a class="btn-logout" href="login.html" id="topLogoutBtn" title="Log out of EasyConnect">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Log Out</span>
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </header>
+
+    <!-- DASHBOARD VIEWPORT -->
+    <main class="container dashboard">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <a class="side-link active" href="dashboard.html">
+                <i class="fa-solid fa-table-cells-large"></i> &nbsp; Overview
+            </a>
+            <a class="side-link" href="donors.html">
+                <i class="fa-solid fa-magnifying-glass"></i> &nbsp; Find Donors
+            </a>
+            <a class="side-link" href="request.html">
+                <i class="fa-regular fa-heart"></i> &nbsp; My Requests
+            </a>
+            <a class="side-link" href="register.html">
+                <i class="fa-solid fa-shield-heart"></i> &nbsp; Join as Donor
+            </a>
+
+            <!-- LOGOUT LINK PINNED AT BOTTOM OF SIDEBAR -->
+            <a class="side-link side-logout-link" href="login.html" id="sideLogoutBtn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>&nbsp; Log Out</span>
+            </a>
+        </aside>
+
+        <!-- DASHBOARD MAIN CONTENT -->
+        <section>
+            <div class="dash-head">
+                <div>
+                    <div class="eyebrow">Your space</div>
+                    <h1>Hello, friend <span class="serif">✳</span></h1>
+                    <p>A calm space to manage your community activity.</p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <a href="request.html" class="btn olive">+ New request</a>
+                </div>
+            </div>
+
+            <div class="metrics">
+                <div class="metric">
+                    <label>Open requests</label>
+                    <h2>02</h2>
+                    <small>Illustrative data</small>
+                </div>
+                <div class="metric">
+                    <label>Donor invitations</label>
+                    <h2>04</h2>
+                    <small>Illustrative data</small>
+                </div>
+                <div class="metric">
+                    <label>Connections made</label>
+                    <h2>01</h2>
+                    <small>Illustrative data</small>
+                </div>
+            </div>
+
+            <section class="activity">
+                <div class="section-head">
+                    <h2>Recent activity</h2>
+                    <span class="chip">Example only</span>
+                </div>
+                <div class="activity-row">
+                    <span>
+                        <strong>O+ donation request</strong><br>
+                        <span class="small-note">Visakhapatnam · Example request</span>
+                    </span>
+                    <span class="status">Open</span>
+                </div>
+                <div class="activity-row">
+                    <span>
+                        <strong>Invitation to connect</strong><br>
+                        <span class="small-note">Example donor profile</span>
+                    </span>
+                    <span class="status">Pending</span>
+                </div>
+                <div class="activity-row">
+                    <span>
+                        <strong>Profile details</strong><br>
+                        <span class="small-note">Edit your details through the registration prototype</span>
+                    </span>
+                    <a href="register.html" class="btn outline small">View form</a>
+                </div>
+            </section>
+
+            <div class="notice" style="margin-top:23px">
+                Dashboard numbers are placeholders. Real request status, invitation delivery, account access, and privacy controls need backend integration.
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="container footer">
+        <span>EasyConnect · Community care, made simple.</span>
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="index.html">Home</a>
+            <a href="login.html" style="color: var(--terracotta);">Log Out</a>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
