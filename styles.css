@@ -845,7 +845,8 @@ button:disabled {
 .search-bar select:focus {
     border-color: var(--sage) !important;
     box-shadow: 0 0 0 3.5px rgba(75, 101, 89, 0.22) !important;
-    transform: none !important; /* Keep field steady while user types */
+    transform: none !important;
+    /* Keep field steady while user types */
 }
 
 .field input::placeholder {
@@ -1102,8 +1103,13 @@ button:disabled {
 }
 
 @keyframes bubbleFloat {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-5px); }
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
 }
 
 .bubble-heart-icon {
@@ -1131,16 +1137,39 @@ button:disabled {
 }
 
 @keyframes haloGlow {
-    0% { transform: scale(0.9); opacity: 0.4; }
-    100% { transform: scale(1.25); opacity: 0.9; }
+    0% {
+        transform: scale(0.9);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(1.25);
+        opacity: 0.9;
+    }
 }
 
 @keyframes heartPulse {
-    0%, 100% { transform: scale(1); }
-    14% { transform: scale(1.22); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.15); }
-    70% { transform: scale(1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    14% {
+        transform: scale(1.22);
+    }
+
+    28% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.15);
+    }
+
+    70% {
+        transform: scale(1);
+    }
 }
 
 .bubble-text {
@@ -1239,7 +1268,7 @@ button:disabled {
     border: 3.5px solid #C4A27A;
     border-radius: 36px;
     box-shadow: 0 16px 40px rgba(44, 46, 48, 0.12),
-                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -1275,15 +1304,39 @@ button:disabled {
 }
 
 @keyframes swirlRotate1 {
-    0% { transform: rotate(-24deg) scale(0.95); opacity: 0.6; }
-    50% { transform: rotate(-18deg) scale(1.05); opacity: 0.95; box-shadow: 0 0 16px rgba(255, 230, 160, 0.8); }
-    100% { transform: rotate(-28deg) scale(0.98); opacity: 0.7; }
+    0% {
+        transform: rotate(-24deg) scale(0.95);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: rotate(-18deg) scale(1.05);
+        opacity: 0.95;
+        box-shadow: 0 0 16px rgba(255, 230, 160, 0.8);
+    }
+
+    100% {
+        transform: rotate(-28deg) scale(0.98);
+        opacity: 0.7;
+    }
 }
 
 @keyframes swirlRotate2 {
-    0% { transform: rotate(18deg) scale(0.98); opacity: 0.7; }
-    50% { transform: rotate(24deg) scale(1.06); opacity: 0.95; box-shadow: 0 0 16px rgba(255, 230, 160, 0.8); }
-    100% { transform: rotate(14deg) scale(0.96); opacity: 0.6; }
+    0% {
+        transform: rotate(18deg) scale(0.98);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: rotate(24deg) scale(1.06);
+        opacity: 0.95;
+        box-shadow: 0 0 16px rgba(255, 230, 160, 0.8);
+    }
+
+    100% {
+        transform: rotate(14deg) scale(0.96);
+        opacity: 0.6;
+    }
 }
 
 /* Rising Liquid Energy Level */
@@ -1323,7 +1376,7 @@ button:disabled {
     left: 10px;
     width: 14px;
     height: calc(100% - 20px);
-    background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.15) 80%, transparent 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.15) 80%, transparent 100%);
     border-radius: 10px;
     pointer-events: none;
     z-index: 6;
@@ -1357,8 +1410,13 @@ button:disabled {
 }
 
 @keyframes waveRotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Rising Bubbles inside Battery Liquid */
@@ -1377,15 +1435,48 @@ button:disabled {
     animation: bubbleRise 3s ease-in infinite;
 }
 
-.bubble-1 { left: 20%; width: 6px; height: 6px; animation-duration: 2.4s; animation-delay: 0.2s; }
-.bubble-2 { left: 50%; width: 9px; height: 9px; animation-duration: 3.1s; animation-delay: 0.8s; }
-.bubble-3 { left: 75%; width: 5px; height: 5px; animation-duration: 2.7s; animation-delay: 1.4s; }
+.bubble-1 {
+    left: 20%;
+    width: 6px;
+    height: 6px;
+    animation-duration: 2.4s;
+    animation-delay: 0.2s;
+}
+
+.bubble-2 {
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    animation-duration: 3.1s;
+    animation-delay: 0.8s;
+}
+
+.bubble-3 {
+    left: 75%;
+    width: 5px;
+    height: 5px;
+    animation-duration: 2.7s;
+    animation-delay: 1.4s;
+}
 
 @keyframes bubbleRise {
-    0% { transform: translateY(0) scale(0.6); opacity: 0; }
-    30% { opacity: 0.8; }
-    80% { opacity: 0.8; }
-    100% { transform: translateY(-220px) scale(1.2); opacity: 0; }
+    0% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-220px) scale(1.2);
+        opacity: 0;
+    }
 }
 
 /* Battery Numeric Display */
@@ -1444,9 +1535,17 @@ button:disabled {
 }
 
 @keyframes ecgFlow {
-    0% { stroke-dashoffset: 100; }
-    50% { stroke-dashoffset: 0; }
-    100% { stroke-dashoffset: -100; }
+    0% {
+        stroke-dashoffset: 100;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: -100;
+    }
 }
 
 /* ===================================================
@@ -1471,9 +1570,22 @@ button:disabled {
 }
 
 @keyframes labelSparkGlow {
-    0% { color: var(--muted); text-shadow: none; }
-    30% { color: #D4A359; text-shadow: 0 0 12px rgba(229, 184, 105, 0.75); transform: translateY(-2px); }
-    100% { color: var(--muted); text-shadow: none; transform: translateY(0); }
+    0% {
+        color: var(--muted);
+        text-shadow: none;
+    }
+
+    30% {
+        color: #D4A359;
+        text-shadow: 0 0 12px rgba(229, 184, 105, 0.75);
+        transform: translateY(-2px);
+    }
+
+    100% {
+        color: var(--muted);
+        text-shadow: none;
+        transform: translateY(0);
+    }
 }
 
 /* Liquid Surface Wave Ripple when Spark is Received */
@@ -1482,10 +1594,25 @@ button:disabled {
 }
 
 @keyframes waveRippleEffect {
-    0% { transform: rotate(0deg) scaleY(1); filter: brightness(1); }
-    35% { transform: rotate(120deg) scaleY(1.45) scaleX(1.08); filter: brightness(1.3) drop-shadow(0 0 10px rgba(255, 223, 149, 0.8)); }
-    70% { transform: rotate(240deg) scaleY(0.9); filter: brightness(1.15); }
-    100% { transform: rotate(360deg) scaleY(1); filter: brightness(1); }
+    0% {
+        transform: rotate(0deg) scaleY(1);
+        filter: brightness(1);
+    }
+
+    35% {
+        transform: rotate(120deg) scaleY(1.45) scaleX(1.08);
+        filter: brightness(1.3) drop-shadow(0 0 10px rgba(255, 223, 149, 0.8));
+    }
+
+    70% {
+        transform: rotate(240deg) scaleY(0.9);
+        filter: brightness(1.15);
+    }
+
+    100% {
+        transform: rotate(360deg) scaleY(1);
+        filter: brightness(1);
+    }
 }
 
 /* Warm Light Ring Ascending Through Glass */
@@ -1508,10 +1635,27 @@ button:disabled {
 }
 
 @keyframes lightRingAscend {
-    0% { bottom: 0; opacity: 0; transform: scaleX(0.7); }
-    15% { opacity: 0.95; transform: scaleX(1); }
-    85% { opacity: 0.95; transform: scaleX(1); }
-    100% { bottom: calc(100% - 22px); opacity: 0; transform: scaleX(0.7); }
+    0% {
+        bottom: 0;
+        opacity: 0;
+        transform: scaleX(0.7);
+    }
+
+    15% {
+        opacity: 0.95;
+        transform: scaleX(1);
+    }
+
+    85% {
+        opacity: 0.95;
+        transform: scaleX(1);
+    }
+
+    100% {
+        bottom: calc(100% - 22px);
+        opacity: 0;
+        transform: scaleX(0.7);
+    }
 }
 
 /* Two Distinct Heartbeats */
@@ -1520,10 +1664,26 @@ button:disabled {
 }
 
 @keyframes heartBeatPulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 rgba(200, 80, 61, 0); }
-    40% { transform: scale(1.42); background: #FDDBD5; color: #C8503D; box-shadow: 0 0 18px rgba(200, 80, 61, 0.65), 0 0 10px rgba(229, 184, 105, 0.6); }
-    75% { transform: scale(1.22); }
-    100% { transform: scale(1); box-shadow: 0 0 6px rgba(200, 80, 61, 0.3); }
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(200, 80, 61, 0);
+    }
+
+    40% {
+        transform: scale(1.42);
+        background: #FDDBD5;
+        color: #C8503D;
+        box-shadow: 0 0 18px rgba(200, 80, 61, 0.65), 0 0 10px rgba(229, 184, 105, 0.6);
+    }
+
+    75% {
+        transform: scale(1.22);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 6px rgba(200, 80, 61, 0.3);
+    }
 }
 
 /* ECG Sync Peak Effect Synchronized with Heartbeats */
@@ -1552,9 +1712,9 @@ button:disabled {
 /* Soft Steady Glow after 100% Celebration */
 .battery-cylinder.steady-glow {
     box-shadow: 0 16px 40px rgba(44, 46, 48, 0.12),
-                0 0 35px rgba(200, 80, 61, 0.35),
-                0 0 18px rgba(229, 184, 105, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+        0 0 35px rgba(200, 80, 61, 0.35),
+        0 0 18px rgba(229, 184, 105, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
     transition: box-shadow 2s ease !important;
 }
 
@@ -1570,8 +1730,15 @@ button:disabled {
 }
 
 @keyframes bubbleTextFadeIn {
-    0% { opacity: 0; transform: translateY(3px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Dynamic Story Card at Bottom of Battery Panel */
@@ -2506,17 +2673,57 @@ body[data-page="home"] {
 }
 
 .hero-headline {
-    font-family: var(--font-heading);
-    font-size: clamp(32px, 3.4vw, 50px);
-    font-weight: 700;
-    line-height: 1.16;
-    letter-spacing: -0.025em;
+    font-family: 'Outfit', 'Plus Jakarta Sans', var(--font-heading), system-ui, -apple-system, sans-serif;
+    font-size: clamp(30px, 3.8vw, 50px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
     margin: 0 0 16px;
-    color: var(--text);
+    color: #23272F;
+}
+
+.hero-headline-primary {
+    display: block;
+    color: #23272F;
+    font-weight: 500;
+}
+
+.hero-headline-gradient {
+    display: inline-block;
+    /* Project Brand Palette: Deep Wine Crimson -> Core Terracotta -> Radiant Life Coral */
+    background: linear-gradient(98deg, #7A221A 0%, #9C3328 22%, #A64F46 48%, #C84938 72%, #DE5D48 90%, #EA6D58 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: 400;
+    position: relative;
+    padding-bottom: 2px;
 }
 
 .hero-headline .accent-terracotta {
-    color: var(--accent);
+    background: linear-gradient(98deg, #7A221A 0%, #9C3328 22%, #A64F46 48%, #C84938 72%, #DE5D48 90%, #EA6D58 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: 400;
+}
+
+.hero-headline-again-wrap {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+}
+
+.hero-headline-curve {
+    position: absolute;
+    left: -2px;
+    bottom: -8px;
+    width: calc(100% + 4px);
+    height: 12px;
+    pointer-events: none;
+    overflow: visible;
 }
 
 .hero-description {
@@ -2963,13 +3170,25 @@ html.js-scroll-reveal:not(.reduced-motion) .reveal-item.is-revealed {
     transform: translateY(0);
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-1 { transition-delay: 50ms; }
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-2 { transition-delay: 110ms; }
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-3 { transition-delay: 170ms; }
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 { transition-delay: 230ms; }
+html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-1 {
+    transition-delay: 50ms;
+}
+
+html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-2 {
+    transition-delay: 110ms;
+}
+
+html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-3 {
+    transition-delay: 170ms;
+}
+
+html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 {
+    transition-delay: 230ms;
+}
 
 /* Subtle 2-3° Decorative Card Tilt (Fine Pointer Only, Disabled for Touch & Reduced Motion) */
 @media (hover: hover) and (pointer: fine) {
+
     .three-feature-cards .feature-card,
     .min-card {
         transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, border-color 220ms ease;
@@ -2979,6 +3198,7 @@ html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 { transition-delay:
 
 /* Reduced Motion Accessible Overrides */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -2987,10 +3207,12 @@ html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 { transition-delay:
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+
     .reveal-item {
         opacity: 1 !important;
         transform: none !important;
     }
+
     .three-feature-cards .feature-card,
     .min-card {
         transform: none !important;
@@ -3001,20 +3223,24 @@ html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 { transition-delay:
     .site-header .nav-links {
         display: none;
     }
+
     .community-pillars-card {
         flex-direction: column;
         gap: 14px;
         padding: 18px 20px;
         border-radius: 16px;
     }
+
     .pillar-divider {
         width: 100%;
         height: 1px;
     }
+
     .three-feature-cards {
         grid-template-columns: 1fr;
         gap: 12px;
     }
+
     .hero-middle-stage {
         min-height: 240px;
     }
@@ -3313,8 +3539,9 @@ html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 { transition-delay:
     font-weight: 600;
     font-family: var(--font-body);
 }
-    white-space: nowrap;
-    letter-spacing: 0.2px;
+
+white-space: nowrap;
+letter-spacing: 0.2px;
 }
 
 .item-desc {
@@ -3903,6 +4130,7 @@ textarea:focus-visible {
     .hero-image {
         height: 380px;
     }
+
     .hero-story-floating-card {
         min-height: 360px;
     }
@@ -4073,6 +4301,20 @@ textarea:focus-visible {
         line-height: 1.2 !important;
         max-width: 440px;
         margin: 0 auto 12px !important;
+    }
+
+    .hero-break-desktop {
+        display: none;
+    }
+
+    .hero-headline-primary {
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    .hero-headline-curve {
+        bottom: -5px;
+        height: 9px;
     }
 
     .hero-description {
@@ -4354,6 +4596,7 @@ textarea:focus-visible {
         opacity: 0;
         transform: translateY(-4px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -4496,9 +4739,12 @@ textarea:focus-visible {
 }
 
 @keyframes mascotBreathe {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) scale(1);
     }
+
     50% {
         transform: translateY(-3px) scale(1.02);
     }
@@ -4652,6 +4898,7 @@ textarea:focus-visible {
         opacity: 0;
         transform: translateY(6px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -5179,18 +5426,18 @@ textarea:focus-visible {
     margin-top: 2px;
 }
 
-.blood-pill-label input[type="radio"]:checked + .blood-pill-box {
+.blood-pill-label input[type="radio"]:checked+.blood-pill-box {
     background: var(--accent);
     border-color: var(--accent);
     color: #FFFFFF;
     box-shadow: 0 0 0 3px rgba(166, 79, 70, 0.22);
 }
 
-.blood-pill-label input[type="radio"]:checked + .blood-pill-box .bg-title {
+.blood-pill-label input[type="radio"]:checked+.blood-pill-box .bg-title {
     color: #FFFFFF !important;
 }
 
-.blood-pill-label input[type="radio"]:checked + .blood-pill-box small {
+.blood-pill-label input[type="radio"]:checked+.blood-pill-box small {
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -5198,7 +5445,7 @@ textarea:focus-visible {
     border-color: var(--accent);
 }
 
-.blood-pill-label input[type="radio"]:focus-visible + .blood-pill-box {
+.blood-pill-label input[type="radio"]:focus-visible+.blood-pill-box {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
 }
@@ -5334,20 +5581,24 @@ textarea:focus-visible {
     .request-card {
         padding: 24px 18px 20px;
     }
+
     .blood-pills-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
+
     .blood-pill-box {
         padding: 12px 14px;
         font-size: 14px;
         min-height: 48px;
     }
+
     .blood-pill-box .bg-title {
         font-size: 18px;
         font-weight: 800;
         color: var(--ink, #1F2421);
     }
+
     .request-hero h1 {
         font-size: 28px;
     }
@@ -5377,6 +5628,7 @@ textarea:focus-visible {
         padding-top: 14px;
         border-top: 1px solid var(--line, #E5EADF);
     }
+
     .btn-mobile-nav {
         display: flex;
         align-items: center;
@@ -5388,11 +5640,13 @@ textarea:focus-visible {
         text-decoration: none;
         min-height: 44px;
     }
+
     .btn-mobile-login {
         background: #F3F1EB;
         color: var(--ink, #1F2421);
         border: 1px solid #DCD6CD;
     }
+
     .btn-mobile-signup {
         background: var(--sage, #455A4E);
         color: #FFFFFF;
@@ -5446,8 +5700,15 @@ textarea:focus-visible {
 }
 
 @keyframes fadeInTab {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Request Blood Form: Review summary card and helper text */
@@ -5561,7 +5822,7 @@ textarea:focus-visible {
     margin-top: 2px;
 }
 
-.blood-pill-label input:checked + .blood-pill-box .bg-title {
+.blood-pill-label input:checked+.blood-pill-box .bg-title {
     color: #FFFFFF;
 }
 
@@ -5629,45 +5890,64 @@ textarea:focus-visible {
         align-items: stretch;
         gap: 10px;
     }
+
     .gps-field-group .input-icon-wrap {
         width: 100%;
     }
+
     .btn-detect-gps {
         width: 100%;
         justify-content: center;
         min-height: 44px;
     }
+
     .schedule-inputs {
         grid-template-columns: 1fr;
         gap: 10px;
     }
+
     .req-two-col {
         grid-template-columns: 1fr;
         gap: 12px;
     }
+
     .fields {
         grid-template-columns: 1fr !important;
     }
+
     .field {
         grid-column: span 1 !important;
     }
+
     .battery-tags-col {
-        display: none !important; /* Prevents tags overlapping battery core on narrow mobile */
+        display: none !important;
+        /* Prevents tags overlapping battery core on narrow mobile */
     }
+
     .battery-panel {
         padding: 20px 16px;
     }
+
     .battery-stage {
         height: 240px;
     }
 }
 
 /* Touch targets and standard buttons */
-button, .btn, a.btn, input, select, textarea {
+button,
+.btn,
+a.btn,
+input,
+select,
+textarea {
     touch-action: manipulation;
 }
 
-.btn, .btn-auth-primary, .btn-next, .btn-back, .btn-step-back {
+.btn,
+.btn-auth-primary,
+.btn-next,
+.btn-back,
+.btn-step-back {
     min-height: 44px;
     font-weight: 700;
 }
