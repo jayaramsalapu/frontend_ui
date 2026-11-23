@@ -1,0 +1,1183 @@
+/**
+ * EASYCONNECT - LOWER HOMEPAGE REDESIGN STYLES (story-redesign.css)
+ * 
+ * Strict Scoping: Applies ONLY to sections below the hero.
+ * Does NOT alter or affect the site header, navigation, or hero section.
+ * Matches existing typography, muted palette, and button styling from styles.css.
+ * Supports all 9 steps of the authentic EasyConnect workflow.
+ */
+
+:root {
+    --accent: #A64F46;
+    --accent-hover: #933E36;
+    --accent-soft: #FDF2F0;
+    --sage: #3D5A4C;
+    --sage-hover: #2E453A;
+    --sage-light: #E7EEE5;
+    --sage-soft: #EFF3ED;
+    --text: #293631;
+    --muted: #5F6E66;
+    --cream: #FAF9F5;
+    --paper: #FAF8F5;
+    --border: rgba(61, 90, 76, 0.12);
+    --border-light: rgba(61, 90, 76, 0.08);
+}
+
+/* ==========================================================================
+   ENSURE VISIBILITY BY DEFAULT (No content stuck at opacity: 0)
+   ========================================================================== */
+.intro-section,
+.story-section,
+.privacy-section,
+.safety-statement-section,
+.faq-section,
+.final-cta-section,
+.site-footer-redesign {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.intro-content-col,
+.intro-image-frame,
+.story-header,
+.story-chapters-col,
+.privacy-content-col,
+.privacy-image-frame,
+.safety-statement-card,
+.faq-header,
+.final-cta-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Base Container */
+.intro-container,
+.story-container,
+.privacy-container,
+.faq-container,
+.final-cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 3.5vw, 40px);
+}
+
+/* Shared Eyebrow Label */
+.section-eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   SECTION A — Introduction: “Help begins with a connection.”
+   ========================================================================== */
+.intro-section {
+    padding: clamp(48px, 6vh, 64px) 0;
+    background: #FFFFFF;
+    position: relative;
+    border-top: 1px solid var(--border-light);
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(36px, 5vw, 64px);
+    align-items: center;
+}
+
+.intro-image-col {
+    display: flex;
+    justify-content: center;
+}
+
+.intro-image-frame {
+    margin: 0;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #FAF8F5;
+    box-shadow: 0 6px 20px rgba(35, 39, 47, 0.05);
+    border: 1px solid var(--border);
+}
+
+.intro-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.intro-content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.intro-heading {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0 0 12px;
+}
+
+.intro-lead {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 20px;
+    max-width: 520px;
+}
+
+.intro-highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.intro-highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.highlight-bullet {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--sage-soft);
+    color: var(--sage);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.intro-text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid transparent;
+    transition: all 180ms ease;
+}
+
+.intro-text-link:hover {
+    color: var(--accent-hover);
+    border-bottom-color: var(--accent-hover);
+}
+
+.intro-text-link i {
+    font-size: 11px;
+    transition: transform 180ms ease;
+}
+
+.intro-text-link:hover i {
+    transform: translateY(2px);
+}
+
+/* ==========================================================================
+   SECTION B — Main Scrolling Story: “How EasyConnect works” (7 Steps)
+   Minimal connected path layout with scroll-linked traveling mascot
+   ========================================================================== */
+.story-section {
+    padding: clamp(52px, 6.5vh, 72px) 0;
+    background: var(--cream);
+    position: relative;
+    border-top: 1px solid var(--border-light);
+}
+
+.story-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto clamp(36px, 4.5vh, 48px);
+}
+
+.story-title {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0;
+}
+
+/* Steps Flow Container */
+.steps-flow-container {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+/* Continuous SVG Path Canvas covering the entire container */
+.steps-flow-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+}
+
+.flow-path-bg {
+    stroke: #D6E0DA;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 6 6;
+    fill: none;
+}
+
+.flow-path-fill {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    transition: stroke-dashoffset 60ms linear;
+}
+
+/* Traveling Blood-Drop Mascot (Preserved existing character asset) */
+.steps-flow-mascot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 38px;
+    pointer-events: none;
+    z-index: 10;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none;
+}
+
+.steps-flow-mascot .story-mascot-svg {
+    display: block;
+    width: 34px;
+    height: 38px;
+    filter: drop-shadow(0 3px 6px rgba(166, 79, 70, 0.28));
+}
+
+/* Steps List */
+.flow-steps-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Individual Step Row - Desktop */
+.flow-step-item {
+    display: grid;
+    grid-template-columns: 1fr 64px 1fr;
+    align-items: center;
+    min-height: 84px;
+    padding: clamp(16px, 2.5vh, 24px) 0;
+    position: relative;
+    transition: opacity 220ms ease;
+}
+
+/* Subtle staggered wave for desktop path */
+@media (min-width: 768px) {
+    .flow-step-item:nth-child(odd) {
+        grid-template-columns: 1.08fr 64px 0.92fr;
+    }
+    .flow-step-item:nth-child(even) {
+        grid-template-columns: 0.92fr 64px 1.08fr;
+    }
+}
+
+/* Step Content (Badge + Text Block) */
+.flow-step-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.flow-step-item:nth-child(odd) .flow-step-content {
+    justify-content: flex-end;
+    padding-right: 18px;
+}
+
+.flow-step-item:nth-child(even) .flow-step-content {
+    justify-content: flex-start;
+    padding-left: 18px;
+}
+
+/* Step Text Container (Title + Description) */
+.flow-step-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.flow-step-item:nth-child(odd) .flow-step-text {
+    text-align: left;
+}
+
+.flow-step-item:nth-child(even) .flow-step-text {
+    text-align: left;
+}
+
+/* Step Number Badge */
+.flow-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #2D4539;
+    background: rgba(61, 90, 76, 0.08);
+    border: 1px solid rgba(61, 90, 76, 0.18);
+    border-radius: 6px;
+    padding: 2px 7px;
+    margin-top: 2px;
+    transition: all 220ms ease;
+    flex-shrink: 0;
+}
+
+/* Step Title */
+.flow-step-title {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #505F57;
+    margin: 0;
+    transition: color 220ms ease;
+}
+
+/* Step Supporting Description */
+.flow-step-desc {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #55645C;
+    margin: 5px 0 0 0;
+    max-width: 320px;
+}
+
+/* Waypoint Circle */
+.flow-step-waypoint {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 2px solid #C8D4CD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+    transition: all 220ms ease;
+    box-shadow: 0 1px 4px rgba(35, 39, 47, 0.06);
+}
+
+.waypoint-inner {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #C8D4CD;
+    transition: all 220ms ease;
+}
+
+/* Active Step Styling */
+.flow-step-item.is-active .flow-step-title {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.flow-step-item.is-active .flow-step-desc {
+    color: #38463F;
+}
+
+.flow-step-item.is-active .flow-step-num {
+    color: #8E281F;
+    background: var(--accent-soft);
+    border-color: rgba(166, 79, 70, 0.28);
+}
+
+.flow-step-item.is-active .flow-step-waypoint {
+    border-color: var(--accent);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(166, 79, 70, 0.14);
+}
+
+.flow-step-item.is-active .waypoint-inner {
+    background: var(--accent);
+    transform: scale(1.15);
+}
+
+/* Mobile & Tablet (<768px): Clean vertical layout with left track */
+@media (max-width: 767px) {
+    .story-title {
+        font-size: 24px !important;
+    }
+
+    .steps-flow-container {
+        padding: 5px 0;
+    }
+
+    .flow-step-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 0;
+    }
+
+    .flow-step-spacer {
+        display: none !important;
+    }
+
+    .flow-step-waypoint {
+        order: 1;
+        margin: 2px 0 0 8px;
+        flex-shrink: 0;
+    }
+
+    .flow-step-content {
+        order: 2;
+        padding: 0 !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        flex: 1;
+        gap: 10px;
+    }
+
+    .flow-step-title {
+        font-size: 18px !important;
+    }
+
+    .flow-step-desc {
+        font-size: 14px;
+        max-width: 100%;
+    }
+}
+
+/* ==========================================================================
+   SECTION C — Privacy and Control: “Your kindness. Your choice.”
+   ========================================================================== */
+.privacy-section {
+    padding: clamp(48px, 6vh, 64px) 0;
+    background: #FFFFFF;
+    border-top: 1px solid var(--border-light);
+}
+
+.privacy-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 64px);
+    align-items: center;
+}
+
+.privacy-content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.privacy-heading {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0 0 12px;
+}
+
+.privacy-lead {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 24px;
+    max-width: 520px;
+}
+
+.privacy-rows-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.privacy-row-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.privacy-row-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--sage-soft);
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.privacy-row-content {
+    flex: 1;
+}
+
+.privacy-row-title {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 3px;
+}
+
+.privacy-row-desc {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+}
+
+.privacy-image-col {
+    display: flex;
+    justify-content: center;
+}
+
+.privacy-image-frame {
+    margin: 0;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    background: #FAF8F5;
+    box-shadow: 0 6px 20px rgba(35, 39, 47, 0.05);
+    border: 1px solid var(--border);
+}
+
+.privacy-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.privacy-overlay-pill {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--border);
+    padding: 5px 11px;
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--sage);
+}
+
+/* ==========================================================================
+   SECTION D — A Clearer Path From Request to Connection
+   ========================================================================== */
+.safety-statement-section {
+    padding: clamp(40px, 5.5vh, 56px) 0;
+    background: var(--cream);
+    border-top: 1px solid var(--border-light);
+}
+
+.safety-statement-card {
+    background: #EFF4EE;
+    border: 1px solid rgba(61, 90, 76, 0.16);
+    border-radius: 18px;
+    padding: clamp(28px, 4vw, 40px);
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.statement-card-header {
+    max-width: 680px;
+    margin: 0 auto clamp(24px, 3.5vh, 32px);
+}
+
+.statement-card-heading {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0 0 10px;
+}
+
+.statement-card-lead {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #405047;
+    margin: 0;
+}
+
+/* 3 Pillars Grid */
+.statement-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    text-align: left;
+}
+
+.statement-pillar-item {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(61, 90, 76, 0.12);
+    border-radius: 14px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px rgba(35, 39, 47, 0.03);
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.statement-pillar-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(35, 39, 47, 0.06);
+    background: #FFFFFF;
+}
+
+.pillar-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(61, 90, 76, 0.09);
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+}
+
+.pillar-title {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text);
+    margin: 0 0 8px;
+}
+
+.pillar-desc {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #55645C;
+    margin: 0;
+}
+
+@media (max-width: 820px) {
+    .statement-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .statement-card-heading {
+        font-size: 21px;
+    }
+
+    .statement-pillar-item {
+        padding: 18px;
+    }
+}
+
+/* ==========================================================================
+   SECTION E — Frequently Asked Questions
+   ========================================================================== */
+.faq-section {
+    padding: clamp(48px, 6vh, 64px) 0;
+    background: #FFFFFF;
+    border-top: 1px solid var(--border-light);
+}
+
+.faq-header {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 32px;
+}
+
+.faq-title {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0;
+}
+
+.faq-accordion-list {
+    max-width: 740px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.faq-accordion-item {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 180ms ease;
+}
+
+.faq-accordion-item:hover {
+    border-color: rgba(61, 90, 76, 0.25);
+}
+
+.faq-accordion-item.faq-open {
+    border-color: var(--sage);
+}
+
+.faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+}
+
+.faq-question-text {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+}
+
+.faq-chevron-icon {
+    font-size: 13px;
+    color: var(--muted);
+    transition: transform 200ms ease;
+    flex-shrink: 0;
+}
+
+.faq-accordion-item.faq-open .faq-chevron-icon {
+    transform: rotate(180deg);
+    color: var(--sage);
+}
+
+.faq-panel {
+    padding: 0 20px 16px;
+}
+
+.faq-answer-text {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* ==========================================================================
+   SECTION F — Final Call to Action
+   ========================================================================== */
+.final-cta-section {
+    padding: clamp(48px, 6vh, 64px) 0;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border-light);
+}
+
+.final-cta-card {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.final-cta-heading {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin: 0 0 10px;
+}
+
+.final-cta-lead {
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 24px;
+}
+
+.final-cta-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.btn-cta-request {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #FFFFFF !important;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(166, 79, 70, 0.2);
+    transition: all 180ms ease;
+    border: 1px solid transparent;
+}
+
+.btn-cta-request:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.btn-cta-donor {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFFFFF;
+    color: var(--text) !important;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 180ms ease;
+}
+
+.btn-cta-donor:hover {
+    background: #FAF8F5;
+    border-color: rgba(61, 90, 76, 0.25);
+    transform: translateY(-1px);
+}
+
+.btn-cta-donor i {
+    color: var(--accent);
+}
+
+.final-cta-decor-mascot {
+    position: absolute;
+    bottom: -15px;
+    right: 5%;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   SECTION G — Footer Redesign
+   ========================================================================== */
+.site-footer-redesign {
+    background: #1F2522;
+    color: #CBD5E1;
+    padding: 48px 0 28px;
+    font-family: var(--font-body), 'Inter', sans-serif;
+}
+
+.footer-redesign-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 3.5vw, 40px);
+}
+
+.footer-redesign-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 0.8fr);
+    gap: clamp(28px, 3.5vw, 48px);
+    margin-bottom: 32px;
+}
+
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    margin-bottom: 12px;
+}
+
+.footer-brand-name {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.footer-brand-name span {
+    color: #E28476;
+}
+
+.footer-desc-text {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #94A3B8;
+    margin: 0;
+    max-width: 300px;
+}
+
+.footer-col-title {
+    font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 14px;
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.footer-links-list a,
+.footer-btn-link {
+    font-size: 13.5px;
+    color: #CBD5E1;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    transition: color 150ms ease;
+    font-family: inherit;
+}
+
+.footer-links-list a:hover,
+.footer-btn-link:hover {
+    color: #FFFFFF;
+}
+
+.footer-divider-line {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.footer-disclaimer-note {
+    font-size: 12px;
+    line-height: 1.55;
+    color: #8E9BAE;
+    margin: 0 0 16px;
+    max-width: 860px;
+}
+
+.footer-bottom-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 12px;
+    color: #718096;
+}
+
+.footer-bottom-flex p {
+    margin: 0;
+}
+
+.footer-back-top {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 180ms ease;
+}
+
+.footer-back-top:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Breakpoints: 1024px, 991px, 767px, 390px, 360px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .intro-grid,
+    .privacy-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .intro-image-frame,
+    .privacy-image-frame {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .footer-redesign-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+}
+
+/* 991px breakpoint clean */
+
+@media (max-width: 767px) {
+    .intro-section,
+    .story-section,
+    .privacy-section,
+    .faq-section,
+    .final-cta-section {
+        padding: 36px 0;
+    }
+
+    .intro-heading,
+    .privacy-heading,
+    .faq-title,
+    .final-cta-heading {
+        font-size: 22px !important;
+    }
+
+    .chapter-heading {
+        font-size: 18px !important;
+    }
+
+    .statement-card-heading,
+    .safety-statement-heading {
+        font-size: 20px !important;
+    }
+
+    .final-cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .final-cta-buttons .btn,
+    .final-cta-buttons a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .footer-redesign-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .footer-bottom-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 390px) {
+    .preview-card-box {
+        padding: 13px;
+    }
+
+    .intro-container,
+    .story-container,
+    .privacy-container,
+    .faq-container,
+    .final-cta-container,
+    .footer-redesign-container {
+        padding: 0 16px;
+    }
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .story-mascot-actor {
+        display: none !important;
+    }
+
+    .story-scene-card {
+        transition: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
