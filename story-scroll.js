@@ -173,12 +173,17 @@
             // Update path fill stroke
             pathFill.style.strokeDashoffset = `${Math.max(0, totalLength - targetLength).toFixed(2)}`;
 
-            // Update subtle active highlight on the current step only
+            // Update subtle active highlight and connected completed steps along the path
             for (let i = 0; i < numSteps; i++) {
                 if (i === activeIdx) {
                     stepItems[i].classList.add('is-active');
+                    stepItems[i].classList.remove('is-completed');
+                } else if (i < activeIdx) {
+                    stepItems[i].classList.remove('is-active');
+                    stepItems[i].classList.add('is-completed');
                 } else {
                     stepItems[i].classList.remove('is-active');
+                    stepItems[i].classList.remove('is-completed');
                 }
             }
         }

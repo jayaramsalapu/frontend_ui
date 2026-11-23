@@ -154,7 +154,7 @@ html {
     }
 }
 
-/* Anchored sections scroll-margin-top */
+/* Anchored sections scroll-margin-top (clears sticky header comfortably) */
 #home,
 #about,
 #how-it-works,
@@ -162,7 +162,7 @@ html {
 #faq,
 #privacy,
 #qr-flow {
-    scroll-margin-top: 60px;
+    scroll-margin-top: clamp(68px, 8vh, 88px);
 }
 
 /* Visible Keyboard Focus Rings Across Entire App */
@@ -176,8 +176,8 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-    outline: 2px solid var(--sage);
-    outline-offset: 2px;
+    outline: 2.5px solid var(--sage);
+    outline-offset: 2.5px;
 }
 
 body {
@@ -2680,6 +2680,61 @@ body[data-page="home"] {
     max-width: 650px;
 }
 
+/* Hero Entrance Animation on Initial Load */
+@keyframes heroEntranceFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Progressive enhancement: initial state when JS is ready */
+body.js-ready .hero-enter-item {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+body.hero-animated .hero-enter-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.hero-animated .hero-badge {
+    transition-delay: 80ms;
+}
+
+body.hero-animated .hero-headline {
+    transition-delay: 180ms;
+}
+
+body.hero-animated .hero-description {
+    transition-delay: 280ms;
+}
+
+body.hero-animated .hero-buttons {
+    transition-delay: 380ms;
+}
+
+body.hero-animated .hero-privacy-reassurance {
+    transition-delay: 480ms;
+}
+
+body.hero-animated .community-pillars-card {
+    transition-delay: 580ms;
+}
+
+/* Fallback if no JS: immediate normal appearance */
+body:not(.js-ready) .hero-enter-item {
+    opacity: 1;
+    transform: none;
+}
+
 .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -2819,11 +2874,13 @@ body[data-page="home"] {
     cursor: pointer;
 }
 
-.btn-hero-find:hover {
-    background: var(--sage-hover) !important;
-    border-color: var(--sage-hover);
-    transform: translateY(-1.5px);
-    box-shadow: var(--shadow-md);
+@media (hover: hover) and (pointer: fine) {
+    .btn-hero-find:hover {
+        background: var(--sage-hover) !important;
+        border-color: var(--sage-hover);
+        transform: translateY(-1.5px);
+        box-shadow: var(--shadow-md);
+    }
 }
 
 .btn-hero-request {
@@ -2840,15 +2897,17 @@ body[data-page="home"] {
     gap: 8px;
     text-decoration: none;
     box-shadow: 0 4px 14px rgba(166, 79, 70, 0.22);
-    transition: all 180ms ease;
+    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
     cursor: pointer;
 }
 
-.btn-hero-request:hover {
-    background: var(--primary-hover) !important;
-    border-color: var(--primary-hover);
-    transform: translateY(-1.5px);
-    box-shadow: 0 6px 18px rgba(166, 79, 70, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .btn-hero-request:hover {
+        background: var(--primary-hover) !important;
+        border-color: var(--primary-hover);
+        transform: translateY(-1.5px);
+        box-shadow: 0 6px 18px rgba(166, 79, 70, 0.3);
+    }
 }
 
 .btn-hero-donor {
@@ -2865,15 +2924,24 @@ body[data-page="home"] {
     gap: 8px;
     text-decoration: none;
     box-shadow: var(--shadow-xs);
-    transition: all 180ms ease;
+    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
     cursor: pointer;
 }
 
-.btn-hero-donor:hover {
-    background: #FFFFFF !important;
-    border-color: var(--border-hover);
-    transform: translateY(-1.5px);
-    box-shadow: var(--shadow-sm);
+@media (hover: hover) and (pointer: fine) {
+    .btn-hero-donor:hover {
+        background: #FFFFFF !important;
+        border-color: var(--border-hover);
+        transform: translateY(-1.5px);
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+.btn-hero-find:focus-visible,
+.btn-hero-request:focus-visible,
+.btn-hero-donor:focus-visible {
+    outline: 2.5px solid var(--sage);
+    outline-offset: 2.5px;
 }
 
 .droplet-terracotta {
@@ -3079,6 +3147,14 @@ body[data-page="home"] {
     align-items: center;
     justify-content: space-around;
     margin-top: clamp(20px, 3vh, 36px);
+    transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .community-pillars-card:hover {
+        box-shadow: var(--shadow-sm);
+        border-color: rgba(61, 90, 76, 0.22);
+    }
 }
 
 .pillar-item {
@@ -3248,32 +3324,32 @@ button[disabled] {
     transform: none;
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-item {
+html.js-scroll-reveal .reveal-item {
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 480ms cubic-bezier(0.16, 1, 0.3, 1), transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(28px);
+    transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1), transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-item.is-revealed {
+html.js-scroll-reveal .reveal-item.is-revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-1 {
-    transition-delay: 50ms;
+html.js-scroll-reveal .reveal-stagger-1 {
+    transition-delay: 80ms;
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-2 {
-    transition-delay: 110ms;
+html.js-scroll-reveal .reveal-stagger-2 {
+    transition-delay: 160ms;
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-3 {
-    transition-delay: 170ms;
+html.js-scroll-reveal .reveal-stagger-3 {
+    transition-delay: 240ms;
 }
 
-html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 {
-    transition-delay: 230ms;
+html.js-scroll-reveal .reveal-stagger-4 {
+    transition-delay: 320ms;
 }
 
 /* Subtle 2-3° Decorative Card Tilt (Fine Pointer Only, Disabled for Touch & Reduced Motion) */
@@ -3298,9 +3374,12 @@ html.js-scroll-reveal:not(.reduced-motion) .reveal-stagger-4 {
         scroll-behavior: auto !important;
     }
 
+    .hero-enter-item,
     .reveal-item {
+        animation: none !important;
         opacity: 1 !important;
         transform: none !important;
+        transition: none !important;
     }
 
     .three-feature-cards .feature-card,

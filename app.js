@@ -79,6 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ========================================
+     1.5 HERO ENTRANCE TRIGGER
+  ======================================== */
+  document.body.classList.add("js-ready");
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.body.classList.add("hero-animated");
+    }, 60);
+  });
+
+  /* ========================================
      2. MOTION SYSTEM & NATIVE SCROLL REVEALS
   ======================================== */
 
@@ -91,24 +101,49 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.classList.add("js-scroll-reveal");
 
     const revealSelectors = [
-      ".section-heading",
-      ".card-grid-4 > .min-card",
-      ".three-feature-cards > .feature-card",
-      ".step-card",
-      ".info-box",
-      ".safety-point",
-      ".safety-card",
-      ".faq-item",
-      ".community-card"
+      // Section A: Introduction
+      ".intro-image-frame",
+      ".intro-heading",
+      ".intro-lead",
+      ".intro-highlights-list",
+      ".intro-action-wrap",
+      // Section B: How It Works Header
+      ".story-header",
+      // Section C: Privacy & Control
+      ".privacy-heading",
+      ".privacy-lead",
+      ".privacy-row-item",
+      ".privacy-image-frame",
+      // Section D: Safety Statement Card & Pillars
+      ".statement-card-header",
+      ".statement-pillar-item",
+      // Section E: Frequently Asked Questions
+      ".faq-header",
+      ".faq-accordion-item",
+      // Section F: Closing Call to Action
+      ".final-cta-heading",
+      ".final-cta-lead",
+      ".final-cta-buttons"
     ];
 
     const revealElements = document.querySelectorAll(revealSelectors.join(", "));
 
-    // Stagger sibling cards capped at ~50-70ms steps
-    document.querySelectorAll(".card-grid-4, .three-feature-cards").forEach(parent => {
-      const children = Array.from(parent.children);
-      children.forEach((child, idx) => {
-        child.classList.add(`reveal-stagger-${Math.min(4, idx + 1)}`);
+    // Stagger sibling cards with incremental delays
+    const staggerParents = [
+      ".privacy-rows-wrap",
+      ".statement-pillars-grid",
+      ".faq-accordion-list",
+      ".intro-highlights-list",
+      ".card-grid-4",
+      ".three-feature-cards"
+    ];
+
+    staggerParents.forEach(selector => {
+      document.querySelectorAll(selector).forEach(parent => {
+        const children = Array.from(parent.children);
+        children.forEach((child, idx) => {
+          child.classList.add(`reveal-stagger-${Math.min(4, idx + 1)}`);
+        });
       });
     });
 
@@ -116,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-revealed");
-          observer.unobserve(entry.target); // Play once!
+          observer.unobserve(entry.target); // Play once without continuous scroll overhead!
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -40px 0px"
+      threshold: 0.08,
+      rootMargin: "0px 0px -20px 0px"
     });
 
     revealElements.forEach(el => {
@@ -129,6 +164,42 @@ document.addEventListener("DOMContentLoaded", () => {
       revealObserver.observe(el);
     });
   }
+
+  /* ========================================
+     3. SMOOTH ANCHOR SCROLLING (Accessible & Header-Aware)
+  ======================================== */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (event) {
+      const hash = this.getAttribute("href");
+      if (!hash || hash === "#") return;
+      const target = document.querySelector(hash);
+      if (target) {
+        event.preventDefault();
+        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target.scrollIntoView({
+          behavior: prefersReduced ? "auto" : "smooth",
+          block: "start"
+        });
+        if (history.pushState) {
+          history.pushState(null, null, hash);
+        }
+        // Close mobile navigation if open
+        const mobileNav = document.getElementById("navLinks");
+        const mobileToggle = document.getElementById("menuToggle");
+        if (mobileNav && mobileNav.classList.contains("open")) {
+          mobileNav.classList.remove("open");
+          if (mobileToggle) {
+            mobileToggle.setAttribute("aria-expanded", "false");
+          }
+        }
+        // Accessibility: set keyboard focus to target
+        if (target.getAttribute("tabindex") === null) {
+          target.setAttribute("tabindex", "-1");
+        }
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
 
   /* ========================================
      READING PROGRESS & STICKY HEADER
