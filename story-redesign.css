@@ -265,13 +265,13 @@
     transition: stroke-dashoffset 60ms linear;
 }
 
-/* Traveling Blood-Drop Mascot (Preserved existing character asset) */
+/* Traveling Cute 3D Blood-Drop Mascot (User uploaded asset) */
 .steps-flow-mascot {
     position: absolute;
     top: 0;
     left: 0;
-    width: 34px;
-    height: 38px;
+    width: 70px;
+    height: 81px;
     pointer-events: none;
     z-index: 10;
     will-change: transform;
@@ -281,11 +281,14 @@
     transition: none;
 }
 
-.steps-flow-mascot .story-mascot-svg {
+.steps-mascot-3d-img {
     display: block;
-    width: 34px;
-    height: 38px;
-    filter: drop-shadow(0 3px 6px rgba(166, 79, 70, 0.28));
+    width: 70px;
+    height: 81px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(166, 79, 70, 0.24));
+    pointer-events: none;
+    user-select: none;
 }
 
 /* Steps List */
@@ -302,9 +305,9 @@
 /* Individual Step Row - Desktop */
 .flow-step-item {
     display: grid;
-    grid-template-columns: 1fr 64px 1fr;
+    grid-template-columns: 1fr 76px 1fr;
     align-items: center;
-    min-height: 84px;
+    min-height: 88px;
     padding: clamp(16px, 2.5vh, 24px) 0;
     position: relative;
     transition: opacity 220ms ease;
@@ -313,10 +316,10 @@
 /* Subtle staggered wave for desktop path */
 @media (min-width: 768px) {
     .flow-step-item:nth-child(odd) {
-        grid-template-columns: 1.08fr 64px 0.92fr;
+        grid-template-columns: 1.08fr 76px 0.92fr;
     }
     .flow-step-item:nth-child(even) {
-        grid-template-columns: 0.92fr 64px 1.08fr;
+        grid-template-columns: 0.92fr 76px 1.08fr;
     }
 }
 
@@ -456,10 +459,20 @@
         padding: 5px 0;
     }
 
+    .steps-flow-mascot {
+        width: 54px;
+        height: 63px;
+    }
+
+    .steps-mascot-3d-img {
+        width: 54px;
+        height: 63px;
+    }
+
     .flow-step-item {
         display: flex;
         align-items: flex-start;
-        gap: 14px;
+        gap: 16px;
         padding: 16px 0;
     }
 
@@ -469,7 +482,7 @@
 
     .flow-step-waypoint {
         order: 1;
-        margin: 2px 0 0 8px;
+        margin: 4px 0 0 10px;
         flex-shrink: 0;
     }
 
@@ -479,7 +492,7 @@
         justify-content: flex-start !important;
         text-align: left !important;
         flex: 1;
-        gap: 10px;
+        gap: 12px;
     }
 
     .flow-step-title {

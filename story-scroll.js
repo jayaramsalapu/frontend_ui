@@ -155,14 +155,17 @@
             // Clamp length
             targetLength = Math.max(0, Math.min(totalLength, targetLength));
 
-            // Position character mascot: optical center offset (width=34, optical Y ~20)
+            // Position character mascot: optical standing offset for cute 3D character
+            const isMobile = window.innerWidth < 768;
+            const mascotW = isMobile ? 54 : 70;
+            const mascotH = isMobile ? 63 : 81;
             const pt = pathFill.getPointAtLength(targetLength);
-            const mascotX = pt.x - 17;
-            const mascotY = pt.y - 20;
+            const mascotX = pt.x - (mascotW / 2);
+            const mascotY = pt.y - (mascotH * 0.72);
 
             if (isReducedMotion) {
                 const activeWp = waypoints[activeIdx];
-                mascot.style.transform = `translate3d(${(activeWp.x - 17).toFixed(1)}px, ${(activeWp.y - 20).toFixed(1)}px, 0)`;
+                mascot.style.transform = `translate3d(${(activeWp.x - mascotW / 2).toFixed(1)}px, ${(activeWp.y - mascotH * 0.72).toFixed(1)}px, 0)`;
             } else {
                 mascot.style.transform = `translate3d(${mascotX.toFixed(2)}px, ${mascotY.toFixed(2)}px, 0)`;
             }
