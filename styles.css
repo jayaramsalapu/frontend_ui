@@ -2686,6 +2686,7 @@ body[data-page="home"] {
         opacity: 0;
         transform: translateY(28px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -6182,4 +6183,69 @@ textarea {
         filter: none !important;
         transform: translateY(-50%) !important;
     }
+}
+
+/* Mobile 3D hero: the same canvas moves into this reserved slot. */
+.hero-mobile-scene,
+.hero-3d-bg-container:not(.hero-3d-unavailable)>.hero-3d-fallback {
+    display: none;
+}
+
+.hero-fallback-drop {
+    width: 13px;
+    height: 13px;
+    border-radius: 70% 50% 70% 0;
+    background: #d45b54;
+    transform: rotate(45deg);
+}
+
+@media (max-width: 767px) {
+    .hero-viewport {
+        min-height: 0 !important;
+    }
+
+    .hero-content-col>br {
+        display: none;
+    }
+
+    .hero-mobile-scene {
+        display: block;
+        position: relative;
+        width: min(100%, 350px);
+        aspect-ratio: 35 / 17;
+    }
+
+    .hero-mobile-scene .hero-3d-bg-container {
+        display: block !important;
+        height: 100% !important;
+    }
+
+    .hero-mobile-scene #hero-3d-canvas {
+        display: block !important;
+        height: 100% !important;
+        visibility: hidden;
+    }
+
+    .hero-mobile-scene .hero-3d-ready #hero-3d-canvas {
+        visibility: visible;
+    }
+
+    .hero-mobile-scene .hero-3d-bg-container:not(.hero-3d-ready)>.hero-3d-fallback {
+        display: flex;
+    }
+
+    .hero-mobile-scene .fallback-scene {
+        width: min(78%, 245px);
+        padding: 0;
+    }
+
+    .hero-mobile-scene .fallback-mascot img {
+        display: block;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+    }
+}
+
+.hero-3d-unavailable #hero-3d-canvas {
+    visibility: hidden;
 }

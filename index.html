@@ -15,7 +15,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=mobile-1">
     <link rel="stylesheet" href="story-redesign.css?v=2">
 </head>
 
@@ -76,6 +76,20 @@
 
             <!-- 3D Animation Canvas as FULL HERO SECTION BACKGROUND -->
             <div id="bg-canvas-container" class="hero-3d-bg-container" aria-hidden="true">
+                <div class="hero-3d-fallback" aria-hidden="true">
+                    <div class="fallback-scene">
+                        <div class="fallback-mascot"><img src="images/cute-mascot.png" width="84" height="97" alt="">
+                        </div>
+                        <span class="hero-fallback-drop"></span>
+                        <div class="fallback-heart">
+                            <svg viewBox="0 0 100 90" class="fallback-heart-svg" width="90" height="80">
+                                <path
+                                    d="M50 85C20 60 5 42 5 26C5 12 16 3 30 3C38 3 46 7 50 14C54 7 62 3 70 3C84 3 95 12 95 26C95 42 80 60 50 85Z"
+                                    fill="#c6534d" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
                 <canvas id="hero-3d-canvas" class="hero-3d-full-canvas"
                     aria-label="Interactive 3D animation of EasyConnect blood-drop mascot reviving a beating heart"></canvas>
             </div>
@@ -138,6 +152,7 @@
                                 <span>Become a Donor</span>
                             </a>
                         </div>
+                        <div class="hero-mobile-scene"></div>
                         <br>
                         <div class="hero-privacy-reassurance hero-enter-item">
                             <div class="hero-privacy-header">
@@ -174,8 +189,8 @@
                         <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                         <span>Nearby Location Matching</span>
                     </div>
-                  
-                   
+
+
                 </div>
             </div>
         </section>
@@ -206,15 +221,18 @@
 
                         <ul class="intro-highlights-list" role="list">
                             <li class="intro-highlight-item">
-                                <span class="highlight-bullet"><i class="fa-solid fa-bell-concierge" aria-hidden="true"></i></span>
+                                <span class="highlight-bullet"><i class="fa-solid fa-bell-concierge"
+                                        aria-hidden="true"></i></span>
                                 <span>Relevant alerts for nearby volunteers</span>
                             </li>
                             <li class="intro-highlight-item">
-                                <span class="highlight-bullet"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></span>
+                                <span class="highlight-bullet"><i class="fa-solid fa-hand-holding-heart"
+                                        aria-hidden="true"></i></span>
                                 <span>A choice to accept or decline</span>
                             </li>
                             <li class="intro-highlight-item">
-                                <span class="highlight-bullet"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                                <span class="highlight-bullet"><i class="fa-solid fa-shield-halved"
+                                        aria-hidden="true"></i></span>
                                 <span>Private coordination after a response</span>
                             </li>
                         </ul>
@@ -250,7 +268,8 @@
 
                     <!-- Traveling Cute 3D Mascot (User-uploaded cute character) -->
                     <div class="steps-flow-mascot" id="stepsFlowMascot" aria-hidden="true">
-                        <img src="images/cute-mascot.png" alt="Cute EasyConnect Blood Drop Mascot" class="steps-mascot-3d-img" width="70" height="81">
+                        <img src="images/cute-mascot.png" alt="Cute EasyConnect Blood Drop Mascot"
+                            class="steps-mascot-3d-img" width="70" height="81">
                     </div>
 
                     <!-- 7 Steps with Supporting Text -->
@@ -260,7 +279,8 @@
                                 <span class="flow-step-num">01</span>
                                 <div class="flow-step-text">
                                     <h3 class="flow-step-title">Request Blood</h3>
-                                    <p class="flow-step-desc">Enter the required blood group, hospital, and location to start a donor request.</p>
+                                    <p class="flow-step-desc">Enter the required blood group, hospital, and location to
+                                        start a donor request.</p>
                                 </div>
                             </div>
                             <div class="flow-step-waypoint" aria-hidden="true">
@@ -285,7 +305,8 @@
                                 <span class="flow-step-num">03</span>
                                 <div class="flow-step-text">
                                     <h3 class="flow-step-title">Predict Donor Willingness</h3>
-                                    <p class="flow-step-desc">EasyConnect estimates which matching donors are most likely to respond, helping prioritize outreach.</p>
+                                    <p class="flow-step-desc">EasyConnect estimates which matching donors are most
+                                        likely to respond, helping prioritize outreach.</p>
                                 </div>
                             </div>
                             <div class="flow-step-waypoint" aria-hidden="true">
@@ -302,7 +323,8 @@
                                 <span class="flow-step-num">04</span>
                                 <div class="flow-step-text">
                                     <h3 class="flow-step-title">Notify Nearby Donors</h3>
-                                    <p class="flow-step-desc">Nearby matching volunteers receive an alert and choose whether they can help.</p>
+                                    <p class="flow-step-desc">Nearby matching volunteers receive an alert and choose
+                                        whether they can help.</p>
                                 </div>
                             </div>
                         </li>
@@ -327,7 +349,8 @@
                                 <span class="flow-step-num">06</span>
                                 <div class="flow-step-text">
                                     <h3 class="flow-step-title">Connect &amp; Donate</h3>
-                                    <p class="flow-step-desc">After a donor accepts, coordinate privately and arrange donation at an authorized blood centre.</p>
+                                    <p class="flow-step-desc">After a donor accepts, coordinate privately and arrange
+                                        donation at an authorized blood centre.</p>
                                 </div>
                             </div>
                         </li>
@@ -336,7 +359,8 @@
                                 <span class="flow-step-num">07</span>
                                 <div class="flow-step-text">
                                     <h3 class="flow-step-title">Verify Donation</h3>
-                                    <p class="flow-step-desc">Confirm the completed donation to keep the request status and donor records up to date.</p>
+                                    <p class="flow-step-desc">Confirm the completed donation to keep the request status
+                                        and donor records up to date.</p>
                                 </div>
                             </div>
                             <div class="flow-step-waypoint" aria-hidden="true">
@@ -362,7 +386,8 @@
                         <span class="section-eyebrow">PRIVATE BY DESIGN</span>
                         <h2 class="privacy-heading">Your kindness. Your choice.</h2>
                         <p class="privacy-lead">
-                            Helping should feel safe and voluntary. You stay in control of your availability, your responses, and the contact details you choose to share.
+                            Helping should feel safe and voluntary. You stay in control of your availability, your
+                            responses, and the contact details you choose to share.
                         </p>
 
                         <div class="privacy-rows-wrap">
@@ -372,7 +397,8 @@
                                 </div>
                                 <div class="privacy-row-content">
                                     <h3 class="privacy-row-title">Keep personal details private</h3>
-                                    <p class="privacy-row-desc">Your phone number and precise location are not displayed on public profiles.</p>
+                                    <p class="privacy-row-desc">Your phone number and precise location are not displayed
+                                        on public profiles.</p>
                                 </div>
                             </div>
 
@@ -382,7 +408,8 @@
                                 </div>
                                 <div class="privacy-row-content">
                                     <h3 class="privacy-row-title">Choose when to respond</h3>
-                                    <p class="privacy-row-desc">Review invitations and accept or decline based on your circumstances.</p>
+                                    <p class="privacy-row-desc">Review invitations and accept or decline based on your
+                                        circumstances.</p>
                                 </div>
                             </div>
 
@@ -392,7 +419,8 @@
                                 </div>
                                 <div class="privacy-row-content">
                                     <h3 class="privacy-row-title">Pause when you need to</h3>
-                                    <p class="privacy-row-desc">Manage notification preferences and take a break from invitations.</p>
+                                    <p class="privacy-row-desc">Manage notification preferences and take a break from
+                                        invitations.</p>
                                 </div>
                             </div>
                         </div>
@@ -420,7 +448,8 @@
                     <header class="statement-card-header">
                         <h3 class="statement-card-heading">A clearer path from request to connection</h3>
                         <p class="statement-card-lead">
-                            When someone needs blood, knowing what happens next matters. EasyConnect helps patients, caregivers, and willing donors connect and coordinate.
+                            When someone needs blood, knowing what happens next matters. EasyConnect helps patients,
+                            caregivers, and willing donors connect and coordinate.
                         </p>
                     </header>
 
@@ -438,7 +467,8 @@
                                 <i class="fa-solid fa-hand-holding-heart"></i>
                             </div>
                             <h4 class="pillar-title">Know who can help</h4>
-                            <p class="pillar-desc">Donors choose whether to accept, helping you coordinate with those who respond.</p>
+                            <p class="pillar-desc">Donors choose whether to accept, helping you coordinate with those
+                                who respond.</p>
                         </div>
 
                         <div class="statement-pillar-item">
@@ -446,7 +476,8 @@
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
                             <h4 class="pillar-title">Coordinate with confidence</h4>
-                            <p class="pillar-desc">Connect privately after acceptance and arrange the next step with the hospital or blood centre.</p>
+                            <p class="pillar-desc">Connect privately after acceptance and arrange the next step with the
+                                hospital or blood centre.</p>
                         </div>
                     </div>
                 </div>
@@ -466,49 +497,63 @@
                 <div class="faq-accordion-list" role="region" aria-label="Frequently Asked Questions">
 
                     <div class="faq-accordion-item">
-                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-1" id="faq-trigger-1">
+                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-1"
+                            id="faq-trigger-1">
                             <span class="faq-question-text">Who can register as a donor?</span>
                             <i class="fa-solid fa-chevron-down faq-chevron-icon" aria-hidden="true"></i>
                         </button>
                         <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1" hidden>
                             <p class="faq-answer-text">
-                                You can create a volunteer profile and provide your availability and donation history. Whether you can donate on a particular day is determined by the authorized blood centre after screening.
+                                You can create a volunteer profile and provide your availability and donation history.
+                                Whether you can donate on a particular day is determined by the authorized blood centre
+                                after screening.
                             </p>
                         </div>
                     </div>
 
                     <div class="faq-accordion-item">
-                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2">
+                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2"
+                            id="faq-trigger-2">
                             <span class="faq-question-text">Who receives a blood request?</span>
                             <i class="fa-solid fa-chevron-down faq-chevron-icon" aria-hidden="true"></i>
                         </button>
                         <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2" hidden>
                             <p class="faq-answer-text">
-                                Requests are intended for opted-in volunteers whose location preferences, availability, and donation history fit the request. Outreach may expand if more responses are needed. A notification does not guarantee that a donor will be available.
+                                Requests are intended for opted-in volunteers whose location preferences, availability,
+                                and donation history fit the request. Outreach may expand if more responses are needed.
+                                A notification does not guarantee that a donor will be available.
                             </p>
                         </div>
                     </div>
 
                     <div class="faq-accordion-item">
-                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3">
+                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3"
+                            id="faq-trigger-3">
                             <span class="faq-question-text">How is a donation confirmed?</span>
                             <i class="fa-solid fa-chevron-down faq-chevron-icon" aria-hidden="true"></i>
                         </button>
                         <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3" hidden>
                             <p class="faq-answer-text">
-                                A completion code or QR exchange can record confirmation between participants. It does not independently prove that a medical donation occurred. ‘Community-confirmed’ means participants confirmed the event; ‘Facility-verified’ should appear only when supported by an authorized blood-centre record.
+                                A completion code or QR exchange can record confirmation between participants. It does
+                                not independently prove that a medical donation occurred. ‘Community-confirmed’ means
+                                participants confirmed the event; ‘Facility-verified’ should appear only when supported
+                                by an authorized blood-centre record.
                             </p>
                         </div>
                     </div>
 
                     <div class="faq-accordion-item">
-                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4">
+                        <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4"
+                            id="faq-trigger-4">
                             <span class="faq-question-text">When can I receive invitations again?</span>
                             <i class="fa-solid fa-chevron-down faq-chevron-icon" aria-hidden="true"></i>
                         </button>
                         <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4" hidden>
                             <p class="faq-answer-text">
-                                Invitations pause during your recovery period. For whole-blood donation in India, the applicable interval is generally 90 days for males and 120 days for females. Other donation types and medical deferrals follow different rules. The blood centre makes the final eligibility decision.
+                                Invitations pause during your recovery period. For whole-blood donation in India, the
+                                applicable interval is generally 90 days for males and 120 days for females. Other
+                                donation types and medical deferrals follow different rules. The blood centre makes the
+                                final eligibility decision.
                             </p>
                         </div>
                     </div>
@@ -524,7 +569,8 @@
             <div class="container final-cta-container">
                 <div class="final-cta-card">
                     <h2 class="final-cta-heading">Be there when someone nearby needs help.</h2>
-                    <p class="final-cta-lead">Request support for a loved one, or join the volunteers willing to respond.</p>
+                    <p class="final-cta-lead">Request support for a loved one, or join the volunteers willing to
+                        respond.</p>
                     <div class="final-cta-buttons">
                         <a href="request.html" class="btn btn-cta-request">
                             <i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i>
@@ -540,7 +586,8 @@
             <!-- Static stylized blood drop illustration at one edge -->
             <div class="final-cta-decor-mascot" aria-hidden="true">
                 <svg viewBox="0 0 100 115" width="80" height="92" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 4 C50 4 12 56 12 76 C12 96 29 104 50 104 C71 104 88 96 88 76 C88 56 50 4 50 4 Z" fill="#FFFFFF" opacity="0.16" />
+                    <path d="M50 4 C50 4 12 56 12 76 C12 96 29 104 50 104 C71 104 88 96 88 76 C88 56 50 4 50 4 Z"
+                        fill="#FFFFFF" opacity="0.16" />
                 </svg>
             </div>
         </section>
@@ -604,13 +651,17 @@
                 <!-- Left: EasyConnect logo and one-line purpose -->
                 <div class="footer-brand-col">
                     <a href="index.html" class="footer-brand-logo" aria-label="EasyConnect Home">
-                        <svg viewBox="0 0 100 115" width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M50 4 C50 4 12 56 12 76 C12 96 29 104 50 104 C71 104 88 96 88 76 C88 56 50 4 50 4 Z" fill="#E25C47" />
+                        <svg viewBox="0 0 100 115" width="26" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path
+                                d="M50 4 C50 4 12 56 12 76 C12 96 29 104 50 104 C71 104 88 96 88 76 C88 56 50 4 50 4 Z"
+                                fill="#E25C47" />
                         </svg>
                         <span class="footer-brand-name">Easy<span>Connect</span></span>
                     </a>
                     <p class="footer-desc-text">
-                        A community-led initiative helping patients, caregivers, and voluntary donors connect simply and privately.
+                        A community-led initiative helping patients, caregivers, and voluntary donors connect simply and
+                        privately.
                     </p>
                 </div>
 
@@ -638,7 +689,8 @@
                 <div class="footer-nav-col">
                     <h3 class="footer-col-title">Trust & Support</h3>
                     <ul class="footer-links-list">
-                        <li><button type="button" class="footer-btn-link open-report-trigger">Report a concern</button></li>
+                        <li><button type="button" class="footer-btn-link open-report-trigger">Report a concern</button>
+                        </li>
                         <li><a href="login.html?tab=login">Member Log In</a></li>
                         <li><a href="login.html?tab=signup">Create Account</a></li>
                     </ul>
@@ -649,54 +701,62 @@
 
             <!-- Required Footer Copy -->
             <p class="footer-disclaimer-note">
-                EasyConnect is a voluntary community initiative. We do not provide medical services, emergency triage, or blood testing. Always contact authorized medical professionals and local emergency services in urgent situations.
+                EasyConnect is a voluntary community initiative. We do not provide medical services, emergency triage,
+                or blood testing. Always contact authorized medical professionals and local emergency services in urgent
+                situations.
             </p>
 
             <div class="footer-bottom-flex">
                 <p>© 2026 EasyConnect. Voluntary community coordination. Designed for privacy and care.</p>
-                <button type="button" class="footer-back-top" id="backToTopBtn" aria-label="Back to top" title="Back to top">
+                <button type="button" class="footer-back-top" id="backToTopBtn" aria-label="Back to top"
+                    title="Back to top">
                     <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
     </footer>
 
-    <script src="app.js?v=2"></script>
-    <script src="story-scroll.js?v=2"></script>
-    <!-- Performance & Mobile Optimization: Load Three.js & 3D character script only on desktop / tablet screens (>767px) -->
     <script>
-        (function () {
-            function loadHero3D() {
-                if (typeof THREE === 'undefined') {
-                    var s = document.createElement('script');
-                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-                    s.onload = function () {
-                        var h = document.createElement('script');
-                        h.src = 'hero-3d.js';
-                        document.body.appendChild(h);
-                    };
-                    document.head.appendChild(s);
-                } else if (!window.__hero3dLoaded) {
-                    window.__hero3dLoaded = true;
-                    var h = document.createElement('script');
-                    h.src = 'hero-3d.js';
-                    document.body.appendChild(h);
+        (() => {
+            const scene = document.getElementById('bg-canvas-container');
+            const mobileSlot = document.querySelector('.hero-mobile-scene');
+            const desktopHome = scene.parentNode;
+            const desktopAnchor = scene.nextElementSibling;
+            const mobile = matchMedia('(max-width: 767px)');
+
+            function placeScene() {
+                if (mobile.matches) {
+                    mobileSlot.appendChild(scene);
+                } else {
+                    desktopHome.insertBefore(scene, desktopAnchor);
                 }
             }
 
-            if (window.innerWidth > 767) {
-                loadHero3D();
+            placeScene();
+            mobile.addEventListener('change', placeScene);
+
+            function loadHero() {
+                const script = document.createElement('script');
+                script.src = 'hero-3d.js?v=mobile-1';
+                script.async = true;
+                script.onerror = () => scene.classList.add('hero-3d-unavailable');
+                document.head.appendChild(script);
+            }
+
+            if (typeof THREE === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+                script.async = true;
+                script.onload = loadHero;
+                script.onerror = () => scene.classList.add('hero-3d-unavailable');
+                document.head.appendChild(script);
             } else {
-                var onResize = function () {
-                    if (window.innerWidth > 767) {
-                        window.removeEventListener('resize', onResize);
-                        loadHero3D();
-                    }
-                };
-                window.addEventListener('resize', onResize, { passive: true });
+                loadHero();
             }
         })();
     </script>
+    <script src="app.js?v=2"></script>
+    <script src="story-scroll.js?v=2"></script>
 </body>
 
 </html>
