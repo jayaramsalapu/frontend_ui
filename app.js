@@ -24,12 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Supports both original and redesigned navigation
   const nav = document.querySelector(".nav-links, .navlinks");
 
+  let closeNav = null;
+
   if (menuToggle && nav) {
     menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open menu");
 
-    const closeNav = (returnFocus = false) => {
+    closeNav = (returnFocus = false) => {
       nav.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
       const icon = menuToggle.querySelector("i");
       if (icon) {
         icon.classList.remove("fa-xmark");
@@ -41,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener("click", () => {
       const isOpen = nav.classList.toggle("open");
       menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
       const icon = menuToggle.querySelector("i");
       if (icon) {
         icon.classList.toggle("fa-bars", !isOpen);
@@ -52,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Close navigation when a link is clicked
+    // Close navigation when any link is clicked
     nav.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         closeNav(false);
@@ -184,12 +189,17 @@ document.addEventListener("DOMContentLoaded", () => {
           history.pushState(null, null, hash);
         }
         // Close mobile navigation if open
-        const mobileNav = document.getElementById("navLinks");
-        const mobileToggle = document.getElementById("menuToggle");
-        if (mobileNav && mobileNav.classList.contains("open")) {
-          mobileNav.classList.remove("open");
-          if (mobileToggle) {
-            mobileToggle.setAttribute("aria-expanded", "false");
+        if (typeof closeNav === "function") {
+          closeNav(false);
+        } else {
+          const mobileNav = document.getElementById("navLinks");
+          const mobileToggle = document.getElementById("menuToggle");
+          if (mobileNav && mobileNav.classList.contains("open")) {
+            mobileNav.classList.remove("open");
+            if (mobileToggle) {
+              mobileToggle.setAttribute("aria-expanded", "false");
+              mobileToggle.setAttribute("aria-label", "Open menu");
+            }
           }
         }
         // Accessibility: set keyboard focus to target

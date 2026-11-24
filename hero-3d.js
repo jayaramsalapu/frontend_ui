@@ -385,14 +385,15 @@
 
         // Use the full mobile frame and keep the desktop scene to the right.
         const halfWidth = camera.position.z * Math.tan(camera.fov * Math.PI / 360) * camera.aspect;
-        const stageScale = Math.min(.65, halfWidth * .90 / 9.25);
         const stageX = halfWidth * .54 + MASCOT_STAGE_X - 2.4;
         if (mobileLayout.matches) {
-            stageGroup.scale.setScalar(Math.min(1.05, halfWidth * 2 / 10.5));
-            stageGroup.position.set(0.45, 0.18, 0);
+            const mobileScale = Math.min(0.76, Math.max(0.64, halfWidth / 6.2));
+            stageGroup.scale.setScalar(mobileScale);
+            stageGroup.position.set(0.50, 0.06, 0);
         } else {
-            stageGroup.position.set(stageX, .04, 0);
-            stageGroup.scale.setScalar(stageScale);
+            const deskScale = Math.min(0.70, Math.max(0.46, halfWidth * 0.92 / 8.5));
+            stageGroup.position.set(stageX, 0.04, 0);
+            stageGroup.scale.setScalar(deskScale);
         }
 
         // Maintain configured heart position
