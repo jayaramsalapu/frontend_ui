@@ -2831,6 +2831,14 @@ body:not(.js-ready) .hero-enter-item {
     display: inline;
 }
 
+.hero-desc-mobile {
+    display: none;
+}
+
+.hero-desc-desktop {
+    display: inline;
+}
+
 /* Hero Action Buttons */
 .hero-buttons {
     display: flex;
@@ -4598,6 +4606,14 @@ textarea:focus-visible {
         max-width: 390px;
         margin: 0 auto clamp(26px, 6.5vw, 34px) !important;
         text-align: center !important;
+    }
+
+    .hero-desc-desktop {
+        display: none;
+    }
+
+    .hero-desc-mobile {
+        display: inline;
     }
 
     .hero-buttons {
