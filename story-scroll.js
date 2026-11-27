@@ -1,7 +1,7 @@
 /**
- * EASYCONNECT - STORY SCROLL CONTROLLER (story-scroll.js)
+ * VIZAG WITH YOU - STORY SCROLL CONTROLLER (story-scroll.js)
  * 
- * - Minimal 7-step "How EasyConnect Works" flow
+ * - Minimal 7-step "How Vizag With You Works" flow
  * - Continuous SVG path connecting actual DOM coordinates of step waypoints
  * - Scroll-linked blood-drop mascot traveling along the path
  * - Exact alignment at each step, naturally reversible when scrolling upward
@@ -13,7 +13,7 @@
     'use strict';
 
     // =========================================================================
-    // 1. HOW EASYCONNECT WORKS - SCROLL-LINKED FLOW ENGINE
+    // 1. HOW VIZAG WITH YOU WORKS - SCROLL-LINKED FLOW ENGINE
     // =========================================================================
     function initHowItWorksFlow() {
         const container = document.getElementById('stepsFlowContainer');

@@ -1,6 +1,6 @@
 
 /*
- * EASYCONNECT - MAIN JAVASCRIPT
+ * VIZAG WITH YOU - MAIN JAVASCRIPT
  * Vanilla JavaScript Frontend
  *
  * Features:

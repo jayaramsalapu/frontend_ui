@@ -1,4 +1,4 @@
-# EasyConnect — Quietly Human frontend concept
+# Vizag With You — Quietly Human frontend concept
 
 A five-page responsive frontend concept for a college blood-donation community project, using **plain HTML, CSS, JavaScript**, compatible with **Flask + Jinja2**.
 

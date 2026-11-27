@@ -1,5 +1,5 @@
 /**
- * EasyConnect — Full Hero Section Interactive 3D Background
+ * Vizag With You — Full Hero Section Interactive 3D Background
  * Features:
  * - Full-Viewport Background Canvas: Stretches across the entire .hero-viewport background.
  * - Cute, Vibrant Red Blood-Drop Mascot:

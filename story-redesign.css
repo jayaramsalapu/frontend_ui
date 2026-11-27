@@ -1,10 +1,10 @@
 /**
- * EASYCONNECT - LOWER HOMEPAGE REDESIGN STYLES (story-redesign.css)
+ * VIZAG WITH YOU - LOWER HOMEPAGE REDESIGN STYLES (story-redesign.css)
  * 
  * Strict Scoping: Applies ONLY to sections below the hero.
  * Does NOT alter or affect the site header, navigation, or hero section.
  * Matches existing typography, muted palette, and button styling from styles.css.
- * Supports all 9 steps of the authentic EasyConnect workflow.
+ * Supports all 9 steps of the authentic Vizag With You workflow.
  */
 
 :root {
@@ -193,7 +193,7 @@
 }
 
 /* ==========================================================================
-   SECTION B — Main Scrolling Story: “How EasyConnect works” (7 Steps)
+   SECTION B — Main Scrolling Story: “How Vizag With You works” (7 Steps)
    Minimal connected path layout with scroll-linked traveling mascot
    ========================================================================== */
 .story-section {

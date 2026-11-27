@@ -1,5 +1,5 @@
 /**
- * EasyConnect — Authentication & Interactive Mascot Logic
+ * Vizag With You — Authentication & Interactive Mascot Logic
  */
 
 document.addEventListener("DOMContentLoaded", () => {

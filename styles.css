@@ -2245,7 +2245,7 @@ button:disabled {
 }
 
 /* =========================================================
-   EasyConnect reference redesign — compatible with old pages
+   Vizag With You reference redesign — compatible with old pages
    ========================================================= */
 :root {
     --paper: #FCFAF7;
@@ -2320,6 +2320,25 @@ body {
 
 .brand-mark>* {
     transform: rotate(45deg)
+}
+
+.brand-logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    flex-shrink: 0;
+    display: block;
+}
+
+.footer-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
 }
 
 .brand-icon {
@@ -2477,6 +2496,25 @@ body[data-page="home"] {
     gap: 8px;
     text-decoration: none;
     flex-shrink: 0;
+}
+
+.brand-logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    flex-shrink: 0;
+    display: block;
+}
+
+.footer-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
 }
 
 .brand-icon {
@@ -4481,7 +4519,13 @@ textarea:focus-visible {
     }
 
     .brand-name {
-        font-size: 17px;
+        font-size: 15.5px;
+    }
+
+    .brand-logo-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
     }
 
     /* Mobile Header Layout: 3-dots to full leftside, Logo centered, Log In to full rightside */
